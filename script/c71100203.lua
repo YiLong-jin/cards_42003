@@ -1,0 +1,52 @@
+--魔物猎人『武士道』
+local m=71100203
+local cm=_G["c"..m]
+function cm.initial_effect(c)
+	aux.AddCodeList(c,71100206)
+	--to grave
+	local e1=Effect.CreateEffect(c)
+	e1:SetCategory(CATEGORY_TOGRAVE)
+	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e1:SetProperty(EFFECT_FLAG_DELAY)
+	e1:SetCode(EVENT_SUMMON_SUCCESS)
+	e1:SetCountLimit(1,m)
+	e1:SetTarget(cm.tgtg)
+	e1:SetOperation(cm.tgop)
+	c:RegisterEffect(e1)
+	local e2=e1:Clone()
+	e2:SetCode(EVENT_SPSUMMON_SUCCESS)
+	c:RegisterEffect(e2) 
+	--ritual summon
+	local e3=aux.AddRitualProcEqual2(c,cm.filter,LOCATION_DECK,nil,cm.mfilter)
+	e3:SetDescription(aux.Stringid(m,0))
+	e3:SetType(EFFECT_TYPE_QUICK_O)
+	e3:SetCode(EVENT_FREE_CHAIN)
+	e3:SetRange(LOCATION_MZONE)
+	e3:SetHintTiming(0,TIMINGS_CHECK_MONSTER+TIMING_MAIN_END)
+	e3:SetCountLimit(1,71100303)
+	e3:SetCondition(cm.rscon)
+	c:RegisterEffect(e3) 
+end
+function cm.tgfilter(c)
+	return aux.IsCodeListed(c,71100206) and c:IsAbleToGrave()
+end
+function cm.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(cm.tgfilter,tp,LOCATION_DECK,0,1,nil) end
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+end
+function cm.tgop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
+	local g=Duel.SelectMatchingCard(tp,cm.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
+	if g:GetCount()>0 then
+		Duel.SendtoGrave(g,REASON_EFFECT)
+	end
+end
+function cm.filter(c,e,tp,chk)
+	return c:IsType(TYPE_RITUAL) and aux.IsCodeListed(c,71100206)
+end
+function cm.rscon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetCurrentPhase()==PHASE_MAIN1 or Duel.GetCurrentPhase()==PHASE_MAIN2
+end
+function cm.mfilter(c,e,tp,chk)
+	return c:IsSetCard(0x7db) or c:IsCode(71100206)
+end

@@ -1,0 +1,27 @@
+--青 玉 魔 像
+function c10203001.initial_effect(c)
+	local e3=Effect.CreateEffect(c)
+	e3:SetDescription(aux.Stringid(10203001,0))
+	e3:SetCategory(CATEGORY_ATKCHANGE+CATEGORY_DEFCHANGE)
+	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
+	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
+	e3:SetOperation(c10203001.atkop)
+	c:RegisterEffect(e3)
+end
+function c10203001.atkop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	Duel.RegisterFlagEffect(tp,10203001,0,0,99)
+	local s=Duel.GetFlagEffect(tp,10203001)*1000--Duel.GetMatchingGroupCount(nil,e:GetHandler():GetControler(),LOCATION_MZONE,0,nil)*1000
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_SET_BASE_ATTACK)
+	e1:SetValue(s)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_DISABLE)
+	c:RegisterEffect(e1)
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_SINGLE)
+	e2:SetCode(EFFECT_SET_BASE_DEFENSE)
+	e2:SetValue(s)
+	e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_DISABLE)
+	c:RegisterEffect(e2)
+end

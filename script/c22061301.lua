@@ -1,0 +1,71 @@
+--洞胤 群小洞洞
+function c22061301.initial_effect(c)
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e1:SetRange(LOCATION_MZONE)
+	e1:SetCode(EFFECT_UPDATE_ATTACK)
+	e1:SetCondition(c22061301.descon)
+	e1:SetValue(2000)
+	c:RegisterEffect(e1)
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_FIELD)
+	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e2:SetCode(EFFECT_CANNOT_ACTIVATE)
+	e2:SetRange(LOCATION_ONFIELD)
+	e2:SetTargetRange(0,1)
+	e2:SetCondition(c22061301.actcona)
+	e2:SetValue(c22061301.actlimit)
+	c:RegisterEffect(e2)
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_FIELD)
+	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e3:SetCode(EFFECT_CANNOT_ATTACK_ANNOUNCE)
+	e3:SetRange(LOCATION_ONFIELD)
+	e3:SetTargetRange(0,1)
+	e3:SetCondition(c22061301.actcona)
+	c:RegisterEffect(e3)
+	--activate limit
+	local e4=Effect.CreateEffect(c)
+	e4:SetType(EFFECT_TYPE_FIELD)
+	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e4:SetCode(EFFECT_CANNOT_ACTIVATE)
+	e4:SetRange(LOCATION_ONFIELD)
+	e4:SetTargetRange(1,0)
+	e4:SetCondition(c22061301.actconb)
+	e4:SetValue(c22061301.actlimit)
+	c:RegisterEffect(e4)
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_FIELD)
+	e5:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e5:SetCode(EFFECT_CANNOT_ATTACK_ANNOUNCE)
+	e5:SetRange(LOCATION_ONFIELD)
+	e5:SetTargetRange(1,0)
+	e5:SetCondition(c22061301.actconb)
+	c:RegisterEffect(e5)
+	
+end
+function c22061301.actcona(e)
+	local tp=e:GetHandler():GetControler()
+	return Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)<Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)
+end
+function c22061301.actconb(e)
+	local tp=e:GetHandler():GetControler()
+	return Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)>Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)
+end
+function c22061301.actlimit(e,re,tp)
+	return re:IsActiveType(TYPE_MONSTER)
+end
+function c22061301.descon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==Duel.GetFieldGroupCount(tp,0,LOCATION_MZONE)
+end
+function c22061301.destg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	Duel.SetOperationInfo(0,CATEGORY_DESTROY,e:GetHandler(),1,0,0)
+end
+function c22061301.desop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if c:IsRelateToEffect(e) then
+		Duel.Destroy(c,REASON_EFFECT)
+	end
+end

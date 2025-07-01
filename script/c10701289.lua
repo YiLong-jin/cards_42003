@@ -1,0 +1,112 @@
+--极星灵 沃伦德
+function c10701289.initial_effect(c)
+	--nontuner
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e1:SetRange(0xff)
+	e1:SetCode(EFFECT_NONTUNER)
+	e1:SetValue(c10701289.tnval)
+	c:RegisterEffect(e1) 
+	--draw 
+	local e2=Effect.CreateEffect(c)
+	e2:SetDescription(aux.Stringid(10701289,0))
+	e2:SetCategory(CATEGORY_DRAW)
+	e2:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
+	e2:SetCode(EVENT_REMOVE)
+	e2:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
+	e2:SetCountLimit(1,10701289)
+	e2:SetCost(c10701289.cost)
+	e2:SetTarget(c10701289.target)
+	e2:SetOperation(c10701289.operation)
+	c:RegisterEffect(e2) 
+	--effect gain
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
+	e3:SetCode(EVENT_BE_MATERIAL)
+	e3:SetProperty(EFFECT_FLAG_EVENT_PLAYER)
+	e3:SetCondition(c10701289.effcon)
+	e3:SetOperation(c10701289.effop)
+	c:RegisterEffect(e3)  
+end
+function c10701289.tnval(e,c)
+	return e:GetHandler():IsControler(c:GetControler()) and c:IsSetCard(0x4b)
+end
+function c10701289.costfilter(c)
+	return c:IsSetCard(0x42) and c:IsAbleToRemoveAsCost()
+end
+function c10701289.cost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(c10701289.costfilter,tp,LOCATION_GRAVE,0,2,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
+	local g=Duel.SelectMatchingCard(tp,c10701289.costfilter,tp,LOCATION_GRAVE,0,2,2,nil)
+	Duel.Remove(g,POS_FACEUP,REASON_COST)
+end
+function c10701289.target(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsPlayerCanDraw(tp,1) end
+	Duel.SetTargetPlayer(tp)
+	Duel.SetTargetParam(1)
+	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
+end
+function c10701289.operation(e,tp,eg,ep,ev,re,r,rp)
+	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
+	Duel.Draw(p,d,REASON_EFFECT)
+end
+function c10701289.effcon(e,tp,eg,ep,ev,re,r,rp)
+	return bit.band(r,REASON_SYNCHRO)~=0 and e:GetHandler():GetReasonCard():IsSetCard(0x4b)
+end
+function c10701289.effop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local rc=c:GetReasonCard()
+	local e1=Effect.CreateEffect(rc)
+	e1:SetDescription(aux.Stringid(10701289,1))
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetProperty(EFFECT_FLAG_CLIENT_HINT+EFFECT_FLAG_SINGLE_RANGE)
+	e1:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
+	e1:SetRange(LOCATION_MZONE)
+	e1:SetValue(c10701289.tg)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+	rc:RegisterEffect(e1,true)
+	local e3=Effect.CreateEffect(rc)
+	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_CONTINUOUS)
+	e3:SetCode(EVENT_CONTROL_CHANGED)
+	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+	e3:SetOperation(c10701289.regop)
+	rc:RegisterEffect(e3,true)
+	local e4=Effect.CreateEffect(rc)
+	e4:SetDescription(aux.Stringid(10701289,2))
+	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
+	e4:SetCode(EVENT_PHASE+PHASE_END)
+	e4:SetRange(LOCATION_MZONE)
+	e4:SetCountLimit(1)
+	e4:SetCondition(c10701289.indcon)
+	e4:SetOperation(c10701289.indop)
+	rc:RegisterEffect(e4,true)
+	if not rc:IsType(TYPE_EFFECT) then
+		local e2=Effect.CreateEffect(rc)
+		e2:SetType(EFFECT_TYPE_SINGLE)
+		e2:SetCode(EFFECT_ADD_TYPE)
+		e2:SetValue(TYPE_EFFECT)
+		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
+		rc:RegisterEffect(e2,true)
+	end
+end
+function c10701289.tg(e,re,rp)
+	return rp==1-e:GetHandler():GetOwner()
+end
+function c10701289.regop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	c:RegisterFlagEffect(10701289,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
+end
+function c10701289.indcon(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():GetFlagEffect(10701289)>0
+end
+function c10701289.indop(e,tp,eg,ep,ev,re,r,rp)
+	local e0=Effect.CreateEffect(e:GetHandler())
+	e0:SetType(EFFECT_TYPE_FIELD)
+	e0:SetCode(EFFECT_AVOID_BATTLE_DAMAGE)
+	e0:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e0:SetTargetRange(0,1)
+	e0:SetValue(1)
+	e0:SetReset(RESET_PHASE+PHASE_END,2)
+	Duel.RegisterEffect(e0,tp)
+end
