@@ -69,7 +69,7 @@ function cm.atkcon(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function cm.filter11(c)
-	return c:IsFaceup() and c:IsSetCard(0x3661) and c:IsAbleToHand()
+	return c:IsFaceup() and c:IsSetCard(0x167a) and c:IsAbleToHand()
 end
 function cm.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cm.filter11,tp,LOCATION_EXTRA+LOCATION_GRAVE,0,1,nil) end
@@ -85,7 +85,7 @@ function cm.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 
 function cm.gyfilter(c)
-	return c:IsType(TYPE_PENDULUM) and c:IsSetCard(0x3661) and not c:IsCode(m)
+	return c:IsType(TYPE_PENDULUM) and c:IsSetCard(0x167a) and not c:IsCode(m)
 end
 function cm.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
