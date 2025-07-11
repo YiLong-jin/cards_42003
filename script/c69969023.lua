@@ -15,6 +15,7 @@ aux.AddSynchroProcedure(c,aux.FilterBoolFunction(Card.IsSynchroType,TYPE_SYNCHRO
 	e2:SetCode(EFFECT_SPSUMMON_PROC)
 	e2:SetRange(LOCATION_EXTRA)
 	e2:SetCondition(c69969023.hspcon)
+	e2:SetTarget(c69969023.hsptg)
 	e2:SetOperation(c69969023.hspop)
 	c:RegisterEffect(e2)
  local e3=Effect.CreateEffect(c)
@@ -54,18 +55,27 @@ function c69969023.hspfilter(c,tp,sc)
 	return c:IsCode(69969008) and c:IsControler(tp) and Duel.GetLocationCountFromEx(tp,tp,c,sc)>0 and c:GetCounter(0x698)>=8
 end
 function c69969023.hspcon(e,c)
-	if c==nil then return true end
-	return Duel.CheckReleaseGroup(REASON_SPSUMMON,c:GetControler(),c69969023.hspfilter,1,nil,c:GetControler(),c)
+if c==nil then return true end
+	return Duel.CheckReleaseGroupEx(c:GetControler(),c69969023.hspfilter,1,REASON_SPSUMMON,false,nil,c:GetControler(),c)
+	end
+function c69969023.hsptg(e,tp,eg,ep,ev,re,r,rp,chk,c)
+	local g=Duel.GetReleaseGroup(tp,false,REASON_SPSUMMON):Filter(c69969023.hspfilter,nil,tp,c)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_RELEASE)
+	local tc=g:SelectUnselect(nil,tp,false,true,1,1)
+	if tc then
+		e:SetLabelObject(tc)
+		return true
+	else return false end
 end
 function c69969023.hspop(e,tp,eg,ep,ev,re,r,rp,c)
-	local g=Duel.SelectReleaseGroup(REASON_SPSUMMON,tp,c69969023.hspfilter,1,1,nil,tp,c)
-	c:SetMaterial(g)
-	Duel.Release(g,REASON_SPSUMMON)
+	local tc=e:GetLabelObject()
+	c:SetMaterial(Group.FromCards(tc))
+	Duel.Release(tc,REASON_SPSUMMON)
 end
+--1
 function c69969023.chainlm(e,ep,tp)
 	return tp==ep
 end
---1
 function c69969023.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,59822133)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>1

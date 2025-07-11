@@ -28,14 +28,17 @@ function s.initial_effect(c)
 	e3:SetTarget(s.destg)
 	e3:SetOperation(s.activate)
 	c:RegisterEffect(e3)
-		--change effect type
-	local e2=Effect.CreateEffect(c)
-	e2:SetType(EFFECT_TYPE_FIELD)
-	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e2:SetCode(99960010)
-	e2:SetRange(LOCATION_SZONE)
-	e2:SetTargetRange(1,0)
-	c:RegisterEffect(e2)
+
+	--special summon xyz
+	local e4=Effect.CreateEffect(c)
+	e4:SetDescription(aux.Stringid(99960010,2))
+	e4:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e4:SetType(EFFECT_TYPE_IGNITION)
+	e4:SetRange(LOCATION_SZONE)
+	e4:SetCountLimit(1,99950300+EFFECT_COUNT_CODE_OATH)
+	e4:SetTarget(s.sptg)
+	e4:SetOperation(s.spop)
+	c:RegisterEffect(e4)
 --[[		if shenqi_Savior.global_check then return end 
 		shenqi_Savior.global_check= {{},{}}
 		local ge1=Effect.CreateEffect(c)
@@ -44,6 +47,42 @@ function s.initial_effect(c)
 		ge1:SetOperation(shenqi_Savior.op_hint)
 		Duel.RegisterEffect(ge1,0)]]
 end
+
+function s.filter(c,e,tp,rc)
+	return c.Savior_mojie=true and c:IsType(TYPE_XYZ) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)
+end
+function s.mtfilter(c,e)
+	return c:IsCanOverlay() and not c:IsImmuneToEffect(e) and c.Savior_mojie=true
+end
+function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_EXTRA,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
+end
+function s.spop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+	local g=Duel.SelectMatchingCard(tp,s.filter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp)
+	if g:GetCount()>0 then
+	local tc=g:GetFirst()
+	local mg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.mtfilter),tp,LOCATION_DECK+LOCATION_GRAVE+LOCATION_HAND+LOCATION_REMOVED,0,tc,e)
+		if Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)>0 and #mg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
+			Duel.BreakEffect()
+			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
+			local xg=mg:Select(tp,1,1,nil)
+			local tc1=xg:GetFirst()
+			while tc1 do
+				tc1:CancelToGrave()
+				local og=tc1:GetOverlayGroup()
+				if #og>0 then
+					Duel.SendtoGrave(og,REASON_RULE)
+				end
+				tc1=xg:GetNext()
+			end
+			Duel.Overlay(tc,xg)
+		end
+	end
+end
+
+
 
 
 

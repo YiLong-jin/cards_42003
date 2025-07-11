@@ -29,17 +29,20 @@ function c10000107.thfil(c)
 end 
 function c10000107.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) and Duel.IsExistingMatchingCard(c10000107.thfil,tp,LOCATION_DECK,0,1,nil) end
+		and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0) 
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function c10000107.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)~=0 and Duel.IsExistingMatchingCard(c10000107.thfil,tp,LOCATION_DECK,0,1,nil) then
-		Duel.BreakEffect() 
-		local g=Duel.SelectMatchingCard(tp,c10000107.thfil,tp,LOCATION_DECK,0,1,1,nil)
-		Duel.SendtoHand(g,tp,REASON_EFFECT) 
-		Duel.ConfirmCards(1-tp,g)  
+	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)~=0 then
+		local mg = Duel.GetMatchingGroup(c10000107.thfil, tp, LOCATION_DECK, 0, nil)
+		if #mg > 0 and Duel.SelectYesNo(tp, aux.Stringid(10000107, 3)) then
+			Duel.BreakEffect() 
+			local g = mg:Select(tp, 1, 1, nil)
+			Duel.SendtoHand(g,tp,REASON_EFFECT) 
+			Duel.ConfirmCards(1-tp,g)  
+		end
 	end
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_FIELD)

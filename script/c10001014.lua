@@ -51,8 +51,8 @@ end
 function c10001014.copyop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	if tc and c:IsRelateToEffect(e) and c:IsFaceup() and tc:IsRelateToEffect(e) and (tc:IsFaceup() or tc:IsLocation(LOCATION_GRAVE)) then
-		local code=tc:GetOriginalCodeRule()
+	if tc and c:IsRelateToEffect(e) and c:IsFaceup() and tc:IsRelateToEffect(e) and aux.NecroValleyFilter()(tc) then --and (tc:IsFaceup() or tc:IsLocation(LOCATION_GRAVE)) then //当怪兽被反转的时候自动丢失对象连锁信息, 另外加入王家长眠之谷的判断
+--[[ 		local code=tc:GetOriginalCodeRule()
 		local cid=0
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
@@ -75,7 +75,16 @@ function c10001014.copyop(e,tp,eg,ep,ev,re,r,rp)
 		e0:SetLabelObject(e1)
 		e0:SetLabel(cid)
 		e0:SetOperation(c10001014.rstop)
-		c:RegisterEffect(e0)
+		c:RegisterEffect(e0) ]]
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_SINGLE)
+		e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+		e1:SetCode(EFFECT_ADD_CODE)
+		e1:SetRange(LOCATION_MZONE)
+		e1:SetCondition(aux.TRUE)
+		e1:SetValue(tc:GetCode())
+		e1:SetReset(RESET_PHASE+PHASE_END+RESET_DISABLE+RESET_EVENT+RESETS_STANDARD) --回合结束时，被无效时，以及RESETS_STANDARD里列名的情况发生时则复制效果不再生效
+		c:RegisterEffect(e1)
 	end
 	local e5=Effect.CreateEffect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE)
@@ -90,7 +99,7 @@ end
 function c10001014.fuslimit(e,c,sumtype)
 	return sumtype==SUMMON_TYPE_FUSION
 end
-function c10001014.rstop(e,tp,eg,ep,ev,re,r,rp)
+--[[ function c10001014.rstop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local cid=e:GetLabel()
 	if cid~=0 then
@@ -101,4 +110,4 @@ function c10001014.rstop(e,tp,eg,ep,ev,re,r,rp)
 	e1:Reset()
 	Duel.HintSelection(Group.FromCards(c))
 	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
-end
+end ]] --不再复制效果，此段可以被安全移除
