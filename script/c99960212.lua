@@ -45,7 +45,7 @@ function c99960212.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		{b3,aux.Stringid(99960310,0),3})
 	e:SetLabel(op)
 end
-function c99960212.activate(e,tp,eg,ep,ev,re,r,rp)
+function c99960212.activate1(e,tp,eg,ep,ev,re,r,rp)
 	local op=e:GetLabel()
 	if op==1 then
 	Duel.Hint(24,0,aux.Stringid(99960290,0))
