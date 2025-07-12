@@ -25,7 +25,8 @@ function s.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function s.xyzcon(e,tp,eg,ep,ev,re,r,rp)
-	return re:GetHandler():IsRace(RACE_INSECT)
+	local race=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_RACE)
+	return re:IsActiveType(TYPE_MONSTER) and race&RACE_INSECT>0
 end
 function s.xyzfilter(c,g)
 	return c:IsXyzSummonable(g,#g,#g)

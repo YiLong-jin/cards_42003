@@ -47,7 +47,8 @@ function cm.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function cm.sccon(e,tp,eg,ep,ev,re,r,rp)
-	return re:IsActiveType(TYPE_MONSTER) and re:GetHandler():IsAttribute(ATTRIBUTE_WATER)
+	local attr=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_ATTRIBUTE)
+	return re:IsActiveType(TYPE_MONSTER) and attr&ATTRIBUTE_WATER>0
 end
 function cm.synfilter(c,g)
 	return c:IsSynchroSummonable(nil,g,g:GetCount()-1,g:GetCount()-1)

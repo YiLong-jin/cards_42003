@@ -5,7 +5,7 @@ function cm.initial_effect(c)
  --search
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(61283655,0))
-	e1:SetCategory(EFFECT_SPSUMMON_PROC)
+	e1:SetCategory(CATEGORY_SEARCH+CATEGORY_TOHAND)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_SUMMON_SUCCESS)
 	e1:SetCountLimit(1,m)

@@ -61,7 +61,7 @@ function this.drop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Draw(p,d,REASON_EFFECT)
 end
 function this.thfilter(c)
-	return c:IsSetCard(0x37a3) and c:IsAbleToHand()
+	return c:IsSetCard(0x37a3) and c:IsAbleToHand() and c:IsType(TYPE_MONSTER)
 end
 function this.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsDestructable(e) and Duel.IsExistingMatchingCard(this.thfilter,tp,LOCATION_DECK,0,1,nil) end
