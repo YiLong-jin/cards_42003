@@ -49,7 +49,7 @@ function s.initial_effect(c)
 end
 
 function s.filter(c,e,tp,rc)
-	return c.Savior_mojie and c:IsType(TYPE_XYZ) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)
+	return c.Savior_mojie and c:IsType(TYPE_XYZ) and c:IsCanBeSpecialSummoned(e,0,tp,true,false,POS_FACEUP)
 end
 function s.mtfilter(c,e)
 	return c:IsCanOverlay() and not c:IsImmuneToEffect(e) and c.Savior_mojie
@@ -64,7 +64,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if g:GetCount()>0 then
 	local tc=g:GetFirst()
 	local mg=Duel.GetMatchingGroup(aux.NecroValleyFilter(s.mtfilter),tp,LOCATION_DECK+LOCATION_GRAVE+LOCATION_HAND+LOCATION_REMOVED,0,tc,e)
-		if Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)>0 and #mg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
+		if Duel.SpecialSummon(g,0,tp,tp,true,false,POS_FACEUP)>0 and #mg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
 			Duel.BreakEffect()
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
 			local xg=mg:Select(tp,1,1,nil)
