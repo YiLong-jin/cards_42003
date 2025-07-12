@@ -5,7 +5,7 @@ function cm.initial_effect(c)
  --sp1
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(EFFECT_TYPE_EQUIP+CATEGORY_DESTROY)
-	e1:SetRange(LOCATION_SZONE)
+	e1:SetRange(LOCATION_MZONE)
 	e1:SetDescription(aux.Stringid(m,0))
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
