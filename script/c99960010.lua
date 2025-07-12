@@ -35,7 +35,7 @@ function s.initial_effect(c)
 	e4:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e4:SetType(EFFECT_TYPE_IGNITION)
 	e4:SetRange(LOCATION_SZONE)
-	e4:SetCountLimit(1,99950300+EFFECT_COUNT_CODE_OATH)
+	e4:SetCountLimit(1,99990011+EFFECT_COUNT_CODE_OATH)
 	e4:SetTarget(s.sptg)
 	e4:SetOperation(s.spop)
 	c:RegisterEffect(e4)
@@ -49,10 +49,10 @@ function s.initial_effect(c)
 end
 
 function s.filter(c,e,tp,rc)
-	return c.Savior_mojie=true and c:IsType(TYPE_XYZ) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)
+	return c.Savior_mojie and c:IsType(TYPE_XYZ) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)
 end
 function s.mtfilter(c,e)
-	return c:IsCanOverlay() and not c:IsImmuneToEffect(e) and c.Savior_mojie=true
+	return c:IsCanOverlay() and not c:IsImmuneToEffect(e) and c.Savior_mojie
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_EXTRA,0,1,nil,e,tp) end

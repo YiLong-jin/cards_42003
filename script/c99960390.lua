@@ -63,7 +63,6 @@ function c99960390.spop(e,tp,eg,ep,ev,re,r,rp)
 	local e3=Effect.CreateEffect(e:GetHandler())
 	e3:SetType(EFFECT_TYPE_FIELD)
 	e3:SetCode(EFFECT_FLAG_EFFECT+99960390)
-	e3:SetRange(LOCATION_SZONE)
 	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e3:SetTargetRange(1,1)
 	e3:SetReset(RESET_PHASE+PHASE_END)  -- 回合结束时重置
