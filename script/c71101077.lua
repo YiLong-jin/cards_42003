@@ -15,6 +15,7 @@ function cm.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_DISABLE+CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_QUICK_O+EFFECT_TYPE_FIELD)
+	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetCode(EVENT_CHAINING)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetCountLimit(1,m+o)
@@ -29,7 +30,7 @@ end
 function cm.spcon2(e,tp,eg,ep,ev,re,r,rp)
 	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) 
 end
-function cm.sptg2(e,tp,eg,ep,ev,re,r,rp,chk)
+function cm.sptg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	 if chkc then return chkc:IsOnField() and aux.NegateAnyFilter(chkc) end
 	if chk==0 then return rp==1-tp and e:GetHandler():GetEquipTarget():IsCode(71100777) and  
 	Duel.IsExistingTarget(aux.NegateAnyFilter,tp,0,LOCATION_ONFIELD,1,nil) end
