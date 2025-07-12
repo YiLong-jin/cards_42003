@@ -52,7 +52,7 @@ function c21400075.ovfilter(c)
 	return c:IsFaceup() and c:IsCode(21400032) 
 end
 function c21400075.discon(e,tp,eg,ep,ev,re,r,rp)
-	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and Duel.IsChainNegatable(ev) and re:IsHasType(EFFECT_TYPE_ACTIVATE)
+	return not e:GetHandler():IsStatus(STATUS_BATTLE_DESTROYED) and Duel.IsChainNegatable(ev) and re:IsHasType(EFFECT_TYPE_ACTIVATE) and e:GetHandler():IsStatus(STATUS_SPSUMMON_TURN)
 end
 function c21400075.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end 

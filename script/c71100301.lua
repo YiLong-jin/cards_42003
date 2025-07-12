@@ -20,7 +20,7 @@ function c71100301.stfil(c)
 	return c:IsSetCard(0x57de) and c:IsSSetable() 
 end 
 function c71100301.tgstg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(c71100301.tgfil,tp,LOCATION_DECK,0,1,nil,e,tp) end
+	if chk==0 then return Duel.IsExistingMatchingCard(c71100301.tgfil,tp,LOCATION_DECK+LOCATION_HAND,0,1,nil,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK+LOCATION_HAND)
 end
 function c71100301.tgsop(e,tp,eg,ep,ev,re,r,rp)
