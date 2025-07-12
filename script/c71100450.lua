@@ -7,10 +7,9 @@ function s.initial_effect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetRange(LOCATION_HAND+LOCATION_MZONE)
-	e2:SetCode(EVENT_CHAINING)
+	e2:SetCode(EVENT_CUSTOM+id)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCountLimit(1,id)
-	e2:SetCondition(s.xyzcon)
 	e2:SetTarget(s.xyztg)
 	e2:SetOperation(s.xyzop)
 	c:RegisterEffect(e2)
@@ -23,10 +22,22 @@ function s.initial_effect(c)
 	e1:SetCondition(s.efcon)
 	e1:SetOperation(s.efop)
 	c:RegisterEffect(e1)
+	if not s.global_check then
+		s.global_check=true
+		local ge1=Effect.CreateEffect(c)
+		ge1:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
+		ge1:SetCode(EVENT_CHAIN_SOLVED)
+		ge1:SetCondition(s.regcon)
+		ge1:SetOperation(s.regop)
+		Duel.RegisterEffect(ge1,0)
+	end
 end
-function s.xyzcon(e,tp,eg,ep,ev,re,r,rp)
+function s.regcon(e,tp,eg,ep,ev,re,r,rp)
 	local race=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_RACE)
-	return re:IsActiveType(TYPE_MONSTER) and race&RACE_INSECT>0
+	return re:IsActiveType(TYPE_MONSTER) and race&RACE_INSECT
+end
+function s.regop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.RaiseEvent(re:GetHandler(),EVENT_CUSTOM+id,re,r,rp,ep,ev)
 end
 function s.xyzfilter(c,g)
 	return c:IsXyzSummonable(g,#g,#g)

@@ -16,13 +16,29 @@ function cm.initial_effect(c)
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetRange(LOCATION_HAND+LOCATION_MZONE)
-	e2:SetCode(EVENT_CHAINING)
+	e2:SetCode(EVENT_CUSTOM+m)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCountLimit(1,m)
 	e2:SetCondition(cm.sccon)
 	e2:SetTarget(cm.sctg)
 	e2:SetOperation(cm.scop)
 	c:RegisterEffect(e2)
+	if not cm.global_check then
+		cm.global_check=true
+		local ge1=Effect.CreateEffect(c)
+		ge1:SetType(EFFECT_TYPE_CONTINUOUS+EFFECT_TYPE_FIELD)
+		ge1:SetCode(EVENT_CHAIN_SOLVED)
+		ge1:SetCondition(cm.regcon)
+		ge1:SetOperation(cm.regop)
+		Duel.RegisterEffect(ge1,0)
+	end
+end
+function cm.regcon(e,tp,eg,ep,ev,re,r,rp)
+	local att=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_ATTRIBUTE)
+	return re:IsActiveType(TYPE_MONSTER) and att&ATTRIBUTE_WATER
+end
+function cm.regop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.RaiseEvent(re:GetHandler(),EVENT_CUSTOM+m,re,r,rp,ep,ev)
 end
 cm.Automatic_chess_piece=true --「自动棋子」记述
 function cm.filter(c)
