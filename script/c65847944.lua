@@ -15,7 +15,7 @@ function c65847944.initial_effect(c)
 	c:RegisterEffect(e2)	
 end
 function c65847944.filter(c)
-	return c:IsFaceup() and c:IsSetCard(0x33e0) and bit.band(c:GetType(),0x81)==0x81
+	return c:IsFaceup() and c:IsSetCard(0x3e5) and bit.band(c:GetType(),0x81)==0x81
 end
 function c65847944.eqtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and c65847944.filter(chkc) end

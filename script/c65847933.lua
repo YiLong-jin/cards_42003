@@ -22,7 +22,7 @@ function c65847933.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function c65847933.filter(c)
-	return bit.band(c:GetType(),0x81)==0x81 or c:IsSetCard(0x33e0) and c:IsFaceup()
+	return bit.band(c:GetType(),0x81)==0x81 or c:IsSetCard(0x3e5) and c:IsFaceup()
 end
 function c65847933.spcon(e,c)
 	if c==nil then return true end
@@ -30,7 +30,7 @@ function c65847933.spcon(e,c)
 		and Duel.IsExistingMatchingCard(c65847933.filter,c:GetControler(),LOCATION_MZONE,0,1,nil)
 end
 function c65847933.thfilter(c)
-	return c:IsSetCard(0x33e0) and c:IsType(0x2) and c:IsAbleToHand()
+	return c:IsSetCard(0x3e5) and c:IsType(0x2) and c:IsAbleToHand()
 end
 function c65847933.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65847933.thfilter,tp,LOCATION_DECK,0,1,nil) and Duel.GetFlagEffect(tp,65847933)==0 end

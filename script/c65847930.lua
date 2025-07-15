@@ -23,7 +23,7 @@ function c65847930.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)>3 end
 end
 function c65847930.thfilter(c)
-	return (bit.band(c:GetType(),0x81)==0x81 or c:IsSetCard(0x33e0)) and c:IsAbleToHand()
+	return (bit.band(c:GetType(),0x81)==0x81 or c:IsSetCard(0x3e5)) and c:IsAbleToHand()
 end
 function c65847930.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetFieldGroupCount(tp,LOCATION_DECK,0)<=3 then return end
@@ -48,7 +48,7 @@ function c65847930.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c65847930.tdfilter(c)
-	return c:IsFaceupEx() and c:IsSetCard(0x33e0) and c:IsType(TYPE_MONSTER) and c:IsAbleToDeck()
+	return c:IsFaceupEx() and c:IsSetCard(0x3e5) and c:IsType(TYPE_MONSTER) and c:IsAbleToDeck()
 end
 function c65847930.tdtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65847930.tdfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil) end

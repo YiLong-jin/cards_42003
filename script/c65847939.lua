@@ -27,7 +27,7 @@ function c65847939.srcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_RITUAL)
 end
 function c65847939.srfilter(c)
-	return c:IsSetCard(0x33e0) and c:IsAbleToHand()
+	return c:IsSetCard(0x3e5) and c:IsAbleToHand()
 end
 function c65847939.srtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65847939.srfilter,tp,LOCATION_DECK,0,1,nil) end

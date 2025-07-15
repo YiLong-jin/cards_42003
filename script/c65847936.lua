@@ -18,7 +18,7 @@ function c65847936.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function c65847936.filter(c,e,tp)
-	return c:IsSetCard(0x33e0)
+	return c:IsSetCard(0x3e5)
 end
 function c65847936.RitualUltimateFilter(c,filter,e,tp,m1,m2,level_function,greater_or_equal,chk)
 	if bit.band(c:GetType(),0x81)~=0x81 or (filter and not filter(c,e,tp,chk)) or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,true,POS_FACEUP) then return false end
@@ -72,7 +72,7 @@ function c65847936.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c65847936.tgfilter(c)
-	return c:IsSetCard(0x33e0) and c:IsAbleToGrave()
+	return c:IsSetCard(0x3e5) and c:IsAbleToGrave()
 end
 function c65847936.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65847936.tgfilter,tp,LOCATION_DECK,0,1,nil) end

@@ -32,5 +32,5 @@ function c65847942.spop(e,tp,eg,ep,ev,re,r,rp,c)
 	g:DeleteGroup()
 end
 function c65847942.tdfilter(c)
-	return c:IsSetCard(0x33e0) and c:IsType(0x2) and c:IsAbleToDeck()
+	return c:IsSetCard(0x3e5) and c:IsType(0x2) and c:IsAbleToDeck()
 end
