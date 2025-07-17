@@ -2,7 +2,7 @@
 function c21400031.initial_effect(c)
 	--special summon
 	local e1=Effect.CreateEffect(c) 
-	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_DECKDES)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O) 
 	e1:SetCode(EVENT_DESTROYED)
 	e1:SetProperty(EFFECT_FLAG_DELAY) 
@@ -44,6 +44,7 @@ function c21400031.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,0,0)
 end 
 function c21400031.spfil(c,e,tp) 
 	return c:IsCode(21400031) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)  
