@@ -1,7 +1,7 @@
 --恐虐杀戮冠军
 function c21400032.initial_effect(c)
 	--xyz summon
-	aux.AddXyzProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x6210),4,2)
+	aux.AddXyzProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x6210),4,2,nil,nil,99)
 	c:EnableReviveLimit() 
 	--search
 	local e1=Effect.CreateEffect(c) 
