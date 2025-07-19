@@ -33,8 +33,8 @@ function s.initial_effect(c)
 	end
 end
 function s.regcon(e,tp,eg,ep,ev,re,r,rp)
-	local race=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_RACE)
-	return re:IsActiveType(TYPE_MONSTER) and race&RACE_INSECT
+	local rc=re:GetHandler()
+	return rc:GetOriginalRace()&RACE_INSECT>0
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RaiseEvent(re:GetHandler(),EVENT_CUSTOM+id,re,r,rp,ep,ev)
