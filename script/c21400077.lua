@@ -97,8 +97,23 @@ function c21400077.spop(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(c21400077.spfil,tp,LOCATION_DECK,0,nil,e,tp)
 	if g:CheckSubGroup(c21400077.spgck,1,5,e,tp) then 
 		local sg=g:SelectSubGroup(tp,c21400077.spgck,false,1,5,e,tp)
-		Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
+		for tc in aux.Next(sg) do 
+			Duel.SpecialSummonStep(tc,0,tp,tp,false,false,POS_FACEUP)
+			local e1=Effect.CreateEffect(e:GetHandler())
+			e1:SetType(EFFECT_TYPE_FIELD)
+			e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
+			e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+			e1:SetRange(LOCATION_MZONE)
+			e1:SetAbsoluteRange(tp,1,0)
+			e1:SetTarget(c21400077.splimit)
+			e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+			tc:RegisterEffect(e1,true)
+		end 
+		Duel.SpecialSummonComplete()
 	end
+end
+function c21400077.splimit(e,c)
+	return not c:IsSetCard(0x6210)
 end
 function c21400077.discon1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

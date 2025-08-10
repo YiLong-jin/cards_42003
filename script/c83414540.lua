@@ -89,7 +89,7 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.setcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==1-tp
-		and (Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0) or (Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil))
+		and ((Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0) or (Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)>=1 and not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil)))
 end
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0 end

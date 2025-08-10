@@ -1,6 +1,6 @@
 function c21400028.initial_effect(c)
 	--synchro summon
-	aux.AddSynchroProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x5210),aux.NonTuner(nil),1)
+	aux.AddSynchroMixProcedure(c,aux.Tuner(Card.IsSetCard,0x5210),nil,nil,aux.FilterBoolFunction(aux.TRUE),1,99)
 	c:EnableReviveLimit()
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DISABLE)

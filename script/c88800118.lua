@@ -100,24 +100,26 @@ end
 function s.to(c)
 	--to grave
 	local e4=Effect.CreateEffect(c)
-	e4:SetDescription(1122)
-	e4:SetCategory(CATEGORY_DAMAGE)
+	e4:SetDescription(aux.Stringid(18940556,1))
+	e4:SetCategory(CATEGORY_DAMAGE+CATEGORY_TOGRAVE)
 	e4:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e4:SetCode(EVENT_BATTLE_START)
 	e4:SetTarget(s.tgtg)
 	e4:SetOperation(s.tgop)
 	c:RegisterEffect(e4)
 end
+    --①
 function s.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local d=Duel.GetAttackTarget()
 	if chk==0 then return Duel.GetAttacker()==e:GetHandler() and d and d:IsDefensePos() end
 	Duel.SetOperationInfo(0,CATEGORY_DAMAGE,nil,0,1-tp,1000)
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,d,1,0,0)
 end
 function s.tgop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.Damage(1-tp,1000,REASON_EFFECT)~=0 then
 		local d=Duel.GetAttackTarget()
 		if d:IsRelateToBattle() and d:IsDefensePos() then
-			Duel.Overlay(e:GetHandler(),d)
+			Duel.SendtoGrave(d,REASON_EFFECT)
 		end
 	end
 end

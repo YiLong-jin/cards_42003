@@ -25,6 +25,7 @@ function c40800003.initial_effect(c)
 	local e3=Effect.CreateEffect(c)
 	e3:SetType(EFFECT_TYPE_SINGLE)
 	e3:SetCode(EFFECT_PIERCE)
+	e3:SetCondition(c40800003.effcon)
 	c:RegisterEffect(e3)
 	local e4=Effect.CreateEffect(c)
 	e4:SetCategory(CATEGORY_DISABLE+CATEGORY_TODECK)
@@ -41,6 +42,7 @@ function c40800003.initial_effect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e5:SetCode(EVENT_TO_GRAVE)
 	e5:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
+	e5:SetCountLimit(1,40800010)
 	e5:SetTarget(c40800003.thtg)
 	e5:SetOperation(c40800003.thop)
 	c:RegisterEffect(e5)
@@ -81,10 +83,10 @@ function c40800003.xyzop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c40800003.effcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetOverlayGroup():FilterCount(Card.IsCode,nil,40800000)>=e:GetLabel()
+	return (e:GetHandler():GetOverlayGroup():FilterCount(Card.IsCode,nil,40800000)>=e:GetLabel() or e:GetHandler():IsHasEffect(40800020,tp) and Duel.GetOverlayGroup(tp,LOCATION_MZONE,0):FilterCount(Card.IsCode,nil,40800000)>=3)
 end
 function c40800003.discon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetOverlayGroup():FilterCount(Card.IsCode,nil,40800000)>=3 
+	return (e:GetHandler():GetOverlayGroup():FilterCount(Card.IsCode,nil,40800000)>=3 or e:GetHandler():IsHasEffect(40800020,tp) and  Duel.GetOverlayGroup(tp,LOCATION_MZONE,0):FilterCount(Card.IsCode,nil,40800000)>=3)
 end
 function c40800003.distg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

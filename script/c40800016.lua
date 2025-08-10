@@ -43,7 +43,7 @@ function c40800016.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 		and Duel.IsExistingTarget(c40800016.filter,tp,LOCATION_GRAVE,0,1,nil) end
 	local g=Duel.GetMatchingGroup(Card.IsAbleToDeck,tp,LOCATION_GRAVE,0,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local sg=g:FilterSelect(tp,c40800016.fselect,1,5,nil)
+	local sg=g:FilterSelect(tp,c40800016.fselect,1,3,nil)
 	Duel.SetTargetCard(sg)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,sg,sg:GetCount(),0,0)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
@@ -54,7 +54,7 @@ function c40800016.tdop(e,tp,eg,ep,ev,re,r,rp)
 	if tg:GetCount()==0 then return end
 	Duel.SendtoDeck(tg,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 	local sg=Duel.GetOperatedGroup()
-	if sg:IsExists(Card.IsLocation,1,nil,LOCATION_DECK) then 
+	if sg:IsExists(Card.IsLocation,1,nil,LOCATION_DECK+LOCATION_EXTRA) then 
 		Duel.ShuffleDeck(tp) 
 		Duel.BreakEffect()
 		Duel.Draw(tp,1,REASON_EFFECT)

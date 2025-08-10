@@ -57,10 +57,11 @@ function c21400078.tgfil(c)
 	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0x6210) and c:IsAbleToGrave() 
 end 
 function c21400078.dtgtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc) 
+	local c=e:GetHandler()
 	if chkc then return chkc:IsOnField() and chkc:IsControler(tp) end
-	if chk==0 then return Duel.IsExistingTarget(nil,tp,LOCATION_ONFIELD,0,1,nil,tp) and Duel.IsExistingMatchingCard(c21400078.tgfil,tp,LOCATION_DECK,0,1,nil) end
+	if chk==0 then return Duel.IsExistingTarget(nil,tp,LOCATION_ONFIELD,0,1,c,tp) and Duel.IsExistingMatchingCard(c21400078.tgfil,tp,LOCATION_DECK,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g=Duel.SelectTarget(tp,nil,tp,LOCATION_ONFIELD,0,1,1,nil,tp)
+	local g=Duel.SelectTarget(tp,nil,tp,LOCATION_ONFIELD,0,1,1,c,tp)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
 end

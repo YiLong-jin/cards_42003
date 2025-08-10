@@ -1,7 +1,7 @@
 --色孽嗜悦魔
 function c21400043.initial_effect(c)
 	--synchro summon
-	aux.AddSynchroProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x5210),nil,1)
+	aux.AddSynchroMixProcedure(c,aux.Tuner(Card.IsSetCard,0x5210),nil,nil,aux.FilterBoolFunction(aux.TRUE),1,99)
 	c:EnableReviveLimit()
 	--damage
 	local e1=Effect.CreateEffect(c)

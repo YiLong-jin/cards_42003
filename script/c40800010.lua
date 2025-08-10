@@ -59,6 +59,7 @@ function c40800010.initial_effect(c)
 	e5:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e5:SetCode(EVENT_TO_GRAVE)
 	e5:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
+	e5:SetCountLimit(1,40800010)
 	e5:SetTarget(c40800010.thtg)
 	e5:SetOperation(c40800010.thop)
 	c:RegisterEffect(e5)
@@ -102,7 +103,7 @@ function c40800010.xyzop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c40800010.effcon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():GetOverlayGroup():FilterCount(Card.IsCode,nil,40800000)>=e:GetLabel()
+	return e:GetHandler():GetOverlayGroup():FilterCount(Card.IsCode,nil,40800000)>=e:GetLabel() or e:GetHandler():IsHasEffect(40800020,tp)
 end
 function c40800010.ndestg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(nil,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil)
