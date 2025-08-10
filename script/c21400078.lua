@@ -18,6 +18,7 @@ function c21400078.initial_effect(c)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetRange(LOCATION_MZONE)
 	e2:SetCountLimit(1,11400078)
+	e2:SetCondition(c21400078.spconf)
 	e2:SetTarget(c21400078.dtgtg)
 	e2:SetOperation(c21400078.dtgop)
 	c:RegisterEffect(e2)  
@@ -31,6 +32,9 @@ function c21400078.initial_effect(c)
 	e3:SetTarget(c21400078.sptg)
 	e3:SetOperation(c21400078.spop)
 	c:RegisterEffect(e3)
+end
+function c21400078.spconf(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetCurrentPhase()==PHASE_MAIN1 or Duel.GetCurrentPhase()==PHASE_MAIN2
 end
 function c21400078.desfilter(c,tp)
 	return Duel.GetMZoneCount(tp,c)>0
