@@ -69,14 +69,14 @@ function c21400094.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.RemoveCounter(tp,1,1,0x1077,x,REASON_COST) 
 end 
 function c21400094.rectg(e,tp,eg,ep,ev,re,r,rp,chk)
-	local ct=e:GetHandler():GetCounter(0x1077)
+	local ct=Duel.GetCounter(tp,LOCATION_ONFIELD,LOCATION_ONFIELD,0x1077)
 	if chk==0 then return ct>1 end 
 	Duel.SetTargetPlayer(tp)
 	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,ct*700)
 end
 function c21400094.recop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	local ct=c:GetCounter(0x1077)
+	local ct=Duel.GetCounter(tp,LOCATION_ONFIELD,LOCATION_ONFIELD,0x1077)
 	local p=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER)
 	if c:IsRelateToEffect(e) and ct>0 then
 		Duel.Recover(p,ct*700,REASON_EFFECT)
