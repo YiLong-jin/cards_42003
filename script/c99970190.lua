@@ -1,5 +1,5 @@
 --yume no sinsei！
-local m=99910100
+local m=99970190
 local cm=_G["c"..m]
 function cm.initial_effect(c)
 	aux.EnablePendulumAttribute(c)

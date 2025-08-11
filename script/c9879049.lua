@@ -1,4 +1,5 @@
 --核心列车 粒子加速器
+c9879049.hxlc=true
 function c9879049.initial_effect(c)
 	aux.AddCodeList(c,9879042)
 
