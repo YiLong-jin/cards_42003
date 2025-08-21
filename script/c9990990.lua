@@ -42,7 +42,7 @@ function c9990990.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function c9990990.cfiltersss(c,syncard)
-	return (c:IsType(TYPE_PENDULUM) or c:IsAttack(1550))
+	return (c:IsType(TYPE_PENDULUM) or c:IsAttack(1550)) and c:IsNotTuner(syncard)
 end
 function c9990990.syncheck(syncard)
 	return  function(g)
