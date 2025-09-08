@@ -100,11 +100,11 @@ function c99961060.damval(e,re,val,r,rp,rc)
 	local chain = Duel.GetCurrentChain()
 	if chain > 0 then
 		local te,tep = Duel.GetChainInfo(chain, CHAININFO_TRIGGERING_EFFECT, CHAININFO_TRIGGERING_PLAYER)
-		if te and te:GetHandler().Savior_Xiaoye then
-			return val -- 咲夜卡造成的伤害保持不变
+		if te and not te:GetHandler().Savior_Xiaoye then
+			return 0 -- 非咲夜卡造成的伤害变为0
+		else return val
 		end
 	end
-	return 0 -- 非咲夜卡造成的伤害变为0
 end
 
 
