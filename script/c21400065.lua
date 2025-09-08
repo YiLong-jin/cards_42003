@@ -27,7 +27,7 @@ function c21400065.initial_effect(c)
 end
 c21400065.toss_coin=true 
 function c21400065.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsPlayerAffectedByEffect(EFFECT_CANNOT_TO_HAND) end
+	if chk==0 then return not Duel.IsPlayerAffectedByEffect(EFFECT_CANNOT_TO_HAND) end
 	Duel.SetOperationInfo(0,CATEGORY_COIN,nil,0,tp,1)
 end
 function c21400065.thfil1(c)
