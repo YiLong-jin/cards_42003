@@ -58,6 +58,7 @@ function s.indfilter(c,tp)
 	return c:IsType(TYPE_EFFECT) and c:IsFaceup()
 end
 function s.indcon(e)
+	local tp=e:GetHandler():GetControler()
 	return not Duel.IsExistingMatchingCard(s.indfilter,tp,LOCATION_MZONE,0,1,nil)
 end
 function s.indtg(e,c)

@@ -1,4 +1,4 @@
---怪兽
+--情怀的前行
 function c99940250.initial_effect(c)
 
 	local e0=Effect.CreateEffect(c)
@@ -19,7 +19,7 @@ function c99940250.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_SPSUM_PARAM)
 	e1:SetRange(LOCATION_GRAVE)
 	e1:SetTargetRange(POS_FACEUP_DEFENSE,0)
-	e1:SetCountLimit(1,99940250+EFFECT_COUNT_CODE_OATH+EFFECT_COUNT_CODE_DUEL)
+	e1:SetCountLimit(1,99940250+EFFECT_COUNT_CODE_OATH)
 	e1:SetCondition(c99940250.spcon)
 	e1:SetValue(c99940250.spval)
 	c:RegisterEffect(e1)

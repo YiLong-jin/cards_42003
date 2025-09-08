@@ -80,11 +80,32 @@ end
 function c99961060.damop1(e,tp,eg,ep,ev,re,r,rp)
 	local p,d=Duel.GetChainInfo(0,CHAININFO_TARGET_PLAYER,CHAININFO_TARGET_PARAM)
 	Duel.Damage(p,d,REASON_EFFECT)
+	-- 创建改变伤害值的效果
+	local e1=Effect.CreateEffect(e:GetHandler())
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetCode(EFFECT_CHANGE_DAMAGE)
+	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
+	e1:SetTargetRange(0,1)
+	e1:SetValue(c99961060.damval)
+	e1:SetReset(RESET_PHASE+PHASE_END)
+	Duel.RegisterEffect(e1,tp)
+	
+	local e2=e1:Clone()
+	e2:SetCode(EFFECT_NO_EFFECT_DAMAGE)
+	e2:SetValue(1)
+	Duel.RegisterEffect(e2,tp)
 end
 
-
-
-
+function c99961060.damval(e,re,val,r,rp,rc)
+	local chain = Duel.GetCurrentChain()
+	if chain > 0 then
+		local te,tep = Duel.GetChainInfo(chain, CHAININFO_TRIGGERING_EFFECT, CHAININFO_TRIGGERING_PLAYER)
+		if te and te:GetHandler():IsSetCard(Savior_Xiaoye) then
+			return val -- 咲夜卡造成的伤害保持不变
+		end
+	end
+	return 0 -- 非咲夜卡造成的伤害变为0
+end
 
 
 

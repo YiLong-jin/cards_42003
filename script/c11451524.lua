@@ -27,9 +27,8 @@ function cm.initial_effect(c)
 	--only
 	local e3=Effect.CreateEffect(c)
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
-	e3:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
+	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e3:SetRange(LOCATION_MZONE)
 	e3:SetCondition(cm.spcon)
 	e3:SetTarget(cm.sptg)
 	e3:SetOperation(cm.spop)
@@ -51,7 +50,7 @@ function cm.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=eg:Filter(cm.repfilter,c,tp)
 	if Duel.GetFlagEffect(tp,m)~=0 then return false end
 	if g:IsExists(Card.IsOnField,1,nil) then Duel.HintSelection(g) end
-	if not Duel.SelectYesNo(tp,aux.Stringid(m,0)) then return false end
+	if not Duel.SelectEffectYesNo(tp,c,aux.Stringid(m,0)) then return false end
 	Duel.RegisterFlagEffect(tp,m,RESET_PHASE+PHASE_END,0,1)
 	if #g>1 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
@@ -91,7 +90,7 @@ function cm.reptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	end
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(m,3))
-	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+	e1:SetType(EFFECT_TYPE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_CLIENT_HINT)
 	e1:SetTargetRange(1,0)
 	e1:SetReset(RESET_PHASE+PHASE_END)
@@ -152,6 +151,7 @@ function cm.psptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		aux.PendulumChecklist=_PendulumChecklist
 		return res
 	end
+	e:GetHandler():ClearEffectRelation()
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,0,0)
 end
 function cm.pspop(e,tp,eg,ep,ev,re,r,rp)
@@ -212,20 +212,51 @@ function cm.pspop(e,tp,eg,ep,ev,re,r,rp)
 end
 function cm.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return eg:GetCount()==1 and eg:GetFirst()==c and c:IsSummonType(SUMMON_TYPE_PENDULUM)
+	return c:IsSummonType(SUMMON_TYPE_PENDULUM)
 end
 function cm.matfilter(c)
 	return c:IsFaceup() and c:IsType(TYPE_PENDULUM)
 end
 function cm.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local mg=Duel.GetMatchingGroup(cm.matfilter,tp,LOCATION_ONFIELD,0,nil)
-	if chk==0 then return Duel.IsExistingMatchingCard(Card.IsLinkSummonable,tp,LOCATION_EXTRA,0,1,nil,mg) end
+	if chk==0 then return Duel.IsExistingMatchingCard(cm.slfilter,tp,LOCATION_EXTRA,0,1,nil,mg) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,0,0)
+end
+function cm.slfilter(c,mg)
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e1:SetCode(EFFECT_EXTRA_LINK_MATERIAL)
+	e1:SetRange(LOCATION_EXTRA)
+	e1:SetTargetRange(LOCATION_ONFIELD,0)
+	e1:SetTarget(aux.TargetBoolFunction(cm.matfilter))
+	e1:SetValue(cm.matval)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+	c:RegisterEffect(e1,true)
+	local res=c:IsLinkSummonable(mg)
+	e1:Reset()
+	return res
+end
+function cm.matval(e,lc,mg,c,tp)
+	if lc~=e:GetHandler() then return false,nil end
+	return true,true
 end
 function cm.spop(e,tp,eg,ep,ev,re,r,rp)
 	local mg=Duel.GetMatchingGroup(cm.matfilter,tp,LOCATION_ONFIELD,0,nil)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,Card.IsLinkSummonable,tp,LOCATION_EXTRA,0,1,1,nil,mg)
+	local g=Duel.SelectMatchingCard(tp,cm.slfilter,tp,LOCATION_EXTRA,0,1,1,nil,mg)
 	local tc=g:GetFirst()
-	if tc then Duel.LinkSummon(tp,tc,mg) end
+	if tc then
+		local e1=Effect.CreateEffect(e:GetHandler())
+		e1:SetType(EFFECT_TYPE_FIELD)
+		e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+		e1:SetCode(EFFECT_EXTRA_LINK_MATERIAL)
+		e1:SetRange(LOCATION_EXTRA)
+		e1:SetTargetRange(LOCATION_ONFIELD,0)
+		e1:SetTarget(aux.TargetBoolFunction(cm.matfilter))
+		e1:SetValue(cm.matval)
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
+		tc:RegisterEffect(e1,true)
+		Duel.LinkSummon(tp,tc,mg)
+	end
 end

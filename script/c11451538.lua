@@ -38,7 +38,7 @@ function cm.spfilter(c,e,tp)
 	return c:IsRace(RACE_MACHINE) and c:IsLevel(10) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function cm.fselect(g,tp)
-	return Duel.IsExistingMatchingCard(cm.xyzfilter,tp,LOCATION_EXTRA,0,1,nil,g,tp)
+	return aux.dabcheck(g) and Duel.IsExistingMatchingCard(cm.xyzfilter,tp,LOCATION_EXTRA,0,1,nil,g,tp)
 end
 function cm.xyzfilter(c,g,tp)
 	return c:IsRace(RACE_MACHINE) and c:IsXyzSummonable(g,#g,#g) --and Duel.GetLocationCountFromEx(tp,tp,g,c)>0
@@ -82,18 +82,24 @@ function cm.activate(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetType(EFFECT_TYPE_SINGLE)
 			e1:SetCode(EFFECT_DISABLE)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-			tc:RegisterEffect(e1)
+			--tc:RegisterEffect(e1)
 			local e2=e1:Clone()
 			e2:SetCode(EFFECT_DISABLE_EFFECT)
-			tc:RegisterEffect(e2)
+			e2:SetValue(RESET_TURN_SET)
+			--tc:RegisterEffect(e2)
 		end
 		Duel.SpecialSummonComplete()
 		local og=Duel.GetOperatedGroup()
 		Duel.RaiseEvent(e:GetHandler(),EVENT_ADJUST,nil,0,PLAYER_NONE,PLAYER_NONE,0)
 		if #og>0 then
-			Duel.BreakEffect()
+			--Duel.BreakEffect()
 			Duel.DisableShuffleCheck()
-			if Duel.SendtoHand(ag-og,1-tp,REASON_EFFECT)>0 then Duel.ShuffleHand(1-tp) end
+			local hg=ag-og
+			if #hg>1 then
+				Duel.Hint(HINT_SELECTMSG,1-tp,HINTMSG_ATOHAND)
+				hg=hg:Select(1-tp,1,1,nil)
+			end
+			if Duel.SendtoHand(hg,1-tp,REASON_EFFECT)>0 then Duel.ShuffleHand(1-tp) end
 			if og:FilterCount(Card.IsLocation,nil,LOCATION_MZONE)==#sg then
 				local tg=Duel.GetMatchingGroup(cm.xyzfilter,tp,LOCATION_EXTRA,0,nil,og,tp)
 				if #tg>0 then

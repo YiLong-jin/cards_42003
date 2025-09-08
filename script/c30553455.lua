@@ -10,16 +10,16 @@ function s.initial_effect(c)
 	e1:SetTarget(s.sptg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1) 
-	--Activate
+	--to hand
 	local e2=Effect.CreateEffect(c)
 	e2:SetDescription(aux.Stringid(id,2))
-	e2:SetCategory(CATEGORY_DESTROY)
+	e2:SetCategory(CATEGORY_REMOVE+CATEGORY_SPECIAL_SUMMON)
+	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e2:SetType(EFFECT_TYPE_ACTIVATE)
 	e2:SetCode(EVENT_FREE_CHAIN)
-	e2:SetHintTiming(0,TIMING_END_PHASE+TIMING_EQUIP)
-	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetTarget(s.target)
-	e2:SetOperation(s.activate)
+	e2:SetCondition(s.descon)
+	e2:SetTarget(s.destg)
+	e2:SetOperation(s.desop)
 	c:RegisterEffect(e2)
 
 	--special summon
@@ -36,58 +36,51 @@ function s.initial_effect(c)
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,id,0,TYPES_NORMAL_TRAP_MONSTER,1800,1400,4,RACE_WARRIOR,ATTRIBUTE_LIGHT) end
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,id,0,TYPES_NORMAL_TRAP_MONSTER,1400,1800,4,RACE_WARRIOR,ATTRIBUTE_LIGHT) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
-end
-function s.synhfilter(c,sc,tuner)
-	return c:IsCanBeSynchroMaterial(sc,tuner) and not c:IsType(TYPE_EFFECT)
-end
-function s.synfilter(c,mc,tp)
-	local mg=Duel.GetMatchingGroup(s.synhfilter,tp,LOCATION_MZONE,0,nil,c,mc)
-	mg:AddCard(mc)
-	return c:IsSynchroSummonable(mc,mg) and Duel.GetLocationCountFromEx(tp,tp,mc,c)>0
 end
 function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and Duel.IsPlayerCanSpecialSummonMonster(tp,id,0,TYPES_NORMAL_TRAP_MONSTER,1800,1400,4,RACE_WARRIOR,ATTRIBUTE_LIGHT) then
+	if c:IsRelateToEffect(e) and Duel.IsPlayerCanSpecialSummonMonster(tp,id,0,TYPES_NORMAL_TRAP_MONSTER,1400,1800,4,RACE_WARRIOR,ATTRIBUTE_LIGHT) then
 		c:AddMonsterAttribute(TYPE_NORMAL+TYPE_TUNER)
 		Duel.SpecialSummon(c,0,tp,tp,true,false,POS_FACEUP)
-		if Duel.IsExistingMatchingCard(s.synfilter,tp,LOCATION_EXTRA,0,1,nil,c,tp) and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
-			Duel.BreakEffect()
-			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-			local fc=Duel.SelectMatchingCard(tp,s.synfilter,tp,LOCATION_EXTRA,0,1,1,nil,c,tp):GetFirst()
-			local mg=Duel.GetMatchingGroup(s.synhfilter,tp,LOCATION_MZONE,0,nil,fc,c)
-			mg:AddCard(c)
-			Duel.SynchroSummon(tp,fc,c,mg)
+	end
+end
+
+
+function s.tgfilter1(c)
+	return c:IsFaceup() and c:IsType(TYPE_SYNCHRO) and not c:IsType(TYPE_EFFECT)
+end
+function s.descon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.IsExistingMatchingCard(s.tgfilter1,tp,LOCATION_ONFIELD,0,1,nil)
+end
+function s.destg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsAbleToRemove() end
+	if chk==0 then return Duel.IsExistingTarget(Card.IsAbleToRemove,tp,0,LOCATION_GRAVE,1,nil) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,id,0,TYPES_NORMAL_TRAP_MONSTER,1400,1800,4,RACE_WARRIOR,ATTRIBUTE_LIGHT) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
+	local g=Duel.SelectTarget(tp,Card.IsAbleToRemove,tp,0,LOCATION_GRAVE,1,2,nil)
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,g:GetCount(),0,0)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
+end
+function s.desop(e,tp,eg,ep,ev,re,r,rp)
+	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
+	local c=e:GetHandler()
+	if c:IsRelateToEffect(e) and Duel.IsPlayerCanSpecialSummonMonster(tp,id,0,TYPES_NORMAL_TRAP_MONSTER,1400,1800,4,RACE_WARRIOR,ATTRIBUTE_LIGHT) then
+		c:AddMonsterAttribute(TYPE_NORMAL+TYPE_TUNER)
+		Duel.SpecialSummon(c,0,tp,tp,true,false,POS_FACEUP)
+		local tg=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS):Filter(Card.IsRelateToEffect,nil,e)
+		if tg:GetCount()>0 then
+			Duel.Remove(tg,POS_FACEUP,REASON_EFFECT)
 		end
 	end
+
 end
-
-
-
-function s.filter(c)
-	return c:IsType(TYPE_SPELL+TYPE_TRAP)
-end
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsOnField() and s.filter(chkc) and chkc~=e:GetHandler() end
-	if chk==0 then return Duel.IsExistingTarget(s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,e:GetHandler()) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
-	local g=Duel.SelectTarget(tp,s.filter,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,e:GetHandler())
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,g,1,0,0)
-end
-function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e) then
-		Duel.SendtoGrave(tc,REASON_EFFECT)
-	end
-end
-
-
 
 
 function s.cfilter(c,tp)
-	return c:IsFaceup() and c:IsType(TYPE_SYNCHRO) and c:IsSummonPlayer(tp) and c:IsRace(RACE_WARRIOR) and not  c:IsType(TYPE_EFFECT)
+	return c:IsFaceup() and c:IsType(TYPE_SYNCHRO) and c:IsSummonPlayer(tp) and c:IsRace(RACE_WARRIOR) and not c:IsType(TYPE_EFFECT)
 end
 function s.drcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.cfilter,1,nil,tp)
@@ -100,5 +93,7 @@ function s.drop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and Duel.IsPlayerCanSSet(c) then 
 		Duel.SSet(tp,c)
+		--Duel.SendtoHand(c,tp,REASON_EFFECT)
+		--Duel.ConfirmCards(1-tp,c)
 	end
 end
