@@ -122,11 +122,11 @@ end
 function c21400077.disop1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local tc=c:GetBattleTarget()
-	tc:RegisterFlagEffect(21400077,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
+	tc:RegisterFlagEffect(21400078,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,0,1)
 	Duel.AdjustInstantly(c)
 end
 function c21400077.distg(e,c)
-	return c:GetFlagEffect(21400077)~=0
+	return c:GetFlagEffect(21400078)~=0
 end
 
 
