@@ -1,7 +1,7 @@
 --奸奇灵能使
 function c21400104.initial_effect(c)
 	c:EnableReviveLimit()
-	aux.AddLinkProcedure(c,aux.FilterBoolFunction(Card.IsLinkSetCard,0x3210),1) 
+	aux.AddLinkProcedure(c,function(c) return c:IsLinkSetCard(0x3210) and not c:IsLinkType(TYPE_LINK) end,1) 
 	--Activate
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DESTROY+CATEGORY_DRAW)
