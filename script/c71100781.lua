@@ -61,7 +61,9 @@ function this.negop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 		c:RegisterEffect(e1)
 		--无效并回卡组
-		if Duel.NegateActivation(ev) and re:GetHandler():IsRelateToEffect(re) then
+		local ec=re:GetHandler()
+		if Duel.NegateActivation(ev) and ec:IsRelateToEffect(re) then
+			ec:CancelToGrave()
 			Duel.SendtoDeck(eg,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)
 		end
 	end
