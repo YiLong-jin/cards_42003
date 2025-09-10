@@ -57,7 +57,7 @@ function c21400091.initial_effect(c)
 	e1:SetRange(LOCATION_PZONE)
 	e1:SetCondition(c21400091.damcon)
 	e1:SetOperation(c21400091.damop)
-	c:RegisterEffect(e1)   
+	--c:RegisterEffect(e1)   
 	--spsummon
 	local e2=Effect.CreateEffect(c) 
 	e2:SetCategory(CATEGORY_SPECIAL_SUMMON)

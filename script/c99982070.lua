@@ -51,7 +51,7 @@ function c99982070.acttg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function cm.spcon1(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	return Duel.IsExistingMatchingCard(cm.cfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,nil) and re:IsActiveType(TYPE_MONSTER) and rp==1-tp
+	return Duel.IsExistingMatchingCard(cm.cfilter,tp,LOCATION_MZONE,0,1,nil) and re:IsActiveType(TYPE_MONSTER) and rp==1-tp
 end
 function cm.cfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x66d) and c:IsType(TYPE_MONSTER)
