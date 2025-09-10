@@ -1,6 +1,6 @@
 --巫女什么的，神的狗而已
 local s,id,o=GetID()
-dofile("expansions/script/c99960010.lua")
+Duel.LoadScript("c99960010.lua")
 function s.initial_effect(c)
 		--activate
 	local e1=Effect.CreateEffect(c)

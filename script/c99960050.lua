@@ -1,6 +1,6 @@
 --复活的魔界少女 爱丽丝
 local s,id,o=GetID()
-dofile("expansions/script/c99960010.lua")
+Duel.LoadScript("c99960010.lua")
 function s.initial_effect(c)
 		--to hand
 	local e1=Effect.CreateEffect(c)

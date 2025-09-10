@@ -1,6 +1,6 @@
 --魔界的魔法使 雪&舞
 local s,id,o=GetID()
-dofile("expansions/script/c99960010.lua")
+Duel.LoadScript("c99960010.lua")
 function s.initial_effect(c)
 			--search
 	local e5=Effect.CreateEffect(c)

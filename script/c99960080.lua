@@ -1,6 +1,6 @@
 --魔界的女仆 梦子
 local s,id,o=GetID()
-dofile("expansions/script/c99960010.lua")
+Duel.LoadScript("c99960010.lua")
 function s.initial_effect(c)
 		c:EnableReviveLimit()
 

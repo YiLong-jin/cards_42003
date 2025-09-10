@@ -1,6 +1,6 @@
 --真魔法·创世纪
 local s,id,o=GetID()
-dofile("expansions/script/c99960010.lua")
+Duel.LoadScript("c99960010.lua")
 function s.initial_effect(c)
 		--Activate
 	local e1=Effect.CreateEffect(c)

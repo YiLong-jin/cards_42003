@@ -1,6 +1,6 @@
 --不可思议的爱丽丝
 local s,id,o=GetID()
-dofile("expansions/script/c99960010.lua")
+Duel.LoadScript("c99960010.lua")
 function s.initial_effect(c)
 		--special summon
 	local e1=Effect.CreateEffect(c)

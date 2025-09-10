@@ -1,6 +1,6 @@
 --不可思议之事
 local s,id,o=GetID()
-dofile("expansions/script/c99960010.lua")
+Duel.LoadScript("c99960010.lua")
 function s.initial_effect(c)
 	aux.EnableChangeCode(c,99960090,LOCATION_MZONE+LOCATION_HAND+LOCATION_GRAVE)
 	--special summon
