@@ -88,8 +88,11 @@ function this.thop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 -- ③效果处理（保持不变）
+function this.rmf(c)
+	return c:IsFaceup() and c:IsSetCard(0x67a3)
+end 
 function this.rmtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	local ct=Duel.GetMatchingGroupCount(Card.IsSetCard,tp,LOCATION_MZONE,0,nil,0x67a3)
+	local ct=Duel.GetMatchingGroupCount(this.rmf,tp,LOCATION_MZONE,0,nil)
 	if chkc then return chkc:IsOnField() and chkc:IsControler(1-tp) end
 	if chk==0 then 
 		if ct<=1 then return false end
