@@ -13,8 +13,8 @@ GlobalEffect同样需要RegisterEffect来注册激活
 --]]
 function Auxiliary.PreloadUds()
 	function require(str)
-		dofile(str..".lua")
-		--[[local len = string.len(str)
+		--dofile(str..".lua")
+		local len = string.len(str)
 		local result=''
 		for i=len,1,-1 do
 			local temp=""
@@ -26,7 +26,7 @@ function Auxiliary.PreloadUds()
 			end
 			result=temp..result
 		end
-		]]--
+		
 	end
 end
 --这张卡在手卡·场上存在的场合才能发动。用包含这张卡的自己的手卡·场上的怪兽为素材作同调召唤。
