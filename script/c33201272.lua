@@ -18,6 +18,7 @@ local m=33201272
 local s,id,o=GetID()
 local cm=_G["c"..m]
 xpcall(function() require("expansions/script/c33201250") end,function() require("script/c33201250") end)
+Duel.LoadScript("c33201250.lua")
 function cm.initial_effect(c)
 	VHisc_Dragonk.eqa(c)
 	--atk up

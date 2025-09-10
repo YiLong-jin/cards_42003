@@ -17,6 +17,7 @@ end
 local m=33201251
 local cm=_G["c"..m]
 xpcall(function() require("expansions/script/c33201250") end,function() require("script/c33201250") end)
+Duel.LoadScript("c33201250.lua")
 local s,id,o=GetID()
 function cm.initial_effect(c)
 	--equip

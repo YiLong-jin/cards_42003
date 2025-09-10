@@ -17,6 +17,7 @@ end
 local m=33201252
 local cm=_G["c"..m]
 if not pcall(function() require("expansions/script/c33201250") end) then require("script/c33201250") end
+Duel.LoadScript("c33201250.lua")
 local s,id,o=GetID()
 function cm.initial_effect(c)
 	--equip

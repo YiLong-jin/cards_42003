@@ -18,6 +18,7 @@ local m=33201257
 local cm=_G["c"..m]
 local s,id,o=GetID()
 xpcall(function() require("expansions/script/c33201250") end,function() require("script/c33201250") end)
+Duel.LoadScript("c33201250.lua")
 function cm.initial_effect(c)
 	--special summon
 	local e1=Effect.CreateEffect(c)
