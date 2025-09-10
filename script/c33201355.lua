@@ -17,6 +17,7 @@ end
 local m=33201355
 local cm=_G["c"..m]
 xpcall(function() require("expansions/script/c33201350") end,function() require("script/c33201350") end)
+Duel.LoadScript("c33201350.lua")
 function cm.initial_effect(c)
 	VHisc_CNTdb.the(c,m,0x2000,0x10000)
 	--to grave
@@ -108,7 +109,7 @@ function cm.thop(e,tp,eg,ep,ev,re,r,rp)
 	tc:RegisterEffect(e3)
 ----------------code table add code----------------------
 --  if not VHisc_CNTdb.codeck(VHisc_CNTN,tc) then
---	  VHisc_CNTN[#VHisc_CNTN+1]=tc:GetOriginalCode()
+--	VHisc_CNTN[#VHisc_CNTN+1]=tc:GetOriginalCode()
 --  end
 end
 function cm.lfop(e,tp,eg,ep,ev,re,r,rp)

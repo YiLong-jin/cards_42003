@@ -17,6 +17,7 @@ end
 local m=33201365
 local cm=_G["c"..m]
 xpcall(function() require("expansions/script/c33201350") end,function() require("script/c33201350") end)
+Duel.LoadScript("c33201350.lua")
 function cm.initial_effect(c)
 	--fusion material
 	c:EnableReviveLimit()

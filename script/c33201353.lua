@@ -17,6 +17,7 @@ end
 local m=33201353
 local cm=_G["c"..m]
 xpcall(function() require("expansions/script/c33201350") end,function() require("script/c33201350") end)
+Duel.LoadScript("c33201350.lua")
 function cm.initial_effect(c)
 	VHisc_CNTdb.the(c,m,0x200+0x1000,0x10000)
 	--destroy replace
