@@ -31,7 +31,7 @@ function s.sfilter(c)
 end
 function s.spcon(e,c)
 	if c==nil then return true end
-	return Duel.IsExistingMatchingCard(s.sfilter,c:GetControler(),LOCATION_MZONE,0,1,nil)
+	return Duel.IsExistingMatchingCard(s.sfilter,c:GetControler(),LOCATION_ONFIELD,0,1,nil)
 end
 function s.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return false end
