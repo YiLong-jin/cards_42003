@@ -47,7 +47,7 @@ function s.filter(c)
 	return c:IsFaceup() and c.Savior_Xiaoye
 end
 function s.filter1111(c)
-	return c:IsFaceup()
+	return (c:IsFaceup() or c:IsFacedown())
 end
 function s.condition(e,tp,eg,ep,ev,re,r,rp)
 	local tp=e:GetHandlerPlayer()
