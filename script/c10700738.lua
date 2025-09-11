@@ -25,6 +25,8 @@ function c10700738.initial_effect(c)
 	e3:SetOperation(c10700738.sgop)
 	c:RegisterEffect(e3)
 end
+c10700738.has_text_type=TYPE_SPIRIT
+
 function c10700738.cfilter(c,tp)
 	return c:IsType(TYPE_MONSTER) and c:IsAbleToGraveAsCost() and Duel.IsExistingMatchingCard(c10700738.srfilter,tp,LOCATION_DECK,0,1,nil,c:GetOriginalAttribute())
 end

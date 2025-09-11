@@ -57,6 +57,7 @@ function c79014036.initial_effect(c)
 	e3:SetOperation(c79014036.xxop) 
 	c:RegisterEffect(e3)   
 end 
+c79014036.has_text_type=TYPE_SPIRIT
 function c79014036.mtcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()~=tp
 end

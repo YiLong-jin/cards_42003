@@ -33,7 +33,7 @@ function c10701238.thfilter(c)
 	return c:IsType(TYPE_SPIRIT) and c:IsAbleToHand()
 end
 function c10701238.stfilter(c)
-	return c:IsCode(276357,9553721,92394653,99173029,10700738) and c:IsType(TYPE_CONTINUOUS) and not c:IsForbidden()
+	return aux.IsTypeInText(c,TYPE_SPIRIT) and c:IsType(TYPE_CONTINUOUS) and not c:IsForbidden()
 end
 function c10701238.sttg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and c10701238.thfilter(chkc) end

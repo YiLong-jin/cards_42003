@@ -47,6 +47,8 @@ function c79014037.initial_effect(c)
 		Duel.RegisterEffect(ge1,0) 
 	end
 end
+c79014037.has_text_type=TYPE_SPIRIT
+
 function c79014037.checkop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=eg:GetFirst() 
 	while tc do 

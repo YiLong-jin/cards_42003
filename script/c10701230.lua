@@ -22,6 +22,8 @@ function c10701230.initial_effect(c)
 	e2:SetOperation(c10701230.thop)
 	c:RegisterEffect(e2)  
 end
+c10701230.has_text_type=TYPE_SPIRIT
+
 function c10701230.filter(c,e,tp,mat)
 	if bit.band(c:GetType(),0x81)~=0x81 or not c:IsType(TYPE_SPIRIT)
 		or not c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_RITUAL,tp,false,true) then return false end

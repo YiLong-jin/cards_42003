@@ -58,6 +58,7 @@ function s.initial_effect(c)
 	e5:SetCondition(s.spcon)
 	c:RegisterEffect(e5)
 end
+s.has_text_type=TYPE_SPIRIT
 function s.cfilter(c,e,tp)
 	return(c:IsFaceup() and not c:IsType(TYPE_SPIRIT)) or c:IsFacedown()
 end

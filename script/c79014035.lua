@@ -31,6 +31,7 @@ function c79014035.initial_effect(c)
 	e3:SetCondition(c79014035.actcon)
 	c:RegisterEffect(e3)
 end 
+c79014035.has_text_type=TYPE_SPIRIT
 function c79014035.pbfil(c) 
 	return not c:IsPublic() and c:IsCode(79014030) 
 end 

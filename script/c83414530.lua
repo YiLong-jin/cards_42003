@@ -48,6 +48,7 @@ function s.initial_effect(c)
 	e3:SetOperation(s.setop)
 	c:RegisterEffect(e3)
 end
+c83414530.has_text_type=TYPE_SPIRIT
 function s.condition1(e,tp,eg,ep,ev,re,r,rp)
 	return (Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)==0) or (Duel.GetFieldGroupCount(tp,LOCATION_MZONE,0)>=1 and not Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_MZONE,0,1,nil))
 end

@@ -29,6 +29,7 @@ function c79014034.initial_effect(c)
 	e3:SetCondition(c79014034.actcon)
 	c:RegisterEffect(e3)
 end 
+c79014034.has_text_type=TYPE_SPIRIT
 function c79014034.thfil1(c) 
 	return c:IsAbleToHand() and c:IsType(TYPE_SPIRIT) and c:IsFaceup()
 end 
