@@ -30,7 +30,7 @@ function c21400067.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function c21400067.cfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x3210) and (c:IsType(TYPE_LINK) or c:IsRace(RACE_WINDBEAST))
+	return c:IsFaceup() and c:IsSetCard(0x3210) and (c:IsLinkAbove(2) or c:IsRace(RACE_WINDBEAST))
 end
 function c21400067.condition(e,tp,eg,ep,ev,re,r,rp)
 	if not Duel.IsExistingMatchingCard(c21400067.cfilter,tp,LOCATION_MZONE,0,1,nil) then return false end

@@ -14,7 +14,7 @@ function this.initial_effect(c)
 	-- (2) 对方检索时，自己从墓地除外并检索1张「渴望」卡
 	local e2 = Effect.CreateEffect(c)
 	e2:SetCategory(CATEGORY_TOHAND + CATEGORY_SEARCH)
-	e2:SetType(EFFECT_TYPE_TRIGGER_O)
+	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCode(EVENT_TO_HAND)
 	e2:SetRange(LOCATION_GRAVE)
