@@ -4,6 +4,7 @@ function s.initial_effect(c)
     local e1 = Effect.CreateEffect(c)
     e1:SetType(EFFECT_TYPE_ACTIVATE)
     e1:SetCode(EVENT_FREE_CHAIN)
+    e1:SetHintTiming(0, TIMINGS_CHECK_MONSTER + TIMING_END_PHASE)
     e1:SetCountLimit(1, id)
     e1:SetTarget(s.target)
     e1:SetOperation(s.operation)
@@ -13,7 +14,7 @@ end
 function s.target(e, tp, eg, ep, ev, re, r, rp, chk)
     local chain = Duel.GetCurrentChain() --连锁号
     local isch, cheg, chep, chev, chre, chr, chrp = Duel.CheckEvent(EVENT_CHAINING, true) --连锁信息（如果正在连锁）
-    local b1 = isch and chre:IsHasType(TYPE_ACTIVATE) and Duel.IsChainNegatable(chev) --要么买定离手（cost已经被检查），要么正在连锁且连锁效果是卡片发动(魔陷)且可以无效
+    local b1 = isch and chre:IsHasType(EFFECT_TYPE_ACTIVATE) and Duel.IsChainNegatable(chev) --要么买定离手（cost已经被检查），要么正在连锁且连锁效果是卡片发动(魔陷)且可以无效
     local b2 = Duel.IsExistingMatchingCard(Card.IsFaceup, tp, 0, LOCATION_MZONE, 1, nil) --对面有表侧怪
     if chk == 0 then
         return (b1 or b2) and (not e:IsCostChecked() or Duel.IsExistingMatchingCard(Card.IsDiscardable, tp, LOCATION_HAND, 0, 1, nil, REASON_COST)) --要么无票上车（复制效果没Cost Checked）要么手牌有卡可以丢
