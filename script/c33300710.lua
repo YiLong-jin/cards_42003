@@ -77,7 +77,7 @@ function s.cond3(e,tp,eg,ep,ev,re,r,rp)
 end
 function s.tg3(e,tp,eg,ep,ev,re,r,rp,chk)
 	tp=e:GetOwnerPlayer()
-	local b1=Duel.IsExistingMatchingCard(s.spfilter1,tp,LOCATION_DECK,0,1,nil)
+	local b1=Duel.IsExistingMatchingCard(s.spfilter1,tp,LOCATION_DECK,0,1,nil,tp)
 	local b2=Duel.IsExistingMatchingCard(s.spfilter2,tp,LOCATION_EXTRA,0,1,nil,e,tp) and Duel.IsExistingMatchingCard(s.cfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,3,nil)
 	if chk==0 then
 		return b1 or b2
