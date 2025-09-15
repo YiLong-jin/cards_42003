@@ -65,7 +65,8 @@ function s.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsContains(e:GetHandler())
 end
 function s.thcon2(e,tp,eg,ep,ev,re,r,rp)
-	return true
+	local c=e:GetHandler()
+	return c:IsReason(REASON_EFFECT)
 end
 function s.sctg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsPlayerCanDraw(tp,2) end
