@@ -41,8 +41,8 @@ function c10701280.initial_effect(c)
 	e5:SetOperation(c10701280.spop2)
 	c:RegisterEffect(e5)
 end
-function c10701280.mfilter(c,e,tp)
-	return (c:IsAttribute(ATTRIBUTE_WATER) or c:GetOwner()~=1-tp) and c:IsLocation(LOCATION_MZONE)
+function c10701280.mfilter(c)
+	return c:IsAttribute(ATTRIBUTE_WATER) or c:GetOwner()~=c:GetControler()
 end
 function c10701280.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()==1-tp
