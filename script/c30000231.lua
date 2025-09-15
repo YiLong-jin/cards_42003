@@ -85,13 +85,15 @@ function cm.spop(e,tp,eg)
 	if flag & TYPE_TRAP ~=0 then
 		local e3=rsef.QO({c,nil,true},nil,{m,3},1,"tg",nil,LOCATION_MZONE,nil,nil,rsop.target(Card.IsAbleToHand,"th",LOCATION_GRAVE,LOCATION_GRAVE),cm.thop,nil,rsreset.est)
 	end
-	local e4=Effect.CreateEffect(c)
-	e4:SetType(EFFECT_TYPE_SINGLE)
-	e4:SetCode(EFFECT_LEAVE_FIELD_REDIRECT)
-	e4:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
-	e4:SetReset(RESET_EVENT+RESETS_REDIRECT)
-	e4:SetValue(LOCATION_REMOVED)
-	c:RegisterEffect(e4,true)
+	if c:IsPreviousLocation(LOCATION_GRAVE) then 
+		local e4=Effect.CreateEffect(c)
+		e4:SetType(EFFECT_TYPE_SINGLE)
+		e4:SetCode(EFFECT_LEAVE_FIELD_REDIRECT)
+		e4:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
+		e4:SetReset(RESET_EVENT+RESETS_REDIRECT)
+		e4:SetValue(LOCATION_REMOVED)
+		c:RegisterEffect(e4,true)
+	end 
 end
 function cm.tgop(e,tp)
 	rsop.SelectToGrave(tp,Card.IsAbleToGrave,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil,{})
