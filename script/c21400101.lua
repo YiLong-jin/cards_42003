@@ -26,8 +26,9 @@ function c21400101.pbfil(c)
 end 
 function c21400101.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c21400101.pbfil,tp,LOCATION_HAND,0,1,nil) end  
-	local g=Duel.SelectMatchingCard(tp,c21400101.pbfil,tp,LOCATION_HAND,0,1,1,nil) 
-	Duel.ConfirmCards(1-tp,g) 
+	local tc=Duel.SelectMatchingCard(tp,c21400101.pbfil,tp,LOCATION_HAND,0,1,1,nil):GetFirst() 
+	Duel.ConfirmCards(1-tp,tc) 
+	e:SetLabelObject(tc)
 end
 function c21400101.filter(c)
 	return c:IsSetCard(0x5210) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
@@ -37,9 +38,11 @@ function c21400101.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 end
 function c21400101.activate(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler() 
+	local tc=e:GetLabelObject()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 	local g=Duel.SelectMatchingCard(tp,c21400101.filter,tp,LOCATION_DECK,0,1,1,nil)
-	if g:GetCount()>0 then
+	if tc and tc:IsLocation(LOCATION_HAND) and Duel.SendtoDeck(tc,nil,2,REASON_EFFECT)~=0 and g:GetCount()>0 then
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
 	end
