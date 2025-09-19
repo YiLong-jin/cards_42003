@@ -1,5 +1,9 @@
 --电子重构斧枪 大陵五
-xpcall(function() dofile("expansions/script/c71100062.lua")end,function() dofile("script/c71100062.lua") end)
+if not pcall(function() require("expansions/script/c71100062") end) then
+	if not pcall(function() require("script/c71100062") end) then
+		Duel.LoadScript("c71100062.lua")
+	end
+end
 local m=71100067
 local cm=_G["c"..m]
 function cm.initial_effect(c)

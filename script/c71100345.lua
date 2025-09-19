@@ -19,7 +19,6 @@ function cm.initial_effect(c)
 	e2:SetCode(EVENT_CUSTOM+m)
 	e2:SetProperty(EFFECT_FLAG_DELAY)
 	e2:SetCountLimit(1,m)
-	e2:SetCondition(cm.sccon)
 	e2:SetTarget(cm.sctg)
 	e2:SetOperation(cm.scop)
 	c:RegisterEffect(e2)
@@ -61,10 +60,6 @@ function cm.activate(e,tp,eg,ep,ev,re,r,rp)
 			Duel.Destroy(sg,REASON_EFFECT)
 		else Duel.Destroy(tg,REASON_EFFECT) end
 	end
-end
-function cm.sccon(e,tp,eg,ep,ev,re,r,rp)
-	local attr=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_ATTRIBUTE)
-	return re:IsActiveType(TYPE_MONSTER) and attr&ATTRIBUTE_WATER>0
 end
 function cm.synfilter(c,g)
 	return c:IsSynchroSummonable(nil,g,g:GetCount()-1,g:GetCount()-1)
