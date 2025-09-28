@@ -30,13 +30,13 @@ end
 function c10701265.filter(c)
 	return c:IsFaceup() and (c:GetAttack()>0 or aux.NegateMonsterFilter(c))
 end
-function c10701265.target(e,tp,eg,ep,ev,re,r,rp,chk)
+function c10701265.atktg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c10701265.filter,tp,0,LOCATION_MZONE,1,nil) and not c:IsHasEffect(EFFECT_EXTRA_ATTACK_MONSTER) end
 end
 function c10701265.atkfilter(c)
 	return c:IsFaceup() and not c:IsAttack(c:GetBaseAttack())
 end
-function c10701265.activate(e,tp,eg,ep,ev,re,r,rp)
+function c10701265.atkop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)
 	local tc=g:GetFirst()

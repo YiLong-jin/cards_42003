@@ -72,12 +72,11 @@ end
 function c9877629.tgop1(e,tp,eg,ep,ev,re,r,rp)   
 	local c=e:GetHandler() 
 	local g=Duel.GetMatchingGroup(c9877629.tgfil1,tp,LOCATION_GRAVE,0,nil) 
-	local g1=Duel.GetMatchingGroup(c9877629.spfil,tp,LOCATION_HAND,0,nil,e,tp)
 	if g:GetCount()>0 then 
 		local sg=g:Select(tp,1,1,nil) 
-		if Duel.SendtoHand(sg,nil,REASON_EFFECT)~=0 and Duel.ConfirmCards(1-tp,sg)~=0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.CheckLPCost(tp,1000) and g1:GetCount()>0 and Duel.SelectYesNo(tp,aux.Stringid(9877629,0))  then 
+		if Duel.SendtoHand(sg,nil,REASON_EFFECT)~=0 and Duel.ConfirmCards(1-tp,sg)~=0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.CheckLPCost(tp,1000) and Duel.IsExistingMatchingCard(c9877629.spfil,tp,LOCATION_HAND,0,1,nil,e,tp) and Duel.SelectYesNo(tp,aux.Stringid(9877629,0))  then 
 		Duel.PayLPCost(tp,1000)
-		local xg=g1:Select(tp,1,1,nil) 
+		local xg=Duel.SelectMatchingCard(tp,c9877629.spfil,tp,LOCATION_HAND,0,1,1,nil,e,tp) 
 		Duel.SpecialSummon(xg,0,tp,tp,false,false,POS_FACEUP)
 		end
 	end 

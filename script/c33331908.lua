@@ -6,6 +6,7 @@ function c33331908.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DESTROY)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
+	e1:SetCountLimit(1,m+EFFECT_COUNT_CODE_OATH)
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetTarget(cm.target)
@@ -16,6 +17,7 @@ function c33331908.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_QUICK_O)
 	e2:SetRange(LOCATION_GRAVE)
 	e2:SetCode(EVENT_FREE_CHAIN)
+	e2:SetCountLimit(1,m+1000000)
 	e2:SetCost(cm.setcost)
 	e2:SetTarget(cm.settg)
 	e2:SetOperation(cm.setop)
@@ -31,13 +33,10 @@ function cm.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local g=Duel.SelectTarget(tp,aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)
 end
-function cm.spcheck(c,e,tp)
-	return c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsLocation(LOCATION_EXTRA+LOCATION_GRAVE+LOCATION_REMOVED) and c:IsFaceup()
-end
 function cm.activate(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) then
-	   if Duel.Destroy(tc,REASON_EFFECT)~=0 and Duel.IsExistingMatchingCard(cm.tgfilter2,tp,LOCATION_MZONE,0,1,nil) and tc:IsType(TYPE_MONSTER) and cm.spcheck(tc,e,tp) and Duel.SelectYesNo(tp,aux.Stringid(m,1)) then
+	   if Duel.Destroy(tc,REASON_EFFECT)~=0 and Duel.IsExistingMatchingCard(cm.tgfilter2,tp,LOCATION_MZONE,0,1,nil) and tc:IsType(TYPE_MONSTER) and Duel.SelectYesNo(tp,aux.Stringid(m,1)) then
 			if Duel.SpecialSummon(tc,0,tp,tp,false,false,POS_FACEUP)~=0 then 
 				local e1=Effect.CreateEffect(e:GetHandler())
 				e1:SetType(EFFECT_TYPE_SINGLE)
