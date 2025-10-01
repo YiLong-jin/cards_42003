@@ -17,7 +17,6 @@ function s.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e2:SetCode(EVENT_CHAIN_SOLVING)
 	e2:SetRange(LOCATION_MZONE)
-	e2:SetCountLimit(1,id)
 	e2:SetCondition(s.discon)
 	e2:SetOperation(s.disop)
 	c:RegisterEffect(e2)
@@ -38,7 +37,7 @@ end
 
 -- 效果①：无效对方效果
 function s.discon(e,tp,eg,ep,ev,re,r,rp)
-	return rp==1-tp  and Duel.IsChainDisablable(ev) and Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_DECK+LOCATION_HAND+LOCATION_GRAVE,0,1,nil)
+	return rp==1-tp  and Duel.IsChainDisablable(ev) and Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_DECK+LOCATION_HAND+LOCATION_GRAVE,0,1,nil) and  e:GetHandler():GetFlagEffect(id)<=0
 end
 
 function s.costfilter(c)
@@ -60,6 +59,7 @@ function s.disop(e,tp,eg,ep,ev,re,r,rp)
 		if #g>0 and  Duel.Remove(g,POS_FACEUP,REASON_EFFECT) then
 			Duel.Hint(HINT_CARD,0,id)
 			Duel.NegateEffect(ev)
+			e:GetHandler():RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,EFFECT_FLAG_CLIENT_HINT,1,0,aux.Stringid(id,4))
 		end
 	end
 end

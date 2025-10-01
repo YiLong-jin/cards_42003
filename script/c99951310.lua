@@ -23,7 +23,6 @@ function s.initial_effect(c)
 	e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e4:SetCode(EVENT_CHAIN_SOLVING)
 	e4:SetRange(LOCATION_MZONE)
-	e4:SetCountLimit(1,id)
 	e4:SetCondition(s.moncon)
 	e4:SetOperation(s.monop)
 	c:RegisterEffect(e4)
@@ -108,12 +107,13 @@ function s.monop(e,tp,eg,ep,ev,re,r,rp)
 		e2:SetValue(atk)
 		e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_DISABLE)
 		c:RegisterEffect(e2)
+		e:GetHandler():RegisterFlagEffect(id,RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,EFFECT_FLAG_CLIENT_HINT,1,0,aux.Stringid(id,4))
    			 end
 		end
 	end
 end
 function s.moncon(e,tp,eg,ep,ev,re,r,rp)
-	return rp==1-tp and Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_GRAVE,0,1,nil)
+	return rp==1-tp and Duel.IsExistingMatchingCard(s.costfilter,tp,LOCATION_GRAVE,0,1,nil)  and  e:GetHandler():GetFlagEffect(id)<=0
 end
 
 function s.costfilter(c)

@@ -53,13 +53,13 @@ function c99951280.pcfilter(c)
 end
 function c99951280.pctg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return (Duel.CheckLocation(tp,LOCATION_PZONE,0) or Duel.CheckLocation(tp,LOCATION_PZONE,1))
-		and Duel.IsExistingMatchingCard(c99951280.pcfilter,tp,LOCATION_EXTRA+LOCATION_GRAVE,0,1,nil) end
+		and Duel.IsExistingMatchingCard(c99951280.pcfilter,tp,LOCATION_EXTRA,0,1,nil) end
 end
 function c99951280.pcop(e,tp,eg,ep,ev,re,r,rp)
 	if not e:GetHandler():IsRelateToEffect(e) then return end
 	if not Duel.CheckLocation(tp,LOCATION_PZONE,0) and not Duel.CheckLocation(tp,LOCATION_PZONE,1) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
-	local g=Duel.SelectMatchingCard(tp,c99951280.pcfilter,tp,LOCATION_EXTRA+LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,c99951280.pcfilter,tp,LOCATION_EXTRA,0,1,1,nil)
 	if g:GetCount()>0 then
 		Duel.MoveToField(g:GetFirst(),tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
