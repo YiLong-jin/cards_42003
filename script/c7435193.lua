@@ -34,7 +34,7 @@ function s.initial_effect(c)
 	--to hand
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(id,2))
-	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
+	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_GRAVE_ACTION)
 	e3:SetType(EFFECT_TYPE_QUICK_O)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetCountLimit(1)
@@ -103,9 +103,9 @@ function s.filter(c)
 	return c:IsCode(36623431) and c:IsAbleToHand()
 end
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_DECK+LOCATION_GRAVE,0,1,nil) end
 	local sg=Duel.GetMatchingGroup(aux.NOT(Card.IsSetCard),tp,LOCATION_ONFIELD,LOCATION_ONFIELD,nil,0x1d)
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK+LOCATION_GRAVE)
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,sg,sg:GetCount(),0,0)
 end
 function s.desfilter(c)
@@ -113,7 +113,7 @@ function s.desfilter(c)
 end
 function s.operation(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_DECK,0,1,1,nil)
+	local g=Duel.GetMatchingGroup(s.filter,tp,LOCATION_DECK+LOCATION_GRAVE,0,1,1,nil)
 	if g:GetCount()==0 then return end
 	local tc=g:GetFirst()
 	Duel.SendtoHand(tc,nil,REASON_EFFECT)
