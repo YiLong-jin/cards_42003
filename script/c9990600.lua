@@ -65,6 +65,7 @@ function c9990600.initial_effect(c)
 	c:RegisterEffect(e5)
 
 end
+c9990600.pendulum_level=5
 function c9990600.filsp(c,tp)
 	return c:IsSetCard(0x671) and c:IsType(TYPE_MONSTER) and Duel.GetMZoneCount(tp,c)>0 and c:IsFaceup()
 end

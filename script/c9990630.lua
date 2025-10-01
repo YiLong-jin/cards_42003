@@ -79,19 +79,9 @@ function cm.rkop(e,tp,eg,ep,ev,re,r,rp)
 		e3:SetValue(cm.xyzlv)
 		e3:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END)
 		lc:RegisterEffect(e3)
-	local e4=Effect.CreateEffect(e:GetHandler())
-	e4:SetType(EFFECT_TYPE_FIELD)
-	e4:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
-	e4:SetProperty(EFFECT_FLAG_PLAYER_TARGET+EFFECT_FLAG_OATH)
-	e4:SetTargetRange(1,0)
-	e4:SetTarget(cm.splimit)
-	e4:SetReset(RESET_PHASE+PHASE_END)
-	Duel.RegisterEffect(e4,tp)
 		end
 end
 function cm.xyzlv(e,c,rc)
 	return c:GetRank()
 end
-function cm.splimit(e,c,sump,sumtype,sumpos,targetp,se)
-	return not c:IsSetCard(0x671) and c:IsLocation(LOCATION_EXTRA)
-end
+

@@ -26,11 +26,9 @@ function c9879209.initial_effect(c)
 	local e11=Effect.CreateEffect(c)
 	e11:SetDescription(aux.Stringid(9879209,0))
 	e11:SetCategory(CATEGORY_DESTROY)
+	e11:SetType(EFFECT_TYPE_IGNITION)
 	e11:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e11:SetType(EFFECT_TYPE_QUICK_O) 
-	e11:SetCode(EVENT_FREE_CHAIN)
 	e11:SetRange(LOCATION_MZONE)
-	e11:SetHintTiming(0,TIMING_END_PHASE)
 	e11:SetCountLimit(1,9879209)
 	e11:SetCost(c9879209.cost)
 	e11:SetTarget(c9879209.target)
@@ -45,7 +43,7 @@ end
 
 function c9879209.cfilter(c,seq2)
 	local seq1=aux.MZoneSequence(c:GetSequence())
-	return c:IsFaceup() and aux.IsCodeListed(c,9879202) and c:IsSummonLocation(LOCATION_EXTRA) and seq1==4-seq2
+	return c:IsFaceup() and aux.IsCodeListed(c,9879202) and c:IsSummonLocation(LOCATION_EXTRA) and seq1==4-seq2 and not c:IsType(TYPE_FUSION)
 end
 function c9879209.discon(e,tp,eg,ep,ev,re,r,rp)
 	local loc,seq=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_LOCATION,CHAININFO_TRIGGERING_SEQUENCE)

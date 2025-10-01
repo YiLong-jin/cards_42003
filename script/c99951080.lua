@@ -33,8 +33,32 @@ function cm.initial_effect(c)
 	e02:SetOperation(cm.fsop)
 	c:RegisterEffect(e02)  
 
+	local e8=Effect.CreateEffect(c)
+	e8:SetDescription(aux.Stringid(21949879,2))
+	e8:SetType(EFFECT_TYPE_IGNITION)
+	e8:SetRange(LOCATION_EXTRA)
+	e8:SetCountLimit(1,m+2)
+	e8:SetCondition(c99951080.pencon)
+	e8:SetTarget(c99951080.pentg)
+	e8:SetOperation(c99951080.penop)
+	c:RegisterEffect(e8)
 
 end
+cm.pendulum_level=4
+
+function c99951080.pencon(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():IsFaceup()
+end
+function c99951080.pentg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.CheckLocation(tp,LOCATION_PZONE,0) or Duel.CheckLocation(tp,LOCATION_PZONE,1) end
+end
+function c99951080.penop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	if c:IsRelateToEffect(e) then
+		Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+	end
+end
+
 function cm.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)

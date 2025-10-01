@@ -38,7 +38,7 @@ end
 c99960360.Savior_Paqi = true
 
 function s.gcon(e,tp,eg,ep,ev,re,r,rp)
-	return re:GetHandler():IsCode(id)
+	return re:GetHandler():IsCode(id) and re:GetHandlerPlayer()=tp
 end
 function s.gop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

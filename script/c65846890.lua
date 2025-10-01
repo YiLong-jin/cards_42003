@@ -24,7 +24,7 @@ function c65846890.initial_effect(c)
 end
 c65846890.SetCard_ZJ_CKAZXZ=true
 function c65846890.costfilter(c)
-	return c:IsLevel(6) and c:IsDefense(500) and not c:IsPublic()
+	return c:IsDefense(500) and not c:IsPublic()
 end
 function c65846890.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65846890.costfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) end

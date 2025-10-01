@@ -42,6 +42,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e8)
 
 end
+cm.pendulum_level=7
 function cm.pencon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsFaceup()
 end
@@ -68,9 +69,8 @@ function cm.costfilter(c)
 	return c:IsType(TYPE_SPELL) or c:IsType(TYPE_MONSTER) or c:IsType(TYPE_TRAP) and c:IsDiscardable()
 end
 function cm.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(cm.costfilter,tp,LOCATION_HAND,0,1,e:GetHandler()) and e:GetHandler():CheckRemoveOverlayCard(tp,2,REASON_COST) end
+	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,2,REASON_COST) end
 	e:GetHandler():RemoveOverlayCard(tp,2,2,REASON_COST)
-	Duel.DiscardHand(tp,cm.costfilter,1,1,REASON_COST+REASON_DISCARD)
 end
 function cm.setfilter1(c,tp)
 	return c:IsSetCard(0x672) and c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
@@ -84,14 +84,6 @@ function cm.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 		and Duel.IsExistingMatchingCard(cm.setfilter1,tp,LOCATION_DECK,0,1,nil,tp) end
 end
 function cm.setop(e,tp,eg,ep,ev,re,r,rp)
-	local e1=Effect.CreateEffect(e:GetHandler())
-	e1:SetType(EFFECT_TYPE_FIELD)
-	e1:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
-	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e1:SetTargetRange(1,0)
-	e1:SetTarget(cm.splimit)
-	e1:SetReset(RESET_PHASE+PHASE_END)
-	Duel.RegisterEffect(e1,tp)
 	if not Duel.CheckLocation(tp,LOCATION_PZONE,0) or not Duel.CheckLocation(tp,LOCATION_PZONE,1) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOFIELD)
 	local g1=Duel.SelectMatchingCard(tp,cm.setfilter1,tp,LOCATION_DECK,0,1,1,nil,tp)

@@ -74,7 +74,7 @@ function c9990700.initial_effect(c)
 	e6:SetOperation(c9990700.penop)
 	c:RegisterEffect(e6)
 end
---c9990700.pendulum_level=5
+c9990700.pendulum_level=5
 function c9990700.pcfilter(c)
 	return c:IsType(TYPE_PENDULUM) and not c:IsForbidden() and c:IsSetCard(0x672)
 end

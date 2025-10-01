@@ -40,7 +40,7 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e0)
 
 end
---cm.pendulum_level=7
+cm.pendulum_level=6
 function cm.cost5(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.CheckRemoveOverlayCard(tp,1,0,1,REASON_COST) end
 	Duel.RemoveOverlayCard(tp,1,0,1,1,REASON_COST)

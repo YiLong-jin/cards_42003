@@ -29,14 +29,14 @@ function cm.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_ACTIVATE)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetProperty(EFFECT_FLAG_CARD_TARGET)
-	e2:SetCountLimit(1,m+EFFECT_COUNT_CODE_OATH)
+	e2:SetCountLimit(1,99951011+EFFECT_COUNT_CODE_OATH)
 	e2:SetTarget(cm.target)
 	e2:SetOperation(cm.activate)
 	c:RegisterEffect(e2)
 
 end
 function cm.psfilter(c)
-	return c:IsSetCard(0x671) and c:IsType(TYPE_PENDULUM) and not c:IsForbidden() and c:IsFaceup()
+	return c:IsSetCard(0x671) and c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 end
 function cm.pstg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return (Duel.CheckLocation(tp,LOCATION_PZONE,0) or Duel.CheckLocation(tp,LOCATION_PZONE,1))

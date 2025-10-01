@@ -21,19 +21,20 @@ function c9990490.spfilter(c,e,tp,mc)
 		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_LINK,tp,false,false) and Duel.GetLocationCountFromEx(tp,tp,mc,c)>0
 end
 function c9990490.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(c9990490.tgfilter,tp,LOCATION_ONFIELD,0,3,e:GetHandler(),e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,3,tp,LOCATION_ONFIELD)
+	if chk==0 then return Duel.IsExistingMatchingCard(c9990490.tgfilter,tp,LOCATION_ONFIELD+LOCATION_HAND,0,3,e:GetHandler(),e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,3,tp,LOCATION_ONFIELD+LOCATION_HAND)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function c9990490.activate(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local tc=Duel.SelectMatchingCard(tp,c9990490.tgfilter,tp,LOCATION_ONFIELD,0,3,3,c,e,tp)
+	local tc=Duel.SelectMatchingCard(tp,c9990490.tgfilter,tp,LOCATION_ONFIELD+LOCATION_HAND,0,3,3,c,e,tp)
 	if tc and Duel.SendtoGrave(tc,REASON_EFFECT)>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sc=Duel.SelectMatchingCard(tp,c9990490.spfilter,tp,LOCATION_EXTRA,0,1,1,nil,e,tp,tc):GetFirst()
 		if sc then
-			Duel.SpecialSummon(sc,0,tp,tp,false,false,POS_FACEUP,0x60)
+			Duel.SpecialSummon(sc,SUMMON_TYPE_LINK,tp,tp,false,false,POS_FACEUP)
+			sc:CompleteProcedure()
 		end
 	end
 end

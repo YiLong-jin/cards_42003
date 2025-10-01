@@ -12,10 +12,10 @@ function c65846902.initial_effect(c)
 end
 c65846902.SetCard_ZJ_CKAZXZ=true 
 function c65846902.cfilter(c)
-	return c:IsLevel(6) and c:IsDefense(500) and c:IsAbleToDeckOrExtraAsCost()
+	return c.SetCard_ZJ_CKAZXZ and c:IsType(0x1) and c:IsAbleToDeckOrExtraAsCost() and c:IsFaceup()
 end
 function c65846902.drcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g=Duel.GetMatchingGroup(c65846902.cfilter,tp,LOCATION_GRAVE,0,nil)
+	local g=Duel.GetMatchingGroup(c65846902.cfilter,tp,LOCATION_GRAVE+LOCATION_ONFIELD,0,nil)
 	if chk==0 then return g:GetClassCount(Card.GetCode)>=4 end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
 	local sg=g:SelectSubGroup(tp,aux.dncheck,false,4,4)

@@ -1,0 +1,68 @@
+--薇特莉斯甜点工坊-熊熊布丁
+function c9871031.initial_effect(c)
+	aux.AddLinkProcedure(c,c9871031.mfilter,1,1)
+	c:EnableReviveLimit()
+
+	local e5=Effect.CreateEffect(c)
+	e5:SetDescription(aux.Stringid(9871031,1))
+	e5:SetCategory(CATEGORY_DISABLE)
+	e5:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_F)
+	e5:SetCode(EVENT_LEAVE_FIELD)
+	e5:SetProperty(EFFECT_FLAG_DELAY)
+	e5:SetRange(LOCATION_MZONE)
+	e5:SetCountLimit(1,9871031)
+	e5:SetCondition(c9871031.negcon)
+	e5:SetOperation(c9871031.negop)
+	c:RegisterEffect(e5)
+end
+function c9871031.mfilter(c)
+	return c:IsLinkRace(RACE_FAIRY) and c:IsLinkAttribute(ATTRIBUTE_EARTH) and c:IsLinkType(TYPE_XYZ) 
+end
+function c9871031.cfilter(c,tp)
+	return c:IsPreviousControler(1-tp) and c:IsPreviousLocation(LOCATION_ONFIELD) and c:IsPreviousPosition(POS_FACEUP)
+		and c:IsReason(REASON_EFFECT) and c:IsLocation(LOCATION_HAND+LOCATION_REMOVED)
+end
+function c9871031.negcon(e,tp,eg,ep,ev,re,r,rp)
+	return re and re:GetHandler():IsSetCard(0x7ef) and eg:IsExists(c9871031.cfilter,1,nil,tp)
+end
+function c9871031.negop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local g=eg:Filter(c9871031.cfilter,nil,tp)
+	for tc in aux.Next(g) do
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_FIELD)
+		e1:SetCode(EFFECT_DISABLE)
+		e1:SetTargetRange(LOCATION_ONFIELD,LOCATION_ONFIELD)
+		e1:SetTarget(c9871031.distg)
+		e1:SetLabelObject(tc)
+		e1:SetReset(RESET_PHASE+PHASE_END,2)
+		Duel.RegisterEffect(e1,tp)
+		local e2=Effect.CreateEffect(c)
+		e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
+		e2:SetCode(EVENT_CHAIN_SOLVING)
+		e2:SetCondition(c9871031.discon)
+		e2:SetOperation(c9871031.disop)
+		e2:SetLabelObject(tc)
+		e2:SetReset(RESET_PHASE+PHASE_END,2)
+		Duel.RegisterEffect(e2,tp)
+		local e3=Effect.CreateEffect(c)
+		e3:SetType(EFFECT_TYPE_FIELD)
+		e3:SetCode(EFFECT_DISABLE_TRAPMONSTER)
+		e3:SetTargetRange(LOCATION_MZONE,LOCATION_MZONE)
+		e3:SetTarget(c9871031.distg)
+		e3:SetLabelObject(tc)
+		e3:SetReset(RESET_PHASE+PHASE_END)
+		Duel.RegisterEffect(e3,tp)
+	end
+end
+function c9871031.distg(e,c)
+	local tc=e:GetLabelObject()
+	return c:IsOriginalCodeRule(tc:GetOriginalCodeRule())
+end
+function c9871031.discon(e,tp,eg,ep,ev,re,r,rp)
+	local tc=e:GetLabelObject()
+	return re:GetHandler():IsOriginalCodeRule(tc:GetOriginalCodeRule())
+end
+function c9871031.disop(e,tp,eg,ep,ev,re,r,rp)
+	Duel.NegateEffect(ev)
+end

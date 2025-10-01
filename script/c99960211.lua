@@ -46,17 +46,27 @@ function c99960211.activate(e,tp,eg,ep,ev,re,r,rp)
 	if op==1 then
 	Duel.Hint(24,0,aux.Stringid(99960290,0))
 	Duel.RegisterFlagEffect(tp,99960290,0,0,0)
+		Duel.Hint(24,0,aux.Stringid(99960290,0))
+	Duel.RegisterFlagEffect(tp,99960290,0,0,0)
 	elseif op==2 then
 	Duel.RegisterFlagEffect(tp,99960300,0,0,0)
+	Duel.Hint(24,0,aux.Stringid(99960300,0))
+		Duel.RegisterFlagEffect(tp,99960300,0,0,0)
 	Duel.Hint(24,0,aux.Stringid(99960300,0))
 	elseif op==3 then
 	Duel.RegisterFlagEffect(tp,99960310,0,0,0)
 	Duel.Hint(24,0,aux.Stringid(99960310,0))
+		Duel.RegisterFlagEffect(tp,99960310,0,0,0)
+	Duel.Hint(24,0,aux.Stringid(99960310,0))
 	elseif op==4 then
 	Duel.RegisterFlagEffect(tp,99960320,0,0,0)
 	Duel.Hint(24,0,aux.Stringid(99960320,0))
+		Duel.RegisterFlagEffect(tp,99960320,0,0,0)
+	Duel.Hint(24,0,aux.Stringid(99960320,0))
 	elseif op==5 then
 	Duel.RegisterFlagEffect(tp,99960330,0,0,0)
+	Duel.Hint(24,0,aux.Stringid(99960330,0))
+		Duel.RegisterFlagEffect(tp,99960330,0,0,0)
 	Duel.Hint(24,0,aux.Stringid(99960330,0))
 	end
 end

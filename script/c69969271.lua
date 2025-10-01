@@ -1,7 +1,16 @@
 --交响曲·命运Ⅱ·圣诞
 function c69969271.initial_effect(c)
    c:EnableReviveLimit()
-	aux.AddFusionProcCodeFun(c,69969276,aux.FilterBoolFunction(Card.IsFusionSetCard,0x69b),1,true,true)  
+   c:SetSPSummonOnce(69969271)
+	aux.AddFusionProcCodeFun(c,69969271,aux.FilterBoolFunction(Card.IsFusionSetCard,0x69b),1,true,true)  
+	local e7=Effect.CreateEffect(c)
+	e7:SetType(EFFECT_TYPE_FIELD)
+	e7:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
+	e7:SetCode(EFFECT_SPSUMMON_PROC)
+	e7:SetRange(LOCATION_EXTRA)
+	e7:SetCondition(c69969271.hspcon)
+	e7:SetOperation(c69969271.hspop)
+	c:RegisterEffect(e7)
 local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(69969271,0))
 	e1:SetCategory(CATEGORY_DISABLE)
@@ -26,6 +35,22 @@ local e2=Effect.CreateEffect(c)
 	e2:SetOperation(c69969271.spop)
 	c:RegisterEffect(e2)
 end
+--0
+function c69969271.hspfilter(c,tp,sc)
+	return c:IsCode(69969276) 
+		and c:IsControler(tp) and Duel.GetLocationCountFromEx(tp,tp,c,sc)>0
+		and c:IsCanBeFusionMaterial(sc,SUMMON_TYPE_SPECIAL)
+end
+function c69969271.hspcon(e,c)
+	if c==nil then return true end
+	return Duel.CheckReleaseGroupEx(c:GetControler(),c69969271.hspfilter,1,REASON_SPSUMMON,false,nil,c:GetControler(),c)
+end
+function c69969271.hspop(e,tp,eg,ep,ev,re,r,rp,c)
+	local g=Duel.SelectReleaseGroupEx(tp,c69969271.hspfilter,1,1,REASON_SPSUMMON,false,nil,tp,c)
+	c:SetMaterial(g)
+	 Duel.Release(g,REASON_SPSUMMON)
+end
+--1
 function c69969271.ddcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local rc=re:GetHandler()
@@ -69,7 +94,7 @@ function c69969271.operation(e,tp,eg,ep,ev,re,r,rp)
 end
 --2
 function c69969271.spfilter(c,e,tp)
-	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and c:IsCode(69969276) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return (c:IsLocation(LOCATION_GRAVE) or c:IsFaceup()) and c:IsCode(69969271) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c69969271.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) and chkc:IsControler(tp) and c69969271.spfilter(chkc,e,tp) end

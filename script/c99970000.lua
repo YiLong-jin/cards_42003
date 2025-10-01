@@ -54,7 +54,7 @@ end
 
 
 function cm.filter(c)
-	return (c:IsCode(99950010) or c:IsCode(99900190)) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
+	return (c:IsCode(99950010) or c:IsCode(99900190) or c:IsCode(9879209)) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
 end
 function cm.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(cm.filter,tp,LOCATION_DECK,0,1,nil) end

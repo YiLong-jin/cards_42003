@@ -1,14 +1,15 @@
 --交响曲·春江花月夜
 function c69969275.initial_effect(c)
 	c:EnableReviveLimit()
-	aux.AddFusionProcFunRep(c,aux.FilterBoolFunction(Card.IsFusionSetCard,0x69b),3,false)
+	aux.AddFusionProcFun2(c,c69969275.mfilter1,aux.FilterBoolFunction(Card.IsRace,RACE_WARRIOR+RACE_SPELLCASTER),true)
 local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(69969275,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_FUSION_SUMMON)
-	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
-	e1:SetCode(EVENT_SPSUMMON_SUCCESS)
-	e1:SetProperty(EFFECT_FLAG_DELAY)
+	e1:SetType(EFFECT_TYPE_QUICK_O)
+	e1:SetCode(EVENT_FREE_CHAIN)
+	e1:SetRange(LOCATION_MZONE)
 	e1:SetCountLimit(1,69969275)
+	e1:SetCondition(c69969275.spcon1)
 	e1:SetTarget(c69969275.fsptg)
 	e1:SetOperation(c69969275.fspop)
 	c:RegisterEffect(e1)
@@ -24,6 +25,13 @@ local e3=Effect.CreateEffect(c)
 	e3:SetOperation(c69969275.spop2)
 	c:RegisterEffect(e3)
 	end
+	function c69969275.mfilter1(c)
+	return c:IsFusionSetCard(0x69b) and c:IsFusionType(TYPE_FUSION+TYPE_SYNCHRO+TYPE_XYZ)
+end
+	function c69969275.spcon1(e,tp,eg,ep,ev,re,r,rp)
+	local ph=Duel.GetCurrentPhase()
+	return ph==PHASE_MAIN1 or ph==PHASE_MAIN2
+end
 function c69969275.mttg(e,c)
 	local tc=c:GetEquipTarget()
 	return tc and tc:IsFaceup() and tc:IsSetCard(0x69b) and c:GetOriginalType()&TYPE_MONSTER~=0

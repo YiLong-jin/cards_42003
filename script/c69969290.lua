@@ -29,7 +29,7 @@ function c69969290.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function c69969290.mfilter(c,fc)
-	return c:IsOnField() and c:IsControler(fc:GetControler()) and c:IsSetCard(0x69b) and c:IsType(TYPE_MONSTER)
+	return (c:IsOnField() or c:IsLocation(LOCATION_HAND)) and c:IsSetCard(0x69b) and c:IsType(TYPE_MONSTER) and c:IsControler(fc:GetControler())
 end
 --1
 function c69969290.spcon(e,tp,eg,ep,ev,re,r,rp)
@@ -76,4 +76,5 @@ function c69969290.recop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,0,69969290)
 	Duel.Recover(tp,300,REASON_EFFECT)
 end
+
 

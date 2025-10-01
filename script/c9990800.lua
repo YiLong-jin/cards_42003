@@ -1,4 +1,4 @@
---交响乐团 塞娜
+--极乐爱乐 塞娜
 function c9990800.initial_effect(c)
 	--spsummon
 	local e1=Effect.CreateEffect(c)
@@ -18,7 +18,7 @@ function c9990800.initial_effect(c)
 	e2:SetType(EFFECT_TYPE_IGNITION)
 	e2:SetRange(LOCATION_GRAVE)
 --  e2:SetCondition(aux.exccon)
-	e1:SetCountLimit(1,9990801)
+	e2:SetCountLimit(1,9990801)
 	e2:SetCost(aux.bfgcost)
 	e2:SetTarget(c9990800.destg)
 	e2:SetOperation(c9990800.desop)
