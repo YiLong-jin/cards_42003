@@ -60,7 +60,7 @@ function c65846905.activate(e,tp,eg,ep,ev,re,r,rp)
 			tc:RegisterEffect(e3)
 		end
 		if lc:IsRelateToEffect(e) and lc:IsControler(tp) and lc:IsAttackPos() then
-			Duel.ChangePosition(tc,POS_FACEUP_DEFENSE)
+			Duel.ChangePosition(lc,POS_FACEUP_DEFENSE)
 		end
 	end
 end

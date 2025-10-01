@@ -15,6 +15,7 @@ function c65846894.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_QUICK_O)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetRange(LOCATION_MZONE)
+	e1:SetCountLimit(1,95846894)
 	e1:SetCost(c65846894.cost)
 	e1:SetTarget(c65846894.destg)
 	e1:SetOperation(c65846894.desop)
@@ -50,7 +51,8 @@ function c65846894.filter(c)
 end
 function c65846894.destg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and c65846894.filter(chkc) and chkc:IsControler(1-tp) end
-	if chk==0 then return Duel.IsExistingTarget(c65846894.filter,tp,0,LOCATION_ONFIELD,1,e:GetHandler()) end
+	if chk==0 then return Duel.IsExistingTarget(c65846894.filter,tp,0,LOCATION_ONFIELD,1,e:GetHandler()) and Duel.GetFlagEffect(tp,65846894)==0 end
+	Duel.RegisterFlagEffect(tp,65846894,RESET_PHASE+PHASE_END,0,1)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
 	local g=Duel.SelectTarget(tp,c65846894.filter,tp,0,LOCATION_ONFIELD,1,1,e:GetHandler())
 	Duel.SetOperationInfo(0,CATEGORY_DESTROY,g,1,0,0)

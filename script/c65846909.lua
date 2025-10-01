@@ -1,7 +1,7 @@
 --超可爱执行者·花草女 开拓
 function c65846909.initial_effect(c)
 	c:EnableReviveLimit()
-	--aux.AddFusionProcCode2(c,65846896,65846892,true,true)
+	aux.AddFusionProcCode2(c,65846896,65846892,true,true)
 	local e0=aux.AddContactFusionProcedure(c,aux.FilterBoolFunction(Card.IsReleasable,REASON_SPSUMMON),LOCATION_ONFIELD,0,Duel.Release,SUMMON_TYPE_FUSION+REASON_MATERIAL)--aux.AddContactFusionProcedure(c,Card.IsAbleToDeckOrExtraAsCost,LOCATION_ONFIELD,0,aux.tdcfop(c))
 	e0:SetValue(SUMMON_TYPE_FUSION)
 	c:RegisterEffect(e0)
@@ -10,7 +10,7 @@ function c65846909.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e1:SetCode(EFFECT_SPSUMMON_CONDITION)
 	e1:SetRange(LOCATION_EXTRA)
-	e1:SetValue(aux.fuslimit)
+	e1:SetValue(c65846909.splimit)
 	c:RegisterEffect(e1)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
@@ -34,13 +34,16 @@ function c65846909.initial_effect(c)
 	e3:SetCode(EVENT_PHASE+PHASE_END)
 	e3:SetRange(LOCATION_MZONE)
 	e3:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
-	e3:SetCountLimit(1,65846909)
+	e3:SetCountLimit(1)
 	e3:SetCondition(c65846909.reccon)
 	e3:SetTarget(c65846909.rectg)
 	e3:SetOperation(c65846909.recop)
 	c:RegisterEffect(e3)
 end
 c65846909.SetCard_ZJ_CKAZXZ=true
+function c65846909.splimit(e,se,sp,st)
+	return e:GetHandler():GetLocation()~=LOCATION_EXTRA
+end
 function c65846909.condition(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
 end
