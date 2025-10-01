@@ -24,7 +24,7 @@ function c21400078.initial_effect(c)
 	c:RegisterEffect(e2)  
 	--sp 
 	local e3=Effect.CreateEffect(c) 
-	e3:SetCategory(CATEGORY_DRAW)
+	e3:SetCategory(CATEGORY_GRAVE_SPSUMMON)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_F)
 	e3:SetCode(EVENT_LEAVE_FIELD) 
 	e3:SetCountLimit(1,31400078)
