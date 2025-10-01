@@ -45,7 +45,7 @@ function c99951370.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 	
 	-- 特殊召唤选项
-	if sc:IsType(TYPE_PENDULUM) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and sc:IsCanBeSpecialSummoned(e,0,tp,false,false) then
+	if sc:IsType(TYPE_PENDULUM) and (Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and not sc:IsLocation(LOCATION_EXTRA)) or Duel.GetLocationCountFromEx(tp,LOCATION_MZONE)>0 and sc:IsCanBeSpecialSummoned(e,0,tp,false,false) then
 		table.insert(options,3)
 	end
 	
@@ -62,7 +62,7 @@ function c99951370.activate(e,tp,eg,ep,ev,re,r,rp)
 		table.insert(opts,aux.Stringid(99951370,2))
 		table.insert(descs,2)
 	end
-	if sc:IsType(TYPE_PENDULUM) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and sc:IsCanBeSpecialSummoned(e,0,tp,false,false) then
+	if sc:IsType(TYPE_PENDULUM) and (Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and not sc:IsLocation(LOCATION_EXTRA)) or Duel.GetLocationCountFromEx(tp,LOCATION_MZONE)>0 and sc:IsCanBeSpecialSummoned(e,0,tp,false,false) then
 		table.insert(opts,aux.Stringid(99951370,3))
 		table.insert(descs,3)
 	end
