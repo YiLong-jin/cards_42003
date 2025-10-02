@@ -69,7 +69,7 @@ function c65846910.cptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chk==0 then return Duel.IsExistingTarget(c65846910.cpfilter,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	local g=Duel.SelectTarget(tp,c65846910.cpfilter,tp,LOCATION_GRAVE,0,1,1,nil)
-	local te,ceg,cep,cev,cre,cr,crp=g:GetFirst():CheckActivateEffect(false,true,true)
+	local te,ceg,cep,cev,cre,cr,crp=g:GetFirst():CheckActivateEffect(true,true,true)
 	Duel.ClearTargetCard()
 	g:GetFirst():CreateEffectRelation(e)
 	local tg=te:GetTarget()
