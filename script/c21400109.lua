@@ -35,7 +35,7 @@ function c21400109.initial_effect(c)
 	end 
 end
 function c21400109.checkop(e,tp,eg,ep,ev,re,r,rp) 
-	local flag=Duel.GetFlagEffectLabel(tp,21400109)
+	local flag=Duel.GetFlagEffectLabel(rp,21400109)
 	if flag==nil then 
 		Duel.RegisterFlagEffect(rp,21400109,RESET_PHASE+PHASE_END,0,1,1)  
 	else 
