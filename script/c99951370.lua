@@ -22,7 +22,7 @@ function c99951370.initial_effect(c)
 end
 function c99951370.filter(c,tp,pcon)
 	return ((c:IsFaceup() and c:IsLocation(LOCATION_EXTRA) and c:IsType(TYPE_PENDULUM)) or c:IsLocation(LOCATION_GRAVE))
-		and c:IsSetCard(0x671) and c:IsType(TYPE_MONSTER) and (c:IsAbleToHand() or c:IsType(TYPE_PENDULUM) and pcon) or (c:IsFaceup() and c:IsSetCard(0x671) and c:IsType(TYPE_MONSTER) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0)
+		and c:IsSetCard(0x671) and c:IsType(TYPE_PENDULUM) and (c:IsAbleToHand() or c:IsType(TYPE_PENDULUM) and pcon)
 end
 function c99951370.activate(e,tp,eg,ep,ev,re,r,rp)
 	local pcon=Duel.CheckLocation(tp,LOCATION_PZONE,0) or Duel.CheckLocation(tp,LOCATION_PZONE,1)
@@ -35,7 +35,7 @@ function c99951370.activate(e,tp,eg,ep,ev,re,r,rp)
 	local options={}
 	
 	-- 加入手卡选项
-	if sc:IsAbleToHand() then
+	if sc:IsType(TYPE_PENDULUM) and sc:IsAbleToHand() then
 		table.insert(options,1)
 	end
 	
@@ -54,7 +54,7 @@ function c99951370.activate(e,tp,eg,ep,ev,re,r,rp)
 	-- 构建选项文本
 	local opts={}
 	local descs={}
-	if sc:IsAbleToHand() then
+	if sc:IsType(TYPE_PENDULUM) and sc:IsAbleToHand() then
 		table.insert(opts,aux.Stringid(99951370,1))
 		table.insert(descs,1)
 	end
