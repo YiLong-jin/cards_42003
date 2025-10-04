@@ -80,7 +80,7 @@ function c10701295.activate(e,tp,eg,ep,ev,re,r,rp)
 end
 function c10701295.cfilter2(c,tp)
 	return c:IsPreviousLocation(LOCATION_MZONE) and c:IsType(0x4b) 
-		and c:IsReason(REASON_EFFECT) and c:GetReasonPlayer()==tp and c:GetReasonEffect(91148083)
+		and c:IsReason(REASON_EFFECT) and c:GetReasonPlayer()==tp and re:GetHandler():IsCode(91148083)
 end
 function c10701295.rmcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(c10701295.cfilter2,1,nil,tp)

@@ -22,7 +22,8 @@ function c21400109.initial_effect(c)
 	e1:SetCode(EFFECT_UPDATE_ATTACK)
 	e1:SetRange(LOCATION_MZONE)
 	e1:SetValue(function(e) 
-	return Duel.GetFlagEffectLabel(e:GetHandlerPlayer(),21400109)*1000 end)
+	local n=Duel.GetFlagEffectLabel(e:GetHandlerPlayer(),21400109) or 0
+	return n*1000 end)
 	c:RegisterEffect(e1)
 	if not c21400109.global_check then
 		c21400109.global_check=true
