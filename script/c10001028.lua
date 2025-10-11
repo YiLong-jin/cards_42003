@@ -70,7 +70,7 @@ function c10001028.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c10001028.splimit2(e,c)
-	return not (c:IsType(TYPE_SYNCHRO) or c:IsRace(RACE_WYRM)) and c:IsLocation(LOCATION_EXTRA)
+	return not (c:IsRace(RACE_WYRM)) and c:IsLocation(LOCATION_EXTRA)
 end
 function c10001028.cfilter(c)
 	return c:IsFaceup() and c:IsRace(RACE_WYRM) and c:IsType(TYPE_SYNCHRO)
