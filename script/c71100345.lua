@@ -34,7 +34,7 @@ function cm.initial_effect(c)
 end
 function cm.regcon(e,tp,eg,ep,ev,re,r,rp)
 	local att=Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_ATTRIBUTE)
-	return re and att and re:IsActiveType(TYPE_MONSTER) and att&ATTRIBUTE_WATER>0
+	return re and att and re:IsActiveType(TYPE_MONSTER) and bit.band(att,ATTRIBUTE_WATER)~=0
 end
 function cm.regop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RaiseEvent(re:GetHandler(),EVENT_CUSTOM+m,re,r,rp,ep,ev)

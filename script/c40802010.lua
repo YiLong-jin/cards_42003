@@ -138,16 +138,16 @@ end
 function c40802010.thop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler() 
 	local tc=Duel.GetFirstTarget()  
-	if tc:IsRelateToEffect(e) then  
+	if tc:IsRelateToEffect(e) and c:IsRelateToEffect(e) then  
 		if Duel.Destroy(tc,REASON_EFFECT)~=0 then
 		  Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
-		 end
 	if tc:IsCode(40802000) and Duel.GetMatchingGroup(c40802010.spfil,tp,LOCATION_DECK+LOCATION_EXTRA+LOCATION_GRAVE,0,nil,e,tp) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then
 	 local g=Duel.GetMatchingGroup(c40802010.spfil,tp,LOCATION_DECK+LOCATION_EXTRA+LOCATION_GRAVE,0,nil,e,tp)
 		if g:GetCount()>0 then 
 			local sg=g:Select(tp,1,1,nil) 
 			Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
 		end
+	 end
 	end
   end
 end

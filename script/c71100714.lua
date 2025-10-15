@@ -63,9 +63,7 @@ function this.nfilter(c)
 	return c:IsSetCard(0x37a3) and c:IsSummonable(true,nil)
 end
 function this.rettg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():IsAbleToHand() and
-		Duel.IsExistingMatchingCard(this.nfilter,tp,LOCATION_HAND,0,1,nil)
-	end
+	if chk==0 then return e:GetHandler():IsAbleToHand() end
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,e:GetHandler(),1,0,0)
 end
 function this.retop(e,tp,eg,ep,ev,re,r,rp)

@@ -129,7 +129,7 @@ function c40802000.sttg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function c40802000.stop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e)then
+	if tc:IsRelateToEffect(e) and c:IsRelateToEffect(e) then
 		Duel.SSet(tp,tc)
 		Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)
 	end
@@ -151,19 +151,26 @@ function c40802000.damop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler() 
 	local tc=Duel.GetFirstTarget()
 	local cp=tc:GetOwner()
-	if tc:IsRelateToEffect(e) and cp==tp then
-		Duel.Damage(tp,math.floor(tc:GetBaseAttack()/2),REASON_EFFECT)  
-	end
-	if tc:IsRelateToEffect(e) and cp~=tp then
-		Duel.Damage(1-tp,math.floor(tc:GetBaseAttack()/2),REASON_EFFECT)	  
-	end
-	if tc:IsCode(40802000) and Duel.GetMatchingGroup(c40802000.spfil,tp,LOCATION_DECK+LOCATION_EXTRA+LOCATION_PZONE,0,nil,e,tp) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then
+	if tc:IsRelateToEffect(e) and c:IsRelateToEffect(e) and cp==tp then
+	 if Duel.Damage(tp,math.floor(tc:GetBaseAttack()/2),REASON_EFFECT)~=0  and  tc:IsCode(40802000) and Duel.GetMatchingGroup(c40802000.spfil,tp,LOCATION_DECK+LOCATION_EXTRA+LOCATION_PZONE,0,nil,e,tp) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then
 	 local g=Duel.GetMatchingGroup(c40802000.spfil,tp,LOCATION_DECK+LOCATION_EXTRA+LOCATION_PZONE,0,nil,e,tp)
-	 if g:GetCount()>0 then 
-		local sg=g:Select(tp,1,1,nil) 
-	   if Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)~=0 then
-		Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+		if g:GetCount()>0 then 
+			local sg=g:Select(tp,1,1,nil) 
+		   if Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)~=0 then
+			Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+			end
 		end
-	 end
-   end
+	  end  
+	end
+   if tc:IsRelateToEffect(e) and c:IsRelateToEffect(e) and cp~=tp then
+	  if Duel.Damage(1-tp,math.floor(tc:GetBaseAttack()/2),REASON_EFFECT)~=0  and  tc:IsCode(40802000) and Duel.GetMatchingGroup(c40802000.spfil,tp,LOCATION_DECK+LOCATION_EXTRA+LOCATION_PZONE,0,nil,e,tp) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then
+	 local g=Duel.GetMatchingGroup(c40802000.spfil,tp,LOCATION_DECK+LOCATION_EXTRA+LOCATION_PZONE,0,nil,e,tp)
+		if g:GetCount()>0 then 
+			local sg=g:Select(tp,1,1,nil) 
+		   if Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)~=0 then
+			Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
+			end
+		end
+	  end
+  end 
 end
