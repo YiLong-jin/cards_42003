@@ -48,10 +48,10 @@ function cm.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function cm.stfilter1(c,tc)
-	return bit.band(c:GetSynchroLevel(tc),9)~=0 and c:IsSynchroType(TYPE_TUNER) and c:IsPosition(POS_FACEUP) and c:IsCanBeSynchroMaterial(tc) and c:IsFaceup()
+	return c:IsLevel(9) and c:IsSynchroType(TYPE_TUNER) and c:IsPosition(POS_FACEUP) and c:IsCanBeSynchroMaterial(tc) and c:IsFaceup()
 end
 function cm.stfilter2(c,tc)
-	return bit.band(c:GetSynchroLevel(tc),6)~=0 and c:IsPosition(POS_FACEUP) and c:IsCanBeSynchroMaterial(tc) and not c:IsSynchroType(TYPE_TUNER) and c:IsFaceup()
+	return c:IsLevel(6) and c:IsPosition(POS_FACEUP) and c:IsCanBeSynchroMaterial(tc) and not c:IsSynchroType(TYPE_TUNER) and c:IsFaceup()
 end
 function cm.stfilterg(g,tp,tc,lv,smat)
 	if smat then

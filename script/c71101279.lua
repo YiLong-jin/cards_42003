@@ -22,6 +22,7 @@ function s.initial_effect(c)
 	e1:SetOperation(s.activate)
 	c:RegisterEffect(e1)
 end
+s.rtsj_Ancient_Legends=true
 function s.thfilter(c)
 	return c:IsLevel(10) and c:IsAttack(2800) and c:IsDefense(3000)and c:IsAbleToHand()
 end

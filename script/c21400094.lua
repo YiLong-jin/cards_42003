@@ -15,7 +15,7 @@ function c21400094.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e1:SetRange(LOCATION_SZONE)
-	e1:SetCountLimit(1,21400094+EFFECT_COUNT_CODE_DUEL)  
+	e1:SetCountLimit(1,21400094)  
 	e1:SetLabel(1)
 	e1:SetCost(c21400094.cost)
 	e1:SetTarget(c21400094.rectg)
@@ -70,7 +70,8 @@ function c21400094.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 end 
 function c21400094.rectg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=Duel.GetCounter(tp,LOCATION_ONFIELD,LOCATION_ONFIELD,0x1077)
-	if chk==0 then return ct>1 end 
+	if chk==0 then return ct>1 and Duel.GetFlagEffect(tp,21400094)==0 end 
+	Duel.RegisterFlagEffect(tp,21400094,0,0,1)
 	Duel.SetTargetPlayer(tp)
 	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,ct*700)
 end
