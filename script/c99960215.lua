@@ -28,11 +28,7 @@ function s.tdfilter(c)
 end
 
 function s.target1(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then
-		local recov = true
-		local tdeck = Duel.IsExistingMatchingCard(s.tdfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil)
-		return recov or tdeck
-	end
+	if chk==0 then end
 	Duel.SetTargetPlayer(tp)
 	Duel.SetTargetParam(100)
 	Duel.SetOperationInfo(0,CATEGORY_RECOVER,nil,0,tp,100)
