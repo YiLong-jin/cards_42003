@@ -84,7 +84,7 @@ function c73116554.activate(e,tp,eg,ep,ev,re,r,rp)
 
 		----------------------------------------------
 			--千年一叹
-		local e8=Effect.CreateEffect(c)
+		local e8=Effect.CreateEffect(tc)
 		e8:SetType(EFFECT_TYPE_FIELD)
 		e8:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 		e8:SetCode(73116554)
@@ -94,7 +94,7 @@ function c73116554.activate(e,tp,eg,ep,ev,re,r,rp)
 							e8:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_CANNOT_DISABLE)
 		tc:RegisterEffect(e8)
 		---------------------------------------------
-		local e5=Effect.CreateEffect(c)
+		local e5=Effect.CreateEffect(tc)
 		e5:SetType(EFFECT_TYPE_SINGLE)
 		e5:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 		e5:SetRange(LOCATION_MZONE)
@@ -103,7 +103,7 @@ function c73116554.activate(e,tp,eg,ep,ev,re,r,rp)
 		e5:SetValue(1)
 		tc:RegisterEffect(e5)
 -----------------------------------------------------------------------------------------------------------------------
-		local e4=Effect.CreateEffect(c)
+		local e4=Effect.CreateEffect(tc)
 		e4:SetDescription(aux.Stringid(73116554,1))
 		e4:SetCategory(CATEGORY_SEARCH)
 		e4:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_TRIGGER_O)

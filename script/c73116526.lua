@@ -43,6 +43,7 @@ function s.desop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 
+
 function s.excost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToRemoveAsCost() end
 	Duel.Remove(e:GetHandler(),POS_FACEUP,REASON_COST)
@@ -61,14 +62,23 @@ function s.setfilter(c)
 	return c:IsSetCard(0x7ae) and c:IsSSetable()
 end
 
+function s.yearfilter(c)
+	return c:IsFaceup() and c:IsCode(73116500)
+end
+
 function s.exop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
 	local g=Duel.SelectMatchingCard(tp,s.exfilter,tp,LOCATION_DECK,0,1,1,nil)
 	if #g>0 and Duel.Remove(g,POS_FACEUP,REASON_EFFECT)>0 then
-		local nc=Duel.GetFirstMatchingCard(s.setfilter,tp,LOCATION_REMOVED,0,nil)
-		if nc and Duel.IsExistingMatchingCard(aux.FaceupFilter(Card.IsCode,73116500),tp,LOCATION_ONFIELD,0,1,nil) then
-			Duel.BreakEffect()
-			Duel.SSet(tp,nc)
+		if Duel.IsExistingMatchingCard(s.yearfilter,tp,LOCATION_ONFIELD,0,1,nil) then
+			local exg=Duel.GetMatchingGroup(s.setfilter,tp,LOCATION_REMOVED,0,nil)
+			if #exg>0 and Duel.SelectYesNo(tp,aux.Stringid(id,3)) then
+				Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
+				local sg=exg:Select(tp,1,1,nil)
+				if #sg>0 then
+					Duel.SSet(tp,sg)
+				end
+			end
 		end
 	end
 end
