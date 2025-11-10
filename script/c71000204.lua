@@ -51,8 +51,8 @@ end
 function this.rtop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if c:IsRelateToEffect(e) and Duel.SendtoHand(c,nil,REASON_EFFECT)~=0 and c:IsLocation(LOCATION_HAND) then
-		if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and c:IsSummonable(true,e) and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
-			Duel.Summon(tp,c,true,e)
+		if Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and c:IsSummonable(true,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
+			Duel.Summon(tp,c,true,nil)
 		end
 	end
 end
