@@ -79,7 +79,7 @@ function this.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 end
 function this.spfilter(c,e,tp,sg)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,true,POS_FACEUP_ATTACK)
-		and eg:IsExists(Card.IsCode,1,nil,c:GetCode())
+		and sg:IsExists(Card.IsCode,1,nil,c:GetCode())
 end
 function this.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
