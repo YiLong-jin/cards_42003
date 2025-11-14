@@ -71,18 +71,21 @@ function this.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(this.cfilter,1,nil)
 end
 function this.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
+	local sg=eg:Filter(this.cfilter,nil)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(this.spfilter,tp,LOCATION_HAND,0,1,nil,e,tp,eg) end
+		and Duel.IsExistingMatchingCard(this.spfilter,tp,LOCATION_HAND,0,1,nil,e,tp,sg) end
+	Duel.SetTargetParam(sg)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND)
 end
-function this.spfilter(c,e,tp,eg)
+function this.spfilter(c,e,tp,sg)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,true,POS_FACEUP_ATTACK)
 		and eg:IsExists(Card.IsCode,1,nil,c:GetCode())
 end
 function this.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
+	local sg=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local g=Duel.SelectMatchingCard(tp,this.spfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp,eg)
+	local g=Duel.SelectMatchingCard(tp,this.spfilter,tp,LOCATION_HAND,0,1,1,nil,e,tp,sg)
 	if #g>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,true,POS_FACEUP_ATTACK)
 	end
