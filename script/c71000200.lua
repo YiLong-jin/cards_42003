@@ -74,7 +74,7 @@ function this.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local sg=eg:Filter(this.cfilter,nil)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.IsExistingMatchingCard(this.spfilter,tp,LOCATION_HAND,0,1,nil,e,tp,sg) end
-	Duel.SetTargetParam(sg)
+	Duel.SetTargetCard(sg)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND)
 end
 function this.spfilter(c,e,tp,sg)
