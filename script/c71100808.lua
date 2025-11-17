@@ -37,7 +37,7 @@ end
 
 
 function s.thcon(e, tp, eg, ep, ev, re, r, rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_SPECIAL)
+	return e:GetHandler()::IsSummonLocation(LOCATION_EXTRA)
 end
 
 
