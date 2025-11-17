@@ -43,7 +43,7 @@ function s.matfilter(g,lc)
 end
 
 function s.thcon(e, tp, eg, ep, ev, re, r, rp)
-	return e:GetHandler()::IsSummonLocation(LOCATION_EXTRA)
+	return e:GetHandler():IsSummonLocation(LOCATION_EXTRA)
 end
 
 
