@@ -106,7 +106,9 @@ end
 
 function s.setcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(s.setconfilter,1,nil,tp,e:GetHandler()) and 
-		   Duel.IsExistingMatchingCard(Card.IsCode,tp,LOCATION_SZONE,0,1,nil,98167225)
+		   Duel.IsExistingMatchingCard(function(c) 
+			   return c:IsCode(98167225) and c:IsFaceup() and c:IsLocation(LOCATION_SZONE)
+		   end, tp, LOCATION_SZONE, 0, 1, nil)
 end
 
 function s.setfilter(c)
@@ -114,15 +116,11 @@ function s.setfilter(c)
 end
 
 function s.settg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then 
-		return Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and 
-			   Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK+LOCATION_GRAVE,0,1,nil) 
-	end
+	if chk==0 then return Duel.IsExistingMatchingCard(s.setfilter,tp,LOCATION_DECK+LOCATION_GRAVE,0,1,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,tp,0)
 end
 
 function s.setop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetLocationCount(tp,LOCATION_SZONE)<=0 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 	local g=Duel.SelectMatchingCard(tp,s.setfilter,tp,LOCATION_DECK+LOCATION_GRAVE,0,1,1,nil)
 	if #g>0 then
