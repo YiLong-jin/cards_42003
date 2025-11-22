@@ -8,6 +8,14 @@
     "hash": "2c2fab233a95bf425e8a200a5a8ce048e9fee6e409c9385f403a7215415a75a0"
   },
   {
+    "path": "LICENSE",
+    "hash": "b468bd0a4341e35a65ff93da1ec33506f339c0b0e4fcc9dce4eb20832a33b915"
+  },
+  {
+    "path": "README.md",
+    "hash": "2f4f7e480f5192f63daeac5af1d1273b223151183b94948ea30dc528f2bf601a"
+  },
+  {
     "path": "servers.conf",
     "hash": "be9f6102c391b8000c1162e8914ef338e9dcc72c0a26538dbf059da1b72db159"
   },
@@ -28669,7 +28677,7 @@
   },
   {
     "path": "script/c7464662.lua",
-    "hash": "2825be26c79b23d541f69fa5ac090acaa39754874b66c7b753a55e047a80ee79"
+    "hash": "6c3d0d3a1068bb7d53fd1f7e93dbcf15acb2b2e1b162ad5c282892e987b17c87"
   },
   {
     "path": "script/c7464875.lua",
