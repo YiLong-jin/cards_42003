@@ -27,21 +27,23 @@ end
 function cm.op(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local ct=Duel.GetMatchingGroup(cm.checkgroup,tp,LOCATION_GRAVE,0,nil):GetClassCount(Card.GetCode)
-	local e1=Effect.CreateEffect(c)
-	e1:SetType(EFFECT_TYPE_SINGLE)
-	e1:SetCode(EFFECT_UPDATE_ATTACK)
-	e1:SetValue(ct*1000)
-	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_DISABLE)
-	c:RegisterEffect(e1)
-	if ct>0 then 
-		Duel.BreakEffect()
+	if c:IsRelateToEffect(e) then 
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
-		e1:SetCode(EFFECT_ADD_CODE)
+		e1:SetCode(EFFECT_UPDATE_ATTACK)
+		e1:SetValue(ct*1000)
 		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_DISABLE)
-		e1:SetValue(71100000)
 		c:RegisterEffect(e1)
-	end
+		if ct>0 then 
+			Duel.BreakEffect()
+			local e1=Effect.CreateEffect(c)
+			e1:SetType(EFFECT_TYPE_SINGLE)
+			e1:SetCode(EFFECT_ADD_CODE)
+			e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_DISABLE)
+			e1:SetValue(71100000)
+			c:RegisterEffect(e1)
+		end
+	end 
 	if ct>1 and Duel.IsExistingMatchingCard(cm.sefilter,tp,LOCATION_DECK,0,1,nil) then 
 		Duel.BreakEffect()
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
