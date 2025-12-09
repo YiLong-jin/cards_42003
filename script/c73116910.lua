@@ -58,8 +58,8 @@ function c73116910.initial_effect(c)
 	e7:SetCountLimit(1,73116910+100000)
 	e7:SetCost(c73116910.cost2)
 	e7:SetCondition(c73116910.condition)
-	e7:SetTarget(c73116910.cptg)
-	e7:SetOperation(c73116910.cpop)
+	e7:SetTarget(c73116910.kstg)
+	e7:SetOperation(c73116910.ksop)
 	c:RegisterEffect(e7)
 	
 	
@@ -78,7 +78,7 @@ function c73116910.cpfilter(c)
 	return  c:IsSetCard(0x8ac) and c:IsAbleToRemoveAsCost()
 		and c:CheckActivateEffect(true,true,false)~=nil
 end
-function c73116910.cptg(e,tp,eg,ep,ev,re,r,rp,chk)
+function c73116910.kstg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		if e:GetLabel()==0 then return false end
 		e:SetLabel(0)
@@ -96,7 +96,7 @@ function c73116910.cptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:SetLabelObject(te)
 	Duel.ClearOperationInfo(0)
 end
-function c73116910.cpop(e,tp,eg,ep,ev,re,r,rp)
+function c73116910.ksop(e,tp,eg,ep,ev,re,r,rp)
 	local te=e:GetLabelObject()
 	if te then
 		e:SetLabelObject(te:GetLabelObject())
@@ -166,25 +166,12 @@ function c73116910.op(e,tp,eg,ep,ev,re,r,rp,c)
 	Duel.SendtoDeck(g, nil, 2, REASON_COST+REASON_SPSUMMON)
 	g:DeleteGroup()
 end
-function c73116910.RR(e,tp,eg,ep,ev,re,r,rp)
-	local te = Duel.GetChainInfo(ev,CHAININFO_TRIGGERING_EFFECT)
-	if not te then return false end
-	local tc = te:GetHandler()
-	return tc:IsSetCard(0x8ac)
-end
-function c73116910.SR(e,tp,eg,ep,ev,re,r,rp,chk)
-	local g = Duel.GetMatchingGroup(aux.TRUE, tp, LOCATION_ONFIELD, LOCATION_ONFIELD, nil)
-	if chk==0 then return g:GetCount()>0 end
-	Duel.SetOperationInfo(0, CATEGORY_DESTROY, g, 1, 0, 0)
-end
-function c73116910.PK(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_DESTROY)
-	local g = Duel.SelectMatchingCard(tp,aux.TRUE,tp,LOCATION_ONFIELD,LOCATION_ONFIELD,1,1,nil)
-	if g:GetCount()>0 then
-		Duel.HintSelection(g)
-		Duel.Destroy(g, REASON_EFFECT)
-	end
-end
+
+
+
+
+
+
 function c73116910.filter(c)
 	local typ=c:GetType()
 	return c:IsFaceupEx() and c:IsSetCard(0x8ac) and (typ&(TYPE_SPELL+TYPE_TRAP)>0)

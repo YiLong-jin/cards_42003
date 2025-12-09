@@ -100,9 +100,9 @@ function c10700801.cfilter(c)
 	return ((c:IsPublic() and c:IsLocation(LOCATION_HAND)) or (c:IsFaceup() and c:IsLocation(LOCATION_ONFIELD))) and c:IsAbleToGraveAsCost()
 end
 function c10700801.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(c10700801.cfilter,tp,LOCATION_HAND+LOCATION_MZONE,0,1,nil,tp) end
+	if chk==0 then return Duel.IsExistingMatchingCard(c10700801.cfilter,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,nil,tp) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectMatchingCard(tp,c10700801.cfilter,tp,LOCATION_HAND+LOCATION_MZONE,0,1,1,nil,tp)
+	local g=Duel.SelectMatchingCard(tp,c10700801.cfilter,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,1,nil,tp)
 	Duel.SendtoGrave(g,REASON_COST)
 end
 function c10700801.thfilter(c)
