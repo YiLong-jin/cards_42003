@@ -5,7 +5,7 @@ function c71100304.initial_effect(c)
 	--remove and to hand  
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(71100304,0))
-	e1:SetCategory(CATEGORY_REMOVE+CATEGORY_TOHAND)
+	e1:SetCategory(CATEGORY_REMOVE+CATEGORY_TOHAND+CATEGORY_SEARCH)
 	e1:SetType(EFFECT_TYPE_IGNITION) 
 	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
 	e1:SetRange(LOCATION_PZONE)

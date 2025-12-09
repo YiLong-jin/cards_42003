@@ -5,7 +5,7 @@ function c71100301.initial_effect(c)
 	--to grave and set  
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(71100301,0))
-	e1:SetCategory(CATEGORY_TOGRAVE)
+	e1:SetCategory(CATEGORY_TOGRAVE+CATEGORY_DECKDES)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_PZONE)
 	e1:SetCountLimit(1,71100301)
