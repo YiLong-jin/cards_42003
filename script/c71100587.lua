@@ -48,7 +48,7 @@ function c71100587.initial_effect(c)
 	c:RegisterEffect(e3) 
 end
 function c71100587.ctfil(c)
-	return c:IsFaceup() and (c:IsRace(RACE_FAIRY) or c:IsSummonLocation(LOCATION_EXTRA)) and c:IsReleasable()
+	return (c:IsRace(RACE_FAIRY) or c:IsSummonLocation(LOCATION_EXTRA)) and c:IsReleasable()
 end 
 function c71100587.ctgck(g,tp) 
 	return Duel.GetMZoneCount(tp,g)>0
