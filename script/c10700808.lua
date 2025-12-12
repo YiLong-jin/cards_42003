@@ -14,7 +14,7 @@ function c10700808.cfilter(c)
 	return c:IsPublic()
 end
 function c10700808.thfilter1(c)
-	return c:IsSetCard(0x7c9) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
+	return c:IsSetCard(0x17c9) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
 end
 function c10700808.thfilter2(c)
 	return c:IsType(TYPE_FLIP) and c:IsAbleToHand()
@@ -27,8 +27,8 @@ function c10700808.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=Duel.GetMatchingGroupCount(c10700808.cfilter,tp,LOCATION_HAND,0,nil)
 	if chk==0 then return 
 		Duel.IsExistingMatchingCard(c10700808.thfilter1,tp,LOCATION_DECK,0,1,nil) 
-	  	or (ct>=2 and Duel.IsExistingMatchingCard(c10700808.thfilter2,tp,LOCATION_DECK,0,1,nil,tp) and Duel.IsExistingMatchingCard(c10700808.thfilter1,tp,LOCATION_DECK,0,1,nil)) 
-	  	or (ct>=3 and Duel.IsExistingMatchingCard(c10700808.spfilter,tp,LOCATION_DECK,0,1,nil,e,tp)) end
+		or (ct>=2 and Duel.IsExistingMatchingCard(c10700808.thfilter2,tp,LOCATION_DECK,0,1,nil,tp) and Duel.IsExistingMatchingCard(c10700808.thfilter1,tp,LOCATION_DECK,0,1,nil)) 
+		or (ct>=3 and Duel.IsExistingMatchingCard(c10700808.spfilter,tp,LOCATION_DECK,0,1,nil,e,tp)) end
 end
 function c10700808.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetMatchingGroupCount(c10700808.cfilter,tp,LOCATION_HAND,0,nil)
