@@ -3,7 +3,7 @@ local this,id,ofs=GetID()
 function this.initial_effect(c)
 	--synchro summon
 	aux.AddSynchroProcedure(c,aux.FilterBoolFunction(Card.IsAttribute,ATTRIBUTE_FIRE),aux.NonTuner(this.mfilter),1)
-	c:EnableReviveLimit() 	
+	c:EnableReviveLimit()   
 	--pendulum summon
 	aux.EnablePendulumAttribute(c,false)
 	--negate
@@ -86,7 +86,7 @@ function this.damop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetMatchingGroup(this.damf,tp,LOCATION_EXTRA,0,nil):GetClassCount(Card.GetCode)
 	local dam=Duel.Damage(1-tp,ct*500,REASON_EFFECT)
 	local ag=Duel.GetMatchingGroup(Card.IsFaceup,tp,0,LOCATION_MZONE,nil)
-	if dam>0 and #ag>0 and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
+	if dam>0 and #ag>0 and Duel.SelectYesNo(tp,aux.Stringid(id,2)) then
 		Duel.BreakEffect()
 		for tc in aux.Next(ag) do 
 			local e1=Effect.CreateEffect(c)

@@ -18,7 +18,8 @@ function c33332102.initial_effect(c)
 	--to grave
 	local e3=Effect.CreateEffect(c)
 	e3:SetDescription(aux.Stringid(33332102,2))
-	e3:SetCategory(CATEGORY_TOGRAVE)
+	--e3:SetCategory(CATEGORY_TOGRAVE)
+	e1:SetCountLimit(1,33354255)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
 	e3:SetCode(EVENT_DESTROYED) 
@@ -59,9 +60,9 @@ function c33332102.thop(e,tp,eg,ep,ev,re,r,rp)
 		local sg=g:Select(tp,1,1,nil)
 		Duel.SendtoHand(sg,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,sg) 
-		if c:IsRelateToEffect(e) and (Duel.CheckLocation(tp,LOCATION_PZONE,0) or Duel.CheckLocation(tp,LOCATION_PZONE,1)) and Duel.SelectYesNo(tp,aux.Stringid(33332102,0)) then
-			Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)	
-		end 
+		--if c:IsRelateToEffect(e) and (Duel.CheckLocation(tp,LOCATION_PZONE,0) or Duel.CheckLocation(tp,LOCATION_PZONE,1)) and Duel.SelectYesNo(tp,aux.Stringid(33332102,0)) then
+			--Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)  
+		--end 
 	end
 end
 function c33332102.tgcon(e,tp,eg,ep,ev,re,r,rp)
@@ -71,14 +72,16 @@ function c33332102.tgfilter(c)
 	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0x6567) and c:IsAbleToGrave()
 end
 function c33332102.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(c33332102.tgfilter,tp,LOCATION_DECK,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOGRAVE,nil,1,tp,LOCATION_DECK)
+	if chk==0 then return Duel.CheckLocation(tp,LOCATION_PZONE,0) or Duel.CheckLocation(tp,LOCATION_PZONE,1) end
+	local c=e:GetHandler()
+	if c:IsLocation(LOCATION_GRAVE) then
+		Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,c,1,0,0)
+	end
 end
 function c33332102.tgop(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
-	local g=Duel.SelectMatchingCard(tp,c33332102.tgfilter,tp,LOCATION_DECK,0,1,1,nil)
-	if g:GetCount()>0 then
-		Duel.SendtoGrave(g,REASON_EFFECT)
+	local c=e:GetHandler()
+	if c:IsRelateToChain() and aux.NecroValleyFilter()(c) then
+		Duel.MoveToField(c,tp,tp,LOCATION_PZONE,POS_FACEUP,true)
 	end
 end 
 function c33332102.pbfil(c) 
@@ -100,14 +103,14 @@ function c33332102.scop(e,tp,eg,ep,ev,re,r,rp)
 		e1:SetCode(EFFECT_UPDATE_LSCALE) 
 		e1:SetRange(LOCATION_PZONE) 
 		e1:SetValue(lv)  
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END) 
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD) 
 		c:RegisterEffect(e1)  
 		local e1=Effect.CreateEffect(c) 
 		e1:SetType(EFFECT_TYPE_SINGLE) 
 		e1:SetCode(EFFECT_UPDATE_RSCALE) 
 		e1:SetRange(LOCATION_PZONE) 
 		e1:SetValue(lv)  
-		e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END) 
+		e1:SetReset(RESET_EVENT+RESETS_STANDARD) 
 		c:RegisterEffect(e1)  
 	end  
 	local e1=Effect.CreateEffect(e:GetHandler())

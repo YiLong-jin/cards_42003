@@ -1,4 +1,4 @@
---VIRTUOSO III OF WANDS
+--小阿卡那的星币 偶像
 function c65846963.initial_effect(c)
 	c:EnableReviveLimit()
 	aux.AddLinkProcedure(c,c65846963.linkff,2,2)
@@ -11,10 +11,10 @@ function c65846963.initial_effect(c)
 	c:RegisterEffect(e0)
 end
 function c65846963.linkff(c)
-	return c:IsSetCard(0x23e0)
+	return c:IsSetCard(0x23ef)
 end
 function c65846963.setfilter(c)
-	return c:IsSetCard(0x23e0) and c:IsType(0x6) and c:IsSSetable()
+	return c:IsSetCard(0x23ef) and c:IsType(0x6) and c:IsSSetable()
 end
 function c65846963.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65846963.setfilter,tp,LOCATION_DECK,0,1,nil) end

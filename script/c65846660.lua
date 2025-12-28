@@ -1,4 +1,4 @@
---幻星集的宝剑 编号X
+--小阿卡那的宝剑 召唤师
 function c65846660.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(65846660,0))

@@ -1,4 +1,4 @@
---幻星集的宝剑 编号IX
+--小阿卡那的宝剑 圣束师
 function c65846659.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(65846659,0))
@@ -37,7 +37,7 @@ function c65846659.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function c65846659.cfilter(c)
-	return  (c:IsSetCard(0x3eb) or c:IsType(TYPE_EQUIP)) and c:IsAbleToGraveAsCost()
+	return  (c:IsSetCard(0x13ef) or c:IsType(TYPE_EQUIP)) and c:IsAbleToGraveAsCost()
 end
 function c65846659.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65846659.cfilter,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,nil,tp) end
@@ -46,7 +46,7 @@ function c65846659.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoGrave(g,REASON_COST)
 end
 function c65846659.filter(c)
-	return c:IsSetCard(0x3eb) and c:IsAbleToHand()
+	return c:IsSetCard(0x13ef) and c:IsAbleToHand()
 end
 function c65846659.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65846659.filter,tp,LOCATION_DECK,0,1,nil) end

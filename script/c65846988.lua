@@ -1,4 +1,4 @@
---童谣 王后
+--小阿卡那的星币 王后
 function c65846988.initial_effect(c)
 	c:EnableReviveLimit()
 	local e1=Effect.CreateEffect(c)
@@ -71,10 +71,10 @@ function c65846988.atkop(e,c)
 	return Duel.GetMatchingGroupCount(c65846988.filter,c:GetControler(),LOCATION_MZONE,LOCATION_MZONE,nil)*300
 end
 function c65846988.thfilter1(c)
-	return c:IsSetCard(0x23e2) and c:IsType(0x1) and c:IsAbleToHand()
+	return c:IsSetCard(0x33ef) and c:IsType(0x1) and c:IsAbleToHand()
 end
 function c65846988.thfilter2(c)
-	return c:IsSetCard(0x23e2) and c:IsType(0x6) and c:IsAbleToGrave()
+	return c:IsSetCard(0x33ef) and c:IsType(0x6) and c:IsAbleToGrave()
 end
 function c65846988.thgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65846988.thfilter1,tp,LOCATION_DECK,0,1,nil) and Duel.IsExistingMatchingCard(c65846988.thfilter2,tp,LOCATION_DECK,0,1,nil) end
@@ -94,7 +94,7 @@ function c65846988.thgop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c65846988.thfilter(c)
-	return c:IsSetCard(0x23e2) and c:IsType(0x6) and c:IsAbleToHand() and c:IsFaceupEx()
+	return c:IsSetCard(0x33ef) and c:IsType(0x6) and c:IsAbleToHand() and c:IsFaceupEx()
 end
 function c65846988.tgtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) and chkc:IsControler(tp) and c65846988.thfilter(chkc) end

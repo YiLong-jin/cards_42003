@@ -1,4 +1,4 @@
---童谣 讲述人
+--小阿卡那的星币 讲述人
 function c65846984.initial_effect(c)
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_ACTIVATE)
@@ -37,7 +37,7 @@ function c65846984.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_COST)
 end
 function c65846984.filter(c)
-	return c:IsSetCard(0x23e2) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
+	return c:IsSetCard(0x33ef) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
 end
 function c65846984.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65846984.filter,tp,LOCATION_DECK+LOCATION_GRAVE,0,1,nil) end
@@ -52,7 +52,7 @@ function c65846984.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c65846984.spfilter(c,e,tp)
-	return c:IsSetCard(0x23e2) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP) and c:IsFaceupEx()
+	return c:IsSetCard(0x33ef) and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP) and c:IsFaceupEx()
 end
 function c65846984.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

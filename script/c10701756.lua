@@ -23,7 +23,6 @@ function c10701756.initial_effect(c)
 	e2:SetCode(EVENT_FREE_CHAIN)
 	e2:SetHintTiming(0,TIMINGS_CHECK_MONSTER)
 	e2:SetRange(LOCATION_MZONE)
-	e2:SetCountLimit(1)
 	e2:SetCost(c10701756.cost)
 	e2:SetTarget(c10701756.target)
 	e2:SetOperation(c10701756.operation)
@@ -49,21 +48,27 @@ function c10701756.mtfilter(c,e)
 end
 function c10701756.mttg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsType(TYPE_XYZ)
-		and Duel.IsExistingMatchingCard(c10701756.mtfilter,tp,LOCATION_GRAVE,0,1,nil) end
+		and Duel.IsExistingMatchingCard(c10701756.mtfilter,tp,LOCATION_GRAVE,0,2,nil) end
 	Duel.SetOperationInfo(0,CATEGORY_LEAVE_GRAVE,nil,1,0,0)
 end
 function c10701756.mtop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	if not c:IsRelateToEffect(e) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_XMATERIAL)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(c10701756.mtfilter),tp,LOCATION_GRAVE,0,1,1,nil,e)
+	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(c10701756.mtfilter),tp,LOCATION_GRAVE,0,2,2,nil,e)
 	if g:GetCount()>0 then
 		Duel.Overlay(c,g)
 	end
 end
 function c10701756.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return e:GetHandler():CheckRemoveOverlayCard(tp,1,REASON_COST) end
-	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
+	local c=e:GetHandler()
+	local g=c:GetOverlayGroup()
+	local ct=2
+	if not g:IsExists(aux.NOT(Card.IsType),1,nil,TYPE_NORMAL) then
+		ct=1
+	end
+	if chk==0 then return c:CheckRemoveOverlayCard(tp,ct,REASON_COST) end
+	c:RemoveOverlayCard(tp,ct,2,REASON_COST)
 end
 function c10701756.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(1-tp) and chkc:IsOnField() and aux.NegateAnyFilter(chkc) end

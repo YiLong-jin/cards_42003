@@ -1,4 +1,4 @@
---VIRTUOSO X OF WANDS
+--小阿卡那的星币 摇滚
 function c65846964.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(65846964,0))
@@ -39,7 +39,7 @@ function c65846964.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)
 end
 function c65846964.thfilter(c)
-	return c:IsAbleToHand() and c:GetType()&TYPE_CONTINUOUS+TYPE_SPELL==TYPE_CONTINUOUS+TYPE_SPELL and c:IsSetCard(0x23e0)
+	return c:IsAbleToHand() and c:GetType()&TYPE_CONTINUOUS+TYPE_SPELL==TYPE_CONTINUOUS+TYPE_SPELL and c:IsSetCard(0x23ef)
 end
 function c65846964.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65846964.thfilter,tp,LOCATION_DECK,0,1,nil) and Duel.GetFlagEffect(tp,65846964)==0 end

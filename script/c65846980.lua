@@ -1,4 +1,4 @@
---童谣 国王
+--小阿卡那的星币 国王
 function c65846980.initial_effect(c)
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_FIELD)
@@ -35,7 +35,7 @@ function c65846980.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function c65846980.filter(c)
-	return c:IsSetCard(0x23e2) and c:IsFaceup()
+	return c:IsSetCard(0x33ef) and c:IsFaceup()
 end
 function c65846980.spcon(e,c)
 	if c==nil then return true end
@@ -43,7 +43,7 @@ function c65846980.spcon(e,c)
 		and Duel.IsExistingMatchingCard(c65846980.filter,c:GetControler(),LOCATION_MZONE,0,3,nil)
 end
 function c65846980.intg(e,c)
-	return c:IsFaceup() and c:IsSetCard(0x23e2) and not c:IsCode(65846980)
+	return c:IsFaceup() and c:IsSetCard(0x33ef) and not c:IsCode(65846980)
 end
 function c65846980.efilter(e,re,rp,c)
 	if not re:IsHasProperty(EFFECT_FLAG_CARD_TARGET) then return true end
@@ -56,7 +56,7 @@ function c65846980.thcon(e,tp,eg,ep,ev,re,r,rp)
 		and c:IsPreviousControler(tp) and c:GetReasonPlayer()==1-tp
 end
 function c65846980.thfilter(c)
-	return c:IsFaceupEx() and c:IsSetCard(0x23e2) and c:IsType(0x1) and c:IsAbleToHand()
+	return c:IsFaceupEx() and c:IsSetCard(0x33ef) and c:IsType(0x1) and c:IsAbleToHand()
 end
 function c65846980.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65846980.thfilter,tp,LOCATION_GRAVE,0,1,nil) end

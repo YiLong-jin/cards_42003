@@ -1,4 +1,4 @@
---小阿卡那 宝剑
+--小阿卡那的宝剑 王牌
 function c65846665.initial_effect(c)
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_EQUIP)
@@ -20,7 +20,7 @@ function c65846665.filter(c,e,tp)
 	return c:IsRace(0x3) and c:IsLevel(4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c65846665.eqfilter(c,tp,ec)
-	return c:IsSetCard(0x3eb) and (not c:IsType(TYPE_EQUIP) or c:IsType(TYPE_EQUIP) and c:CheckEquipTarget(ec)) and c:CheckUniqueOnField(tp,LOCATION_SZONE) and not c:IsForbidden() 
+	return c:IsSetCard(0x13ef) and (not c:IsType(TYPE_EQUIP) or c:IsType(TYPE_EQUIP) and c:CheckEquipTarget(ec)) and c:CheckUniqueOnField(tp,LOCATION_SZONE) and not c:IsForbidden() 
 end
 function c65846665.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0

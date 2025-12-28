@@ -1,4 +1,4 @@
---幻星集的宝剑 编号II
+--小阿卡那的宝剑 刺客
 function c65846652.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(65846652,0))
@@ -46,7 +46,7 @@ function c65846652.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoGrave(g,REASON_COST)
 end
 function c65846652.tgfilter(c)
-	return c:IsSetCard(0x3eb) and c:IsAbleToGrave()
+	return c:IsSetCard(0x13ef) and c:IsAbleToGrave()
 end
 function c65846652.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65846652.tgfilter,tp,LOCATION_DECK,0,1,nil) end

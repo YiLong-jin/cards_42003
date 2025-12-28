@@ -1,4 +1,4 @@
---童谣 故事书
+--小阿卡那的星币 故事书
 function c65846982.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -22,7 +22,7 @@ function c65846982.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function c65846982.filter(c)
-	return c:IsSetCard(0x23e2) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
+	return c:IsSetCard(0x33ef) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
 end
 function c65846982.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65846982.filter,tp,LOCATION_DECK,0,1,nil) end

@@ -1,7 +1,7 @@
---VIRTUOSO ACE OF WANDS
+--小阿卡那的星币 指挥
 function c65846954.initial_effect(c)
 	c:EnableReviveLimit()	
-	aux.AddXyzProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x23e0),4,2)
+	aux.AddXyzProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x23ef),4,2)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(65846954,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -47,7 +47,7 @@ function c65846954.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	e:GetHandler():RemoveOverlayCard(tp,1,1,REASON_COST)
 end
 function c65846954.thfilter(c)
-	return c:IsSetCard(0x23e0) and c:IsAbleToHand()
+	return c:IsSetCard(0x23ef) and c:IsAbleToHand()
 end
 function c65846954.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65846954.thfilter,tp,LOCATION_DECK,0,1,nil) and Duel.GetFlagEffect(tp,65846954)==0 end

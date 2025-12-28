@@ -1,4 +1,4 @@
---幻星集的宝剑 编号VI
+--小阿卡那的宝剑 德鲁伊
 function c65846656.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(65846656,0))
@@ -37,7 +37,7 @@ function c65846656.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function c65846656.thfilter(c)
-	return (c:IsSetCard(0x3eb) or c:IsType(TYPE_EQUIP)) and c:IsAbleToHand()
+	return (c:IsSetCard(0x13ef) or c:IsType(TYPE_EQUIP)) and c:IsAbleToHand()
 end
 function c65846656.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and c65846656.thfilter(chkc) end

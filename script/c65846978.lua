@@ -1,4 +1,4 @@
---童谣 侍从
+--小阿卡那的星币 骑士
 function c65846978.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)

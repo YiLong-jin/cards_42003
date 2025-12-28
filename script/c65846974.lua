@@ -1,4 +1,4 @@
---童谣 猎人
+--小阿卡那的星币 猎人
 function c65846974.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)
@@ -22,7 +22,7 @@ function c65846974.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function c65846974.filter(c)
-	return c:IsSetCard(0x23e2) and c:IsFaceup()
+	return c:IsSetCard(0x33ef) and c:IsFaceup()
 end
 function c65846974.spcon(e,c)
 	if c==nil then return true end

@@ -1,4 +1,4 @@
---VIRTUOSO V OF WANDS
+--小阿卡那的星币 古筝
 function c65846958.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
@@ -23,7 +23,7 @@ function c65846958.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function c65846958.thfilter(c)
-	return c:IsSetCard(0x23e0) and c:IsAbleToHand()
+	return c:IsSetCard(0x23ef) and c:IsAbleToHand()
 end
 function c65846958.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65846958.thfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -38,7 +38,7 @@ function c65846958.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c65846958.cfilter(c)
-	return c:IsFaceup() and c:IsType(TYPE_LINK) and c:IsSetCard(0x23e0)
+	return c:IsFaceup() and c:IsType(TYPE_LINK) and c:IsSetCard(0x23ef)
 end
 function c65846958.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(c65846958.cfilter,tp,LOCATION_MZONE,0,1,nil)

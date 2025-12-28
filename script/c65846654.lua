@@ -1,4 +1,4 @@
---幻星集的宝剑 编号IV
+--小阿卡那的宝剑 魔法师
 function c65846654.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(65846654,0))
@@ -37,7 +37,7 @@ function c65846654.initial_effect(c)
 	c:RegisterEffect(e4)	
 end
 function c65846654.cfilter(c,e,tp)
-	return  (c:IsSetCard(0x3eb) or c:IsType(TYPE_EQUIP)) and c:IsAbleToGraveAsCost() and Duel.GetMZoneCount(tp,c,tp)>0 and Duel.IsExistingMatchingCard(c65846654.spfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil,e,tp)
+	return  (c:IsSetCard(0x13ef) or c:IsType(TYPE_EQUIP)) and c:IsAbleToGraveAsCost() and Duel.GetMZoneCount(tp,c,tp)>0 and Duel.IsExistingMatchingCard(c65846654.spfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil,e,tp)
 end
 function c65846654.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65846654.cfilter,tp,LOCATION_HAND+LOCATION_ONFIELD,0,1,nil,e,tp) end
@@ -46,7 +46,7 @@ function c65846654.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoGrave(g,REASON_COST)
 end
 function c65846654.spfilter(c,e,tp)
-	return c:IsSetCard(0x3eb) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(0x13ef) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c65846654.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65846654.spfilter,tp,LOCATION_HAND+LOCATION_DECK,0,1,nil,e,tp) end

@@ -1,7 +1,7 @@
---幻星集的宝剑 封底
+--小阿卡那的宝剑 封底
 function c65846663.initial_effect(c)	
 	c:EnableReviveLimit()
-	aux.AddFusionProcFun2(c,aux.FilterBoolFunction(Card.IsFusionSetCard,0x3eb),c65846663.matfilter,true) 
+	aux.AddFusionProcFun2(c,aux.FilterBoolFunction(Card.IsFusionSetCard,0x13ef),c65846663.matfilter,true) 
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_FIELD)
 	e0:SetCode(EFFECT_SPSUMMON_PROC)
@@ -9,7 +9,7 @@ function c65846663.initial_effect(c)
 	e0:SetRange(LOCATION_EXTRA)
 	e0:SetCondition(c65846663.spcon)
 	e0:SetTarget(c65846663.sptg)
-	e0:SetValue(0x3eb)
+	e0:SetValue(0x13ef)
 	c:RegisterEffect(e0)
 	local g=Group.CreateGroup()
 	g:KeepAlive()
@@ -159,14 +159,14 @@ function c65846663.spfilter1(c,tp)
 	return c:GetEquipCount()>2  and Duel.IsExistingMatchingCard(c65846663.spfilter2,tp,LOCATION_MZONE+LOCATION_GRAVE,0,1,c)
 end
 function c65846663.spfilter2(c)
-	return c:IsSetCard(0x3eb) and c:IsFaceup()
+	return c:IsSetCard(0x13ef) and c:IsFaceup()
 end
 function c65846663.spfilter3(c)
-	return (c:IsSetCard(0x3eb) or c:GetEquipCount()>2) and c:IsFaceup()
+	return (c:IsSetCard(0x13ef) or c:GetEquipCount()>2) and c:IsFaceup()
 end
 function c65846663.spconfl(g,tp,sc)
 	return g:GetCount()==2
-		and g:IsExists(function(c) return c:GetEquipCount()>1 and c:IsType(0x1) end,1,nil) and g:IsExists(function(c) return c:IsType(TYPE_MONSTER) and c:IsSetCard(0x3eb) end,1,nil)
+		and g:IsExists(function(c) return c:GetEquipCount()>1 and c:IsType(0x1) end,1,nil) and g:IsExists(function(c) return c:IsType(TYPE_MONSTER) and c:IsSetCard(0x13ef) end,1,nil)
 		and Duel.GetLocationCountFromEx(tp,tp,g,sc)>0
 end
 function c65846663.sptg(e,tp,eg,ep,ev,re,r,rp,chk,c)
@@ -184,7 +184,7 @@ end
 function c65846663.eqop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local pg=e:GetLabelObject():GetLabelObject()
-	if c:GetSummonType()==SUMMON_TYPE_SPECIAL+0x3eb and c:IsFaceup() and c:IsLocation(LOCATION_MZONE) and #pg==2 then
+	if c:GetSummonType()==SUMMON_TYPE_SPECIAL+0x13ef and c:IsFaceup() and c:IsLocation(LOCATION_MZONE) and #pg==2 then
 		for tc in aux.Next(pg) do 
 			if tc:IsLocation(LOCATION_MZONE+LOCATION_GRAVE) and Duel.Equip(tp,tc,c)~=0 then
 				local e1=Effect.CreateEffect(c)

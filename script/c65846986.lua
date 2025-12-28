@@ -1,4 +1,4 @@
---童谣 睡前故事
+--小阿卡那的星币 睡前故事
 function c65846986.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_DISABLE)
@@ -36,7 +36,7 @@ function c65846986.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.NegateEffect(ev)	
 end
 function c65846986.thfilter(c)
-	return c:IsSetCard(0x23e2) and c:IsType(TYPE_SPELL+TYPE_TRAP) and not c:IsCode(65846986) and c:IsAbleToHand() and c:IsFaceupEx()
+	return c:IsSetCard(0x33ef) and c:IsType(TYPE_SPELL+TYPE_TRAP) and not c:IsCode(65846986) and c:IsAbleToHand() and c:IsFaceupEx()
 end
 function c65846986.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and c65846986.thfilter(chkc) end

@@ -1,4 +1,4 @@
---RHYTHM YI
+--小阿卡那的星币 树的旋律
 function c65846953.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(65846953,0))
@@ -33,7 +33,7 @@ function c65846953.activate(e,tp,eg,ep,ev,re,r,rp)
 	Duel.SpecialSummon(c,0,tp,tp,true,false,POS_FACEUP)
 end
 function c65846953.tgfilter(c)
-	return c:IsSetCard(0x23e0) and c:IsType(0x1) and c:IsAbleToGrave()
+	return c:IsSetCard(0x23ef) and c:IsType(0x1) and c:IsAbleToGrave()
 end
 function c65846953.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65846953.tgfilter,tp,LOCATION_DECK,0,1,nil)  and Duel.GetFlagEffect(tp,65846953)==0 end

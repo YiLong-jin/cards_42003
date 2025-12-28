@@ -1,4 +1,4 @@
---幻星集的宝剑 编号V
+--小阿卡那的宝剑 牧师
 function c65846655.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(65846655,0))

@@ -1,4 +1,4 @@
---童谣 白天鹅
+--小阿卡那的星币 白天鹅
 function c65846972.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(65846972,0))
@@ -24,7 +24,7 @@ function c65846972.initial_effect(c)
 	c:RegisterEffect(e2)	
 end
 function c65846972.cfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x23e2)
+	return c:IsFaceup() and c:IsSetCard(0x33ef)
 end
 function c65846972.spcon(e,c)
 	if c==nil then return true end
@@ -32,7 +32,7 @@ function c65846972.spcon(e,c)
 		and Duel.GetLocationCount(c:GetControler(),LOCATION_MZONE)>0
 end
 function c65846972.filter(c)
-	return c:IsSetCard(0x23e2) and (c:IsAbleToHand() or c:IsAbleToGrave())
+	return c:IsSetCard(0x33ef) and (c:IsAbleToHand() or c:IsAbleToGrave())
 end
 function c65846972.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65846972.filter,tp,LOCATION_DECK,0,1,nil) end

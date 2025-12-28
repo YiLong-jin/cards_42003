@@ -1,4 +1,4 @@
---VIRTUOSO VII OF WANDS
+--小阿卡那的星币 霹雳
 function c65846965.initial_effect(c)
 	local e2=Effect.CreateEffect(c)
 	e2:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_SINGLE)
@@ -18,7 +18,7 @@ function c65846965.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function c65846965.filter(c)
-	return c:IsSetCard(0x23e0) and c:IsType(TYPE_SPELL) and c:IsSSetable()
+	return c:IsSetCard(0x23ef) and c:IsType(TYPE_SPELL) and c:IsSSetable()
 end
 function c65846965.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_SZONE)>0
@@ -37,7 +37,7 @@ function c65846965.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsReason(REASON_EFFECT)
 end
 function c65846965.tgfilter(c)
-	return c:IsSetCard(0x23e0) and c:IsType(0x1) and c:IsAbleToGrave()
+	return c:IsSetCard(0x23ef) and c:IsType(0x1) and c:IsAbleToGrave()
 end
 function c65846965.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65846965.tgfilter,tp,LOCATION_DECK,0,1,nil) and Duel.GetFlagEffect(tp,65846965)==0 end

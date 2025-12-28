@@ -1,4 +1,4 @@
---RHYTHM SKY MIRROR
+--小阿卡那的星币 空的旋律
 function c65846959.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_GRAVE_ACTION)
@@ -20,7 +20,7 @@ function c65846959.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function c65846959.thfilter(c,e,sp)
-	return c:IsSetCard(0x23e0) and c:IsAbleToHand() and c:IsType(0x1)
+	return c:IsSetCard(0x23ef) and c:IsAbleToHand() and c:IsType(0x1)
 end
 function c65846959.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(c65846959.thfilter),tp,LOCATION_DECK+LOCATION_GRAVE,0,nil)
@@ -38,7 +38,7 @@ function c65846959.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(c65846959.xyzfilter2,1,nil,tp) 
 end
 function c65846959.tdfilter(c)
-	return (c:IsSetCard(0x23e0) or c:IsType(TYPE_XYZ)) and c:IsAbleToDeck()
+	return (c:IsSetCard(0x23ef) or c:IsType(TYPE_XYZ)) and c:IsAbleToDeck()
 end
 function c65846959.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and c65846959.tdfilter(chkc) end

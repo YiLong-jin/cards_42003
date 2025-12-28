@@ -1,4 +1,4 @@
---幻星集的宝剑 编号VIII
+--小阿卡那的宝剑 枪兵
 function c65846658.initial_effect(c)
 	local e0=Effect.CreateEffect(c)
 	e0:SetDescription(aux.Stringid(65846658,0))
@@ -33,7 +33,7 @@ function c65846658.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function c65846658.cfilter(c,ec,tp)
-	return (c:IsType(TYPE_MONSTER) and c:IsSetCard(0x3eb) or c:IsType(TYPE_EQUIP) and c:CheckEquipTarget(ec)) and c:CheckUniqueOnField(tp,LOCATION_SZONE) and not c:IsForbidden()
+	return (c:IsType(TYPE_MONSTER) and c:IsSetCard(0x13ef) or c:IsType(TYPE_EQUIP) and c:CheckEquipTarget(ec)) and c:CheckUniqueOnField(tp,LOCATION_SZONE) and not c:IsForbidden()
 end
 function c65846658.sptg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
@@ -64,7 +64,7 @@ function c65846658.eqlimit(e,c)
 	return c==e:GetLabelObject()
 end
 function c65846658.cfilter2(c,ec)
-	return (c:IsType(TYPE_EQUIP) and c:CheckEquipTarget(ec) and c:CheckUniqueOnField(tp,LOCATION_SZONE) and not c:IsForbidden() or c:IsType(TYPE_MONSTER) and c:IsSetCard(0x3eb)) and not c:IsPublic()
+	return (c:IsType(TYPE_EQUIP) and c:CheckEquipTarget(ec) and c:CheckUniqueOnField(tp,LOCATION_SZONE) and not c:IsForbidden() or c:IsType(TYPE_MONSTER) and c:IsSetCard(0x13ef)) and not c:IsPublic()
 end
 function c65846658.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65846658.cfilter2,tp,LOCATION_HAND,0,1,e:GetHandler(),e:GetHandler()) end

@@ -1,5 +1,4 @@
---VIRTUOSO VI OF WANDS
---芝士 绯
+--小阿卡那的星币 琵琶
 function c65846952.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(65846952,0))
@@ -27,7 +26,7 @@ function c65846952.initial_effect(c)
 	c:RegisterEffect(e3)
 end 
 function c65846952.filter(c,e,tp)
-	return c:IsSetCard(0x23e0)
+	return c:IsSetCard(0x23ef)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP_DEFENSE)
 end
 function c65846952.sptg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
@@ -39,7 +38,7 @@ function c65846952.sptg2(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,g,1,0,0)
 end
 function c65846952.xyzfilter(c)
-	return c:IsSetCard(0x23e0) and c:IsXyzSummonable(nil)
+	return c:IsSetCard(0x23ef) and c:IsXyzSummonable(nil)
 end
 function c65846952.spop2(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()

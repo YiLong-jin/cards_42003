@@ -1,4 +1,4 @@
---VIRTUOSO VIII OF WANDS
+--小阿卡那的星币 街舞
 function c65846956.initial_effect(c)
 	c:EnableReviveLimit()
 	aux.AddLinkProcedure(c,c65846956.mat,1,1)

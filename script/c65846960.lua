@@ -1,4 +1,4 @@
---RHYTHM GROW
+--小阿卡那的星币 成长的旋律
 function c65846960.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_TOGRAVE)
@@ -12,10 +12,10 @@ function c65846960.initial_effect(c)
 	c:RegisterEffect(e1)
 end 
 function c65846960.filter(c,tp)
-	return c:IsFaceup() and c:IsSetCard(0x23e0) and Duel.GetMZoneCount(tp,c)>0
+	return c:IsFaceup() and c:IsSetCard(0x23ef) and Duel.GetMZoneCount(tp,c)>0
 end
 function c65846960.filter2(c,e,tp)
-	return c:IsSetCard(0x23e0) and c:IsType(TYPE_MONSTER)
+	return c:IsSetCard(0x23ef) and c:IsType(TYPE_MONSTER)
 		and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP)
 end
 function c65846960.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

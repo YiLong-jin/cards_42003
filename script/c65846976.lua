@@ -1,4 +1,4 @@
---童谣 小红帽
+--小阿卡那的星币 小红帽
 function c65846976.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD)

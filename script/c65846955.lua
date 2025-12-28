@@ -1,4 +1,4 @@
---RHYTHM ACE
+--小阿卡那的星币 河的旋律
 function c65846955.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON+CATEGORY_GRAVE_ACTION)
@@ -24,7 +24,7 @@ function c65846955.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end
 end
 function c65846955.filter(c,e,sp)
-	return c:IsSetCard(0x23e0) and c:IsCanBeSpecialSummoned(e,0,sp,false,false,POS_FACEUP_DEFENSE)
+	return c:IsSetCard(0x23ef) and c:IsCanBeSpecialSummoned(e,0,sp,false,false,POS_FACEUP_DEFENSE)
 end
 function c65846955.activate(e,tp,eg,ep,ev,re,r,rp)
 	local cg=Duel.GetMatchingGroup(aux.NecroValleyFilter(c65846955.filter),tp,LOCATION_GRAVE+LOCATION_HAND,0,nil,e,tp)

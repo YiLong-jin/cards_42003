@@ -61,7 +61,7 @@ function c10700977.thop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c10700977.damcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0 and aux.damcon1(e,tp,eg,ep,ev,re,r,rp) and rp~=tp
+	return Duel.GetFieldGroupCount(tp,LOCATION_HAND,0)==0 and aux.damcon1(e,tp,eg,ep,ev,re,r,rp)
 end
 function c10700977.damtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

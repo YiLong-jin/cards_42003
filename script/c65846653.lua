@@ -1,4 +1,4 @@
---幻星集的宝剑 编号III
+--小阿卡那的宝剑 巫师
 function c65846653.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(65846653,0))
@@ -37,7 +37,7 @@ function c65846653.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function c65846653.thfilter(c,ec,e,tp,chemck,chesck)
-	return ((c:IsSetCard(0x3eb) or c:IsType(TYPE_EQUIP) and c:CheckEquipTarget(ec)) and c:CheckUniqueOnField(tp,LOCATION_SZONE) and chesck and not c:IsForbidden() or c:IsSetCard(0x3eb) and chemck and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP))
+	return ((c:IsSetCard(0x13ef) or c:IsType(TYPE_EQUIP) and c:CheckEquipTarget(ec)) and c:CheckUniqueOnField(tp,LOCATION_SZONE) and chesck and not c:IsForbidden() or c:IsSetCard(0x13ef) and chemck and c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP))
 end
 function c65846653.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local chemck=Duel.GetLocationCount(tp,LOCATION_MZONE)>0
@@ -54,7 +54,7 @@ end
 function c65846653.thop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	local a=Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and tc:IsCanBeSpecialSummoned(e,0,tp,false,false)
-	local b=(tc:CheckEquipTarget(e:GetHandler()) or tc:IsSetCard(0x3eb)) and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and not tc:IsForbidden()
+	local b=(tc:CheckEquipTarget(e:GetHandler()) or tc:IsSetCard(0x13ef)) and Duel.GetLocationCount(tp,LOCATION_SZONE)>0 and not tc:IsForbidden()
 	if not tc:IsRelateToEffect(e) then return end
 	if not a and not b then return end
 	local op=aux.SelectFromOptions(tp,

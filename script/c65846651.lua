@@ -1,4 +1,4 @@
---幻星集的宝剑 编号I
+--小阿卡那的宝剑 王牌剑士
 function c65846651.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(65846651,0))
@@ -37,7 +37,7 @@ function c65846651.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function c65846651.cfilter(c,tp)
-	return  (c:IsSetCard(0x3eb) or c:IsType(TYPE_EQUIP)) and c:IsAbleToGraveAsCost()
+	return  (c:IsSetCard(0x13ef) or c:IsType(TYPE_EQUIP)) and c:IsAbleToGraveAsCost()
 end
 function c65846651.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local loc=LOCATION_HAND+LOCATION_ONFIELD
@@ -48,7 +48,7 @@ function c65846651.thcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SendtoGrave(g,REASON_COST)
 end
 function c65846651.filter(c,ec,tp)
-	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0x3eb) and c:CheckUniqueOnField(tp,LOCATION_SZONE) and not c:IsForbidden() 
+	return c:IsType(TYPE_MONSTER) and c:IsSetCard(0x13ef) and c:CheckUniqueOnField(tp,LOCATION_SZONE) and not c:IsForbidden() 
 end
 function c65846651.eqtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65846651.filter,tp,LOCATION_DECK+LOCATION_GRAVE,0,1,nil,e:GetHandler(),tp) end
