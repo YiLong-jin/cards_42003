@@ -60,6 +60,7 @@ function c21400126.SynCondition(f1,f2,minct,maxct)
 					if max<maxc then maxc=max end
 					if minc>maxc then return false end
 				end 
+				local tp=c:GetControler()
 				if mg==nil then 
 					mg=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
 					xmg=Duel.GetMatchingGroup(c21400126.xmtfil,tp,LOCATION_GRAVE,0,nil) 
@@ -81,6 +82,7 @@ function c21400126.SynTarget(f1,f2,minct,maxct)
 					if max<maxc then maxc=max end
 					if minc>maxc then return false end
 				end
+				local tp=c:GetControler()
 				if mg==nil then 
 					mg=Duel.GetMatchingGroup(Card.IsFaceup,tp,LOCATION_MZONE,0,nil)
 					xmg=Duel.GetMatchingGroup(c21400126.xmtfil,tp,LOCATION_GRAVE,0,nil) 
