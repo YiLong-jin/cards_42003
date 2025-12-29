@@ -12,7 +12,7 @@ function c21400131.initial_effect(c)
 	e2:SetRange(LOCATION_SZONE)
 	e2:SetTargetRange(LOCATION_MZONE,0)
 	e2:SetTarget(function(e,c) 
-	return c:IsSetCard(0xb210) and c:IsLevelBelow(4) end)
+	return c:IsSetCard(0x3211) and c:IsLevelBelow(4) end)
 	e2:SetValue(1)
 	e2:SetCondition(function(e) 
 	local tp=e:GetHandlerPlayer() 
@@ -53,10 +53,10 @@ function c21400131.spcon(e,tp,eg,ep,ev,re,r,rp)
 	   and Duel.GetFlagEffect(tp,21400131+21400125)~=0  
 end 
 function c21400131.spckfil(c) 
-	return c:IsFaceup() and c:IsType(TYPE_SYNCHRO) and c:IsSetCard(0xb210)
+	return c:IsFaceup() and c:IsType(TYPE_SYNCHRO) and c:IsSetCard(0x3211)
 end 
 function c21400131.spfilter(c,e,tp) 
-	local b1=c:IsSetCard(0xb210)
+	local b1=c:IsSetCard(0x3211)
 	local b2=Duel.IsExistingMatchingCard(c21400131.spckfil,tp,LOCATION_MZONE,0,2,nil) and c:IsRace(RACE_ZOMBIE)
 	return (b1 or b2) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end

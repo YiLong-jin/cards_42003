@@ -43,7 +43,7 @@ function c21400114.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end 
 end
 function c21400114.cfilter(c)
-	return c:IsAbleToRemove() and c:IsSetCard(0xb210)
+	return c:IsAbleToRemove() and c:IsSetCard(0x3211)
 end
 function c21400114.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) and Duel.IsExistingMatchingCard(c21400114.cfilter,tp,LOCATION_HAND+LOCATION_GRAVE,0,1,e:GetHandler()) end
@@ -71,7 +71,7 @@ function c21400114.srcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) and r==REASON_SYNCHRO 
 end
 function c21400114.srfilter(c)
-	return c:IsSetCard(0xb210) and c:IsType(TYPE_TRAP) and c:IsAbleToHand()
+	return c:IsSetCard(0x3211) and c:IsType(TYPE_TRAP) and c:IsAbleToHand()
 end
 function c21400114.srtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c21400114.srfilter,tp,LOCATION_DECK,0,1,nil) end

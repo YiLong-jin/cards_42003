@@ -50,7 +50,7 @@ function c21400135.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():GetReasonPlayer()==1-tp 
 end 
 function c21400135.spfilter(c,e,tp)
-	return c:IsFaceup() and c:IsSetCard(0xb210) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsFaceup() and c:IsSetCard(0x3211) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c21400135.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(c21400135.spfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil,e,tp) end

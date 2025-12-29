@@ -129,6 +129,7 @@ function c40802000.sttg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 end
 function c40802000.stop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
+	local c=e:GetHandler() 
 	if tc:IsRelateToEffect(e) and c:IsRelateToEffect(e) then
 		Duel.SSet(tp,tc)
 		Duel.SendtoGrave(e:GetHandler(),REASON_EFFECT)

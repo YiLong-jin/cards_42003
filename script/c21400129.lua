@@ -41,7 +41,7 @@ function c21400129.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function c21400129.spfilter(c,e,tp)
-	return c:IsFaceup() and c:IsSetCard(0xb210) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsFaceup() and c:IsSetCard(0x3211) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c21400129.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(c21400129.spfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil,e,tp) end
@@ -57,7 +57,7 @@ function c21400129.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c21400129.drckfil(c,tp) 
-	return c:IsControler(tp) and c:IsSetCard(0xb210)   
+	return c:IsControler(tp) and c:IsSetCard(0x3211)   
 end 
 function c21400129.drcon(e,tp,eg,ep,ev,re,r,rp) 
 	return eg:IsExists(c21400129.drckfil,1,nil,tp)

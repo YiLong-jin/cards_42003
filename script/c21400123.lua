@@ -1,7 +1,7 @@
 --亡灵海岸旗舰-剑鱼号
 function c21400123.initial_effect(c)
 	--synchro summon
-	aux.AddSynchroProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0xb210),aux.NonTuner(Card.IsSetCard,0xb210),1)
+	aux.AddSynchroProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x3211),aux.NonTuner(Card.IsSetCard,0x3211),1)
 	c:EnableReviveLimit() 
 	--to grave 
 	local e1=Effect.CreateEffect(c)  
@@ -33,7 +33,7 @@ function c21400123.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function c21400123.tgfilter(c)
-	return c:IsSetCard(0xb210) and c:IsType(TYPE_MONSTER) and c:IsLevelAbove(5) and c:IsAbleToGrave()
+	return c:IsSetCard(0x3211) and c:IsType(TYPE_MONSTER) and c:IsLevelAbove(5) and c:IsAbleToGrave()
 end
 function c21400123.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c21400123.tgfilter,tp,LOCATION_DECK,0,1,nil) end

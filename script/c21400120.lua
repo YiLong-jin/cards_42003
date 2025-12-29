@@ -60,7 +60,7 @@ function c21400120.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return re and re:GetHandler():IsCode(21400123)
 end
 function c21400120.thfilter(c)
-	return c:IsSetCard(0xb210) and c:IsAbleToHand()
+	return c:IsSetCard(0x3211) and c:IsAbleToHand()
 end
 function c21400120.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c21400120.thfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -90,7 +90,7 @@ function c21400120.gspcon(e,tp,eg,ep,ev,re,r,rp)
 	return eg:IsExists(c21400120.gsckfil,1,nil,tp)  
 end 
 function c21400120.grmfil(c)
-	return c:IsSetCard(0xb210) and c:IsAbleToRemoveAsCost()
+	return c:IsSetCard(0x3211) and c:IsAbleToRemoveAsCost()
 end 
 function c21400120.gsptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c21400120.grmfil,tp,LOCATION_GRAVE,0,1,e:GetHandler()) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) end 

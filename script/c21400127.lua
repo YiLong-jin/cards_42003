@@ -20,7 +20,7 @@ function c21400127.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function c21400127.filter(c)
-	return c:IsLevelBelow(4) and c:IsSetCard(0xb210) and c:IsAbleToHand()
+	return c:IsLevelBelow(4) and c:IsSetCard(0x3211) and c:IsAbleToHand()
 end
 function c21400127.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c21400127.filter,tp,LOCATION_DECK,0,1,nil) end
@@ -35,7 +35,7 @@ function c21400127.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c21400127.lvfilter(c)
-	return c:IsSetCard(0x1b210) and c:IsFaceup() and c:GetLevel()>0
+	return c:IsSetCard(0x13211) and c:IsFaceup() and c:GetLevel()>0
 end
 function c21400127.lvtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and c21400127.lvfilter(chkc) end

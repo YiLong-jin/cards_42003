@@ -67,7 +67,7 @@ function c65843152.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function c65843152.distg(e,c)
-	return c:IsControler(e:GetHandlerPlayer()) and c:IsSetCard(0x162) and c:IsType(TYPE_PENDULUM) and c:IsSummonType(SUMMON_TYPE_PENDULUM)
+	return c:IsControler(e:GetHandlerPlayer()) and c:IsSetCard(0x43ef) and c:IsType(TYPE_PENDULUM) and c:IsSummonType(SUMMON_TYPE_PENDULUM)
 end
 function c65843152.pztg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

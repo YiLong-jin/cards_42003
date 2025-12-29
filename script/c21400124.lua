@@ -38,7 +38,7 @@ function c21400124.initial_effect(c)
 	c:RegisterEffect(e3)
 end
 function c21400124.mfilter1(c)
-	return c:IsSetCard(0xb210)
+	return c:IsSetCard(0x3211)
 end
 function c21400124.mfilter2(c,syncard)
 	return c:IsCode(21400118) 

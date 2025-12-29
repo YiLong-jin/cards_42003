@@ -43,7 +43,7 @@ function c21400116.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end 
 end
 function c21400116.cfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0xb210)
+	return c:IsFaceup() and c:IsSetCard(0x3211)
 end
 function c21400116.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(c21400116.cfilter,tp,LOCATION_MZONE,0,1,nil)
@@ -76,7 +76,7 @@ function c21400116.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end
 function c21400116.shpfil(c,e,tp) 
-	return c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsLevelBelow(4) and c:IsSetCard(0xb210)  
+	return c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsLevelBelow(4) and c:IsSetCard(0x3211)  
 end 
 function c21400116.shptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()

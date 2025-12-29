@@ -29,7 +29,7 @@ function c21400133.initial_effect(c)
 	c:RegisterEffect(e2)  
 end 
 function c21400133.spfilter(c,e,tp)
-	return c:IsSetCard(0xb210) and c:IsType(TYPE_SYNCHRO)
+	return c:IsSetCard(0x3211) and c:IsType(TYPE_SYNCHRO)
 end
 function c21400133.spsumfilter1(c,e,tp)
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false,POS_FACEUP,tp) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0 
@@ -126,7 +126,7 @@ function c21400133.xxtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end 
 end
 function c21400133.rthfil(c) 
-	return c:IsSetCard(0xb210) and c:IsAbleToHand()  
+	return c:IsSetCard(0x3211) and c:IsAbleToHand()  
 end 
 function c21400133.xxop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()

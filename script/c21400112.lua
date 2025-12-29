@@ -29,7 +29,7 @@ end
 function c21400112.diceop(e,tp,eg,ep,ev,re,r,rp)
 	local cc=Duel.GetCurrentChain()
 	local cid,te=Duel.GetChainInfo(cc,CHAININFO_CHAIN_ID,CHAININFO_TRIGGERING_EFFECT)
-	if te:GetHandler():IsSetCard(0xb210) then
+	if te:GetHandler():IsSetCard(0x3211) then
 		Duel.Hint(HINT_CARD,0,21400112) 
 		local dc={Duel.GetDiceResult()}
 		local ac=1

@@ -30,10 +30,10 @@ function c21400130.ditg(e,tp,eg,ep,ev,re,r,rp,chk)
 	Duel.SetOperationInfo(0,CATEGORY_DICE,nil,0,tp,1)
 end
 function c21400130.thfil(c) 
-	return c:IsAbleToHand() and c:IsSetCard(0xb210)   
+	return c:IsAbleToHand() and c:IsSetCard(0x3211)   
 end 
 function c21400130.plfil(c) 
-	return not c:IsForbidden() and c:IsType(TYPE_MONSTER) and c:IsSetCard(0xb210) and (c:IsLocation(LOCATION_DECK) or c:IsFaceup())
+	return not c:IsForbidden() and c:IsType(TYPE_MONSTER) and c:IsSetCard(0x3211) and (c:IsLocation(LOCATION_DECK) or c:IsFaceup())
 end 
 function c21400130.diop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler() 
@@ -66,7 +66,7 @@ function c21400130.diop(e,tp,eg,ep,ev,re,r,rp)
 	end 
 end 
 function c21400130.thfilter(c,e,tp)
-	return c:IsFaceup() and c:IsSetCard(0xb210) and not c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsFaceup() and c:IsSetCard(0x3211) and not c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c21400130.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return e:GetHandler():IsAbleToRemove() end

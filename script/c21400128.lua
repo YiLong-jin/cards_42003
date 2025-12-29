@@ -20,10 +20,10 @@ function c21400128.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function c21400128.filter(c,tp)
-	return c:IsSetCard(0xb210) and c:IsType(TYPE_MONSTER) and c:IsAbleToRemove() 
+	return c:IsSetCard(0x3211) and c:IsType(TYPE_MONSTER) and c:IsAbleToRemove() 
 end
 function c21400128.spfil(c,e,tp)
-	return c:IsSetCard(0xb210) and c:IsLevelAbove(5) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsSetCard(0x3211) and c:IsLevelAbove(5) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c21400128.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c21400128.filter,tp,LOCATION_GRAVE+LOCATION_HAND+LOCATION_MZONE,0,1,nil,tp) end
@@ -39,7 +39,7 @@ function c21400128.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c21400128.lvfilter(c)
-	return c:IsSetCard(0x1b210) and c:IsFaceup() and c:GetLevel()>0
+	return c:IsSetCard(0x13211) and c:IsFaceup() and c:GetLevel()>0
 end
 function c21400128.lvtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and c21400128.lvfilter(chkc) end

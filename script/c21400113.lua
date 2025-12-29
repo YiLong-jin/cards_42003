@@ -43,7 +43,7 @@ function c21400113.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end 
 end
 function c21400113.costfilter(c)
-	return c:IsSetCard(0xb210) and c:IsType(TYPE_MONSTER) and c:IsAbleToGraveAsCost()
+	return c:IsSetCard(0x3211) and c:IsType(TYPE_MONSTER) and c:IsAbleToGraveAsCost()
 end
 function c21400113.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c21400113.costfilter,tp,LOCATION_DECK,0,1,nil) and c21400113.cost(e,tp,eg,ep,ev,re,r,rp,0) end
@@ -76,7 +76,7 @@ function c21400113.srcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) and r==REASON_SYNCHRO 
 end
 function c21400113.srfilter(c)
-	return c:IsSetCard(0xb210) and c:IsType(TYPE_CONTINUOUS) and c:IsType(TYPE_SPELL) and c:IsAbleToHand()
+	return c:IsSetCard(0x3211) and c:IsType(TYPE_CONTINUOUS) and c:IsType(TYPE_SPELL) and c:IsAbleToHand()
 end
 function c21400113.srtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c21400113.srfilter,tp,LOCATION_DECK,0,1,nil) end

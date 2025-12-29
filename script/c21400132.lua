@@ -2,7 +2,7 @@
 function c21400132.initial_effect(c)
 	--Activate
 	local e1=Effect.CreateEffect(c)
-	e1:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH)
+	e1:SetCategory(CATEGORY_TOHAND)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
 	e1:SetCode(EVENT_FREE_CHAIN)
 	e1:SetOperation(c21400132.activate)
@@ -32,7 +32,7 @@ function c21400132.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function c21400132.filter(c)
-	return c:IsSetCard(0xb210) and c:IsAbleToRemove()
+	return c:IsSetCard(0x3211) and c:IsAbleToRemove()
 end
 function c21400132.activate(e,tp,eg,ep,ev,re,r,rp)
 	local g=Duel.GetMatchingGroup(c21400132.filter,tp,LOCATION_DECK+LOCATION_HAND,0,nil)

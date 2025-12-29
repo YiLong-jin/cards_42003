@@ -1,7 +1,7 @@
 --亡灵海岸旗舰-血腥掠夺者号
 function c21400125.initial_effect(c)
 	--synchro summon
-	aux.AddSynchroProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0xb210),aux.FilterBoolFunction(Card.IsCode,21400119),1,1)
+	aux.AddSynchroProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x3211),aux.FilterBoolFunction(Card.IsCode,21400119),1,1)
 	c:EnableReviveLimit() 
 	--to grave 
 	local e1=Effect.CreateEffect(c)  
@@ -63,7 +63,7 @@ function c21400125.xspcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)  
 end 
 function c21400125.xspfilter(c,e,tp)
-	return c:IsFaceup() and c:IsSetCard(0xb210) and not c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsFaceup() and c:IsSetCard(0x3211) and not c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c21400125.xsptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>=2 and not Duel.IsPlayerAffectedByEffect(tp,59822133) and Duel.IsExistingMatchingCard(c21400125.xspfilter,tp,LOCATION_GRAVE,0,2,nil,e,tp) end

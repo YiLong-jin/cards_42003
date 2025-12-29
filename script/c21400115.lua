@@ -46,7 +46,7 @@ function c21400115.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end 
 end
 function c21400115.thfilter(c)
-	return c:IsSetCard(0xb210) and c:IsAbleToHand()
+	return c:IsSetCard(0x3211) and c:IsAbleToHand()
 end
 function c21400115.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c21400115.thfilter,tp,LOCATION_DECK,0,1,nil) end

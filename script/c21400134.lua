@@ -32,7 +32,7 @@ function c21400134.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function c21400134.rmfil(c) 
-	return c:IsAbleToRemove() and c:IsSetCard(0xb210) and c:IsType(TYPE_SYNCHRO)  
+	return c:IsAbleToRemove() and c:IsSetCard(0x3211) and c:IsType(TYPE_SYNCHRO)  
 end 
 function c21400134.negtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and aux.NegateAnyFilter(chkc) end
@@ -69,13 +69,13 @@ function c21400134.spcon(e,tp,eg,ep,ev,re,r,rp)
 end
 function c21400134.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsPlayerCanSpecialSummonMonster(tp,21400134,0xb210,TYPES_NORMAL_TRAP_MONSTER,1800,1800,4,RACE_ZOMBIE,ATTRIBUTE_WATER) end
+	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsPlayerCanSpecialSummonMonster(tp,21400134,0x3211,TYPES_NORMAL_TRAP_MONSTER,1800,1800,4,RACE_ZOMBIE,ATTRIBUTE_WATER) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,c,1,0,0)
 end
 function c21400134.spop(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and Duel.IsPlayerCanSpecialSummonMonster(tp,21400134,0xb210,TYPES_NORMAL_TRAP_MONSTER,1800,1800,4,RACE_ZOMBIE,ATTRIBUTE_WATER) then
+	if c:IsRelateToEffect(e) and Duel.IsPlayerCanSpecialSummonMonster(tp,21400134,0x3211,TYPES_NORMAL_TRAP_MONSTER,1800,1800,4,RACE_ZOMBIE,ATTRIBUTE_WATER) then
 		c:AddMonsterAttribute(TYPE_NORMAL)
 		Duel.SpecialSummon(c,0,tp,tp,true,false,POS_FACEUP) 
 	end

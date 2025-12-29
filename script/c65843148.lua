@@ -38,7 +38,7 @@ function c65843148.spfilter(c,e,tp)
 		and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
 end
 function c65843148.penfilter(c)
-	return c:IsSetCard(0x43e8) and c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
+	return c:IsSetCard(0x43ef) and c:IsType(TYPE_PENDULUM) and not c:IsForbidden()
 end
 function c65843148.zones(e,tp,eg,ep,ev,re,r,rp)
 	local zone=0xff

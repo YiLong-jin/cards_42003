@@ -20,7 +20,7 @@ function c65843145.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function c65843145.thcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(Card.IsSetCard,tp,LOCATION_PZONE,0,1,e:GetHandler(),0x43e8)
+	return Duel.IsExistingMatchingCard(Card.IsSetCard,tp,LOCATION_PZONE,0,1,e:GetHandler(),0x43ef)
 end
 function c65843145.filter(c)
 	return c:IsSetCard(0x43ef) and c:IsAbleToHand()

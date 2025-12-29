@@ -62,7 +62,7 @@ function c21400117.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end 
 end
 function c21400117.cfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0xb210) and c:IsType(TYPE_SYNCHRO) 
+	return c:IsFaceup() and c:IsSetCard(0x3211) and c:IsType(TYPE_SYNCHRO) 
 end
 function c21400117.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(c21400117.cfilter,tp,LOCATION_MZONE,0,1,nil)
@@ -88,7 +88,7 @@ function c21400117.spop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RegisterEffect(e1,tp)
 end 
 function c21400117.thfilter(c)
-	return c:IsSetCard(0xb210) and c:IsFaceup() and c:IsAbleToHand()
+	return c:IsSetCard(0x3211) and c:IsFaceup() and c:IsAbleToHand()
 end
 function c21400117.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c21400117.thfilter,tp,LOCATION_REMOVED,0,1,nil) end

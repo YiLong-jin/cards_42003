@@ -20,7 +20,7 @@ function c65843144.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function c65843144.cfilter(c)
-	return c:IsSetCard(0x43e8)
+	return c:IsSetCard(0x43ef)
 end
 function c65843144.srcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(c65843144.cfilter,tp,LOCATION_PZONE,0,1,e:GetHandler())

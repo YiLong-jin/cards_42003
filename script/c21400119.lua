@@ -52,7 +52,7 @@ function c21400119.cost(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end 
 end
 function c21400119.filter(c)
-	return c:IsFaceup() and c:IsSetCard(0xb210) and not c:IsType(TYPE_TUNER)
+	return c:IsFaceup() and c:IsSetCard(0x3211) and not c:IsType(TYPE_TUNER)
 end
 function c21400119.tg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsControler(tp) and chkc:IsLocation(LOCATION_MZONE) and c21400119.filter(chkc) end
@@ -86,7 +86,7 @@ function c21400119.setcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	aux.bfgcost(e,tp,eg,ep,ev,re,r,rp,1)
 end
 function c21400119.setfilter(c)
-	return c:IsSetCard(0xb210) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSSetable()
+	return c:IsSetCard(0x3211) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSSetable()
 end
 function c21400119.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c21400119.setfilter,tp,LOCATION_DECK,0,1,nil) end

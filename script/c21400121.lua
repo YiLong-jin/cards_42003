@@ -1,7 +1,7 @@
 --亡灵海岸-海祭司
 function c21400121.initial_effect(c)
 	--synchro summon
-	aux.AddSynchroProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0xb210),aux.NonTuner(Card.IsSetCard,0xb210),1,1)
+	aux.AddSynchroProcedure(c,aux.FilterBoolFunction(Card.IsSetCard,0x3211),aux.NonTuner(Card.IsSetCard,0x3211),1,1)
 	c:EnableReviveLimit() 
 	--to grave 
 	local e1=Effect.CreateEffect(c)  
@@ -37,7 +37,7 @@ function c21400121.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)
 end
 function c21400121.tgfilter(c)
-	return c:IsSetCard(0xb210) and c:IsType(TYPE_MONSTER) and c:IsAbleToGrave()
+	return c:IsSetCard(0x3211) and c:IsType(TYPE_MONSTER) and c:IsAbleToGrave()
 end
 function c21400121.tgtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c21400121.tgfilter,tp,LOCATION_DECK,0,1,nil) end
@@ -52,7 +52,7 @@ function c21400121.tgop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c21400121.spfilter(c,e,tp)
-	return c:IsFaceup() and c:IsSetCard(0xb210) and not c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
+	return c:IsFaceup() and c:IsSetCard(0x3211) and not c:IsType(TYPE_SYNCHRO) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function c21400121.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(c21400121.spfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil,e,tp) end
