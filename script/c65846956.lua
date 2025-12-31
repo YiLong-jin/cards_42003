@@ -16,7 +16,7 @@ function c65846956.initial_effect(c)
 	aux.RegisterMergedDelayedEvent(c,65846956,EVENT_SPSUMMON_SUCCESS)
 end
 function c65846956.mat(c)
-	return c:IsSetCard(0x23e0) and not c:IsLinkType(TYPE_LINK)
+	return c:IsSetCard(0x23ef) and not c:IsLinkType(TYPE_LINK)
 end
 function c65846956.cfilter(c,e,se)
 	return c:IsFaceup() and c:IsType(TYPE_XYZ) and c:IsCanBeEffectTarget(e) and (se==nil or c:GetReasonEffect()~=se)
