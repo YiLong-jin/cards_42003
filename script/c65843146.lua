@@ -26,7 +26,7 @@ function c65843146.thfilter0(c)
 	return c:IsSetCard(0x43ef) and c:IsAbleToHand() and c:IsType(0x6)
 end
 function c65843146.thfilter1(c)
-	return c:IsType(TYPE_PENDULUM) and c:IsAbleToHand() and c:IsSetCard(0x43e8)
+	return c:IsType(TYPE_PENDULUM) and c:IsAbleToHand() and c:IsSetCard(0x43ef)
 end
 function c65843146.thfilter2(c)
 	return c:IsCode(65843146) and c:IsAbleToHand()

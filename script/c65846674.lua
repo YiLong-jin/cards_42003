@@ -3,7 +3,7 @@ local m=65846674
 local cm=_G["c"..m]
 function cm.initial_effect(c)
 	aux.AddCodeList(c,65846670)
-	aux.AddSynchroProcedure(c,aux.FilterBoolFunction(Card.IsCode,65846670),aux.NonTuner(Card.IsRace,RACE_PSYCHO),1)
+	aux.AddSynchroMixProcedure(c,c65846674.matfilter1,nil,nil,c65846674.matfilter2,1,99)
 	c:EnableReviveLimit()
 	local e0=Effect.CreateEffect(c)
 	e0:SetDescription(aux.Stringid(m,1))
@@ -42,6 +42,12 @@ function cm.initial_effect(c)
 	e3:SetOperation(cm.ddop)
 	c:RegisterEffect(e3)
 	
+end
+function c65846674.matfilter1(c,syncard)
+	return c:IsCode(65846670)
+end
+function c65846674.matfilter2(c,syncard)
+	return c:IsNotTuner(syncard) and c:IsRace(RACE_PSYCHO)
 end
 function cm.tgcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetTurnPlayer()~=tp

@@ -22,7 +22,7 @@ function this.initial_effect(c)
 end
 this.fusion_effect=true
 function this.thfilter(c)
-	return c:IsSetCard(0x97a3) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
+	return c:IsSetCard(0x97a3) and c:IsAbleToHand()
 end
 function this.filter(c,e,tp,m,f,chkf)
 	return c:IsType(TYPE_FUSION) and (not f or f(c))
