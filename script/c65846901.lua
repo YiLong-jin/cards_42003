@@ -30,7 +30,7 @@ function c65846901.activate(e,tp,eg,ep,ev,re,r,rp)
 	local ag=Duel.GetMatchingGroup(c65846901.thfilter,tp,LOCATION_DECK,0,nil)
 	if ag:GetClassCount(Card.GetCode)<2 then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local sg=ag:SelectSubGroup(tp,aux.dabcheck,false,2,2)
+	local sg=ag:SelectSubGroup(tp,aux.dncheck,false,2,2)
 	Duel.SendtoHand(sg,nil,REASON_EFFECT)
 	Duel.ConfirmCards(1-tp,sg)
 end
