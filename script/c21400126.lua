@@ -127,10 +127,18 @@ end
 function c21400126.desop(e,tp,eg,ep,ev,re,r,rp)   
 	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToEffect(e) and Duel.Destroy(tc,REASON_EFFECT)~=0 then 
+	if tc:IsRelateToEffect(e) and Duel.Destroy(tc,REASON_EFFECT) then 
+		local e1=Effect.CreateEffect(c)
+		e1:SetType(EFFECT_TYPE_FIELD)
+		e1:SetCode(EFFECT_DISABLE)
+		e1:SetTargetRange(LOCATION_ONFIELD,LOCATION_ONFIELD)
+		e1:SetTarget(c21400126.distg)
+		e1:SetLabelObject(tc)
+		e1:SetReset(RESET_PHASE+PHASE_END)
+		Duel.RegisterEffect(e1,tp)
 		local e2=Effect.CreateEffect(c)
 		e2:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
-		e2:SetCode(EVENT_CHAINING)
+		e2:SetCode(EVENT_CHAIN_SOLVING)
 		e2:SetCondition(c21400126.discon)
 		e2:SetOperation(c21400126.disop)
 		e2:SetLabelObject(tc)
@@ -138,13 +146,17 @@ function c21400126.desop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.RegisterEffect(e2,tp)
 	end
 end
+function c21400126.distg(e,c)
+	local tc=e:GetLabelObject()
+	return c:IsCode(tc:GetCode()) 
+end
 function c21400126.discon(e,tp,eg,ep,ev,re,r,rp)
 	local tc=e:GetLabelObject()
 	return re:GetHandler():IsCode(tc:GetCode())
 end
 function c21400126.disop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Hint(HINT_CARD,0,21400126)
-	Duel.NegateActivation(ev)
+	Duel.NegateEffect(ev)
 end
 function c21400126.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsReason(REASON_EFFECT) and e:GetHandler():GetReasonPlayer()==1-tp 
