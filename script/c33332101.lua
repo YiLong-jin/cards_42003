@@ -1,6 +1,6 @@
 --澄炎之霜语 克利斯
 local s,id,o=GetID()
-function c33332101.initial_effect(c)
+function s.initial_effect(c)
 	--pendulum summon
 	aux.EnablePendulumAttribute(c)
 	--pendulum set
@@ -19,21 +19,21 @@ function c33332101.initial_effect(c)
 	e1:SetProperty(EFFECT_FLAG_DELAY+EFFECT_FLAG_DAMAGE_STEP)
 	e1:SetCode(EVENT_DESTROYED)
 	e1:SetRange(LOCATION_EXTRA)
-	e1:SetCountLimit(1,33332101)
-	e1:SetCondition(c33332101.spcon)
-	e1:SetTarget(c33332101.sptg)
-	e1:SetOperation(c33332101.spop)
+	e1:SetCountLimit(1,id)
+	e1:SetCondition(s.spcon)
+	e1:SetTarget(s.sptg)
+	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1) 
 	--spsummon
 	local e3=Effect.CreateEffect(c)
-	e3:SetDescription(aux.Stringid(33332101,2))
+	e3:SetDescription(aux.Stringid(id,2))
 	e3:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e3:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e3:SetCode(EVENT_SUMMON_SUCCESS)
 	e3:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
 	e3:SetCountLimit(1,id+1000000)
-	e3:SetTarget(c33332101.gsptg)
-	e3:SetOperation(c33332101.gspop)
+	e3:SetTarget(s.gsptg)
+	e3:SetOperation(s.gspop)
 	c:RegisterEffect(e3)
 	local e4=e3:Clone()
 	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
@@ -58,41 +58,41 @@ function s.penop(e,tp,eg,ep,ev,re,r,rp)
 		end
 	end
 end
-function c33332101.cfilter(c,tp)
+function s.cfilter(c,tp)
 	return c:IsReason(REASON_BATTLE+REASON_EFFECT) and c:IsPreviousLocation(LOCATION_ONFIELD) and c:IsPreviousControler(tp) and c:IsSetCard(0x6567)
 end
-function c33332101.spcon(e,tp,eg,ep,ev,re,r,rp)
-	return eg:IsExists(c33332101.cfilter,1,nil,tp)
+function s.spcon(e,tp,eg,ep,ev,re,r,rp)
+	return eg:IsExists(s.cfilter,1,nil,tp)
 end
-function c33332101.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
+function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and e:GetHandler():IsCanBeSpecialSummoned(e,0,tp,false,false) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,e:GetHandler(),1,0,0)
 end 
-function c33332101.sthfil(c) 
+function s.sthfil(c) 
 	return c:IsFaceup() and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsType(TYPE_PENDULUM) and c:IsAbleToHand()  
 end 
-function c33332101.spop(e,tp,eg,ep,ev,re,r,rp)
+function s.spop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
-	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)~=0 and Duel.IsExistingMatchingCard(c33332101.sthfil,tp,LOCATION_GRAVE+LOCATION_EXTRA,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(33332101,0)) then
+	if c:IsRelateToEffect(e) and Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP)~=0 and Duel.IsExistingMatchingCard(s.sthfil,tp,LOCATION_GRAVE+LOCATION_EXTRA,0,1,nil) and Duel.SelectYesNo(tp,aux.Stringid(id,0)) then
 		Duel.BreakEffect() 
-		local sg=Duel.SelectMatchingCard(tp,c33332101.sthfil,tp,LOCATION_GRAVE+LOCATION_EXTRA,0,1,1,nil)  
+		local sg=Duel.SelectMatchingCard(tp,s.sthfil,tp,LOCATION_GRAVE+LOCATION_EXTRA,0,1,1,nil)  
 		Duel.SendtoHand(sg,nil,REASON_EFFECT) 
 		Duel.ConfirmCards(1-tp,sg)  
 	end 
 end 
-function c33332101.gspfil(c,e,tp) 
+function s.gspfil(c,e,tp) 
 	return c:IsCanBeSpecialSummoned(e,0,tp,false,false) and c:IsSetCard(0x6567)  
 end 
-function c33332101.gsptg(e,tp,eg,ep,ev,re,r,rp,chk) 
+function s.gsptg(e,tp,eg,ep,ev,re,r,rp,chk) 
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
-		and Duel.IsExistingMatchingCard(c33332101.gspfil,tp,LOCATION_HAND+LOCATION_PZONE,0,1,nil,e,tp) end
+		and Duel.IsExistingMatchingCard(s.gspfil,tp,LOCATION_HAND+LOCATION_PZONE,0,1,nil,e,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND+LOCATION_PZONE)
 end 
-function c33332101.gspop(e,tp,eg,ep,ev,re,r,rp)
+function s.gspop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler() 
-	local g=Duel.GetMatchingGroup(c33332101.gspfil,tp,LOCATION_HAND+LOCATION_PZONE,0,nil,e,tp) 
+	local g=Duel.GetMatchingGroup(s.gspfil,tp,LOCATION_HAND+LOCATION_PZONE,0,nil,e,tp) 
 	if g:GetCount()>0 then 
 		local sg=g:Select(tp,1,1,nil) 
 		Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)   
