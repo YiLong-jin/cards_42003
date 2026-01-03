@@ -62,25 +62,25 @@ function c99971060.checkop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetFlagEffect(tp,99971060)
 	c:SetHint(CHINT_TURN,ct)
 	Duel.RegisterFlagEffect(tp,99971060,RESET_PHASE+PHASE_END,0,51-ct)
-	if ct>=5 then
+	if ct==5 then
 	-- 第5回合时赋予效果
 		Duel.Hint(HINT_CARD,1-tp,id)
 		Duel.RegisterFlagEffect(tp,99971061,nil,0,98)
 		e:GetHandler():RegisterFlagEffect(0,nil,EFFECT_FLAG_CLIENT_HINT,2,0,aux.Stringid(99971060,3))
 	end
-	if ct>=10 then
+	if ct==10 then
 	-- 第10回合时赋予效果
 		Duel.Hint(HINT_CARD,1-tp,id)
 		Duel.RegisterFlagEffect(tp,99971062,nil,0,98)
 		e:GetHandler():RegisterFlagEffect(0,nil,EFFECT_FLAG_CLIENT_HINT,2,0,aux.Stringid(99971060,4))
 	end
-		if ct>=20 then
+		if ct==20 then
 	-- 第20回合时赋予效果
 		Duel.Hint(HINT_CARD,1-tp,id)
 		Duel.RegisterFlagEffect(tp,99971063,nil,0,98)
 		e:GetHandler():RegisterFlagEffect(0,nil,EFFECT_FLAG_CLIENT_HINT,2,0,aux.Stringid(99971060,5))
 	end
-			if ct>=50 then
+			if ct==50 then
 	-- 第50回合时赋予效果
 		Duel.Hint(HINT_CARD,1-tp,id)
 		Duel.RegisterFlagEffect(tp,99971064,nil,0,98)

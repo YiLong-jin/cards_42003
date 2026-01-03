@@ -41,7 +41,7 @@ function s.initial_effect(c)
 end
 
 function s.pubcon1(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetFlagEffect(tp,99971209)==0
+	return Duel.GetFlagEffect(tp,99971209)~=0
 end
 -- 效果①：持续公开
 function s.pubcon(e,tp,eg,ep,ev,re,r,rp)

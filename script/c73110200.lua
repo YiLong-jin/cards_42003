@@ -42,11 +42,14 @@ end
 function s.spcon(e,c)
 	if c==nil then return true end
 	local tp = c:GetControler()
+	if Duel.GetLocationCountFromEx(tp, tp, nil, c) < 1 then
+		return false
+	end
 
 	local pc1 = Duel.GetFieldCard(tp,LOCATION_PZONE,0)
 	local pc2 = Duel.GetFieldCard(tp,LOCATION_PZONE,1)
 	if not pc1 or not pc2 then return false end
-	if not ((pc1:IsCode(3048768) and pc2:IsCode(30432463)) or 
+	if not ((pc1:IsCode(3048768) and pc2:IsCode(30432463)) or
 			(pc1:IsCode(30432463) and pc2:IsCode(3048768))) then
 		return false
 	end

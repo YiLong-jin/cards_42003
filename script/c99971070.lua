@@ -53,7 +53,7 @@ function s.initial_effect(c)
 	e22:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e22:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e22:SetProperty(EFFECT_FLAG_CARD_TARGET+EFFECT_FLAG_DELAY)
-			e22:SetCondition(s.pubcon2)
+	e22:SetCondition(s.pubcon2)
 	e22:SetTarget(s.destg)
 	e22:SetOperation(s.desop)
 	c:RegisterEffect(e22)  -- 注册e2
@@ -102,10 +102,10 @@ function c99971070.checkop(e,tp,eg,ep,ev,re,r,rp)
 	local ct=Duel.GetFlagEffect(tp,99971070)
 	c:SetHint(CHINT_TURN,ct)
 	Duel.RegisterFlagEffect(tp,99971070,RESET_PHASE+PHASE_END,0,5-ct)
-	if ct>=1 then
+	if ct==1 then
 	-- 第1回合时赋予效果
 	--spsummon
-		Duel.RegisterFlagEffect(tp,99971078,nil,0,98)
+	Duel.RegisterFlagEffect(tp,99971078,nil,0,98)
 	e:GetHandler():RegisterFlagEffect(0,nil,EFFECT_FLAG_CLIENT_HINT,2,0,aux.Stringid(99971070,4))
 	end
 	if ct>=4 then
@@ -113,7 +113,7 @@ function c99971070.checkop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Hint(HINT_CARD,1-tp,id)
 	-- 特殊召唤时破坏对方怪兽效果（从e2开始）
 		Duel.RegisterFlagEffect(tp,99971079,nil,0,98)
-	e:GetHandler():RegisterFlagEffect(0,nil,EFFECT_FLAG_CLIENT_HINT,2,0,aux.Stringid(99971070,5))
+		e:GetHandler():RegisterFlagEffect(0,nil,EFFECT_FLAG_CLIENT_HINT,2,0,aux.Stringid(99971070,5))
 	
 		c:ResetFlagEffect(1082946)
 		c:ResetFlagEffect(99971070)
