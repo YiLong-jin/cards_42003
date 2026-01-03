@@ -28,14 +28,14 @@ function c14003154.initial_effect(c)
 	e1:SetOperation(c14003154.synop)
 	c:RegisterEffect(e1)
    --hand synchro
-	local e3=Effect.CreateEffect(c)
-	e3:SetType(EFFECT_TYPE_SINGLE)
-	e3:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_SPSUM_PARAM)
-	e3:SetCondition(c14003154.syncon)
-	e3:SetCode(EFFECT_HAND_SYNCHRO)
-	e3:SetTargetRange(0,1)
-	c:RegisterEffect(e3)
- 
+ 	local e0=Effect.CreateEffect(c)
+	e0:SetType(EFFECT_TYPE_SINGLE)
+	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_SPSUM_PARAM)
+	e0:SetCondition(c14003154.syncon)
+	e0:SetCode(EFFECT_HAND_SYNCHRO)
+	e0:SetTargetRange(0,1)
+	e0:SetTarget(c14003154.tfilter)
+	c:RegisterEffect(e0)
 
 	--draw
 	local e5=Effect.CreateEffect(c)
@@ -95,9 +95,12 @@ end
 
 
 
-
+function c14003154.tfilter(e,c)
+	return c:IsSetCard(0x417)
+end
 function c14003154.synfilter(c,syncard,tuner,f)
-	return (c:IsFaceup() or c:IsLocation(LOCATION_HAND)) and c:IsSetCard(0x417) and c:IsCanBeSynchroMaterial(syncard,tuner) and (f==nil or f(c,syncard))
+	if c:IsLocation(LOCATION_HAND) and not c:IsSetCard(0x417) then return false end 
+	return c:IsFaceupEx() and c:IsCanBeSynchroMaterial(syncard,tuner) and (f==nil or f(c,syncard))
 end
 function c14003154.syncheck(c,g,mg,tp,lv,syncard,minc,maxc)
 	g:AddCard(c)
@@ -112,6 +115,7 @@ function c14003154.syngoal(g,tp,lv,syncard,minc,ct)
 		and g:CheckWithSumEqual(Card.GetSynchroLevel,lv,ct,ct,syncard)
 		and Duel.GetLocationCountFromEx(tp,tp,g,syncard)>0
 		and g:FilterCount(Card.IsLocation,nil,LOCATION_HAND)<=1
+		and aux.MustMaterialCheck(g,tp,EFFECT_MUST_BE_SMATERIAL)
 end
 function c14003154.syncon(e)
 	return e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)
@@ -124,7 +128,9 @@ function c14003154.syntg(e,syncard,f,min,max)
 	local lv=syncard:GetLevel()
 	if lv<=c:GetLevel() then return false end
 	local g=Group.FromCards(c)
-	local mg=Duel.GetMatchingGroup(c14003154.synfilter,tp,LOCATION_MZONE+LOCATION_HAND,LOCATION_MZONE,c,syncard,c,f)
+	local mg=Duel.GetSynchroMaterial(tp):Filter(c14003154.synfilter,c,syncard,c,f)
+	local exg=Duel.GetMatchingGroup(c14003154.synfilter,tp,LOCATION_HAND,0,c,syncard,c,f)
+	mg:Merge(exg)
 	return mg:IsExists(c14003154.syncheck,1,g,g,mg,tp,lv,syncard,minc,maxc)
 end
 function c14003154.synop(e,tp,eg,ep,ev,re,r,rp,syncard,f,min,max)
@@ -133,7 +139,9 @@ function c14003154.synop(e,tp,eg,ep,ev,re,r,rp,syncard,f,min,max)
 	local c=e:GetHandler()
 	local lv=syncard:GetLevel()
 	local g=Group.FromCards(c)
-	local mg=Duel.GetMatchingGroup(c14003154.synfilter,tp,LOCATION_MZONE+LOCATION_HAND,LOCATION_MZONE,c,syncard,c,f)
+	local mg=Duel.GetSynchroMaterial(tp):Filter(c14003154.synfilter,c,syncard,c,f)
+	local exg=Duel.GetMatchingGroup(c14003154.synfilter,tp,LOCATION_HAND,0,c,syncard,c,f)
+	mg:Merge(exg)
 	for i=1,maxc do
 		local cg=mg:Filter(c14003154.syncheck,g,g,mg,tp,lv,syncard,minc,maxc)
 		if cg:GetCount()==0 then break end
