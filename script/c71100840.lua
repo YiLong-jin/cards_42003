@@ -44,8 +44,8 @@ function this.initial_effect(c)
 	e5:SetOperation(this.ntrop)
 	c:RegisterEffect(e5)
 end
-function this.efgcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(function(c)return c:IsFaceup() and c:IsSetCard(0xc7a3)end,tp,LOCATION_MZONE,0,1,nil)
+function this.efgcon(e)
+	return Duel.IsExistingMatchingCard(function(c)return c:IsFaceup() and c:IsSetCard(0xc7a3)end,e:GetOwnerPlayer(),LOCATION_MZONE,0,1,nil)
 end
 function this.efilter(e,te)
 	return te:IsActiveType(TYPE_MONSTER)
