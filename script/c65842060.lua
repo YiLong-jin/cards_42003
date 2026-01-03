@@ -52,6 +52,7 @@ function c65842060.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	else
 		op=Duel.SelectOption(tp,aux.Stringid(65842060,2))+1
 	end
+	e:SetLabel(op)
 end
 function c65842060.operation(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
