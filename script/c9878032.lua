@@ -29,7 +29,6 @@ function c9878032.initial_effect(c)
 	e3:SetProperty(EFFECT_FLAG_DELAY)
 	e3:SetCode(EVENT_SPSUMMON_SUCCESS)
 	e3:SetCountLimit(1,9878032)
-	e3:SetCondition(c9878032.descon)
 	e3:SetTarget(c9878032.destg)
 	e3:SetOperation(c9878032.desop)
 	c:RegisterEffect(e3)
@@ -51,9 +50,6 @@ function c9878032.fusfilter2(c)
 end
 
 
-function c9878032.descon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsSummonType(SUMMON_TYPE_FUSION)
-end 
 function c9878032.destg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(nil,tp,0,LOCATION_ONFIELD,nil)
 	if chk==0 then return #g>0 end
