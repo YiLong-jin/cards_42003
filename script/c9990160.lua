@@ -24,7 +24,7 @@ function c9990160.cfilter(c)
 	return c:IsFaceup() and c:IsSetCard(0x669) and (c:IsType(TYPE_LINK) or c:IsType(TYPE_XYZ))
 end
 function c9990160.handcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsExistingMatchingCard(c9990160.cfilter,tp,LOCATION_MZONE,0,1,nil) and Duel.GetTurnPlayer()==e:GetOwnerPlayer()
+	return Duel.IsExistingMatchingCard(c9990160.cfilter,e:GetHandlerPlayer(),LOCATION_MZONE,0,1,nil)
 end
 function c9990160.negtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsOnField() and aux.disfilter1(chkc) end

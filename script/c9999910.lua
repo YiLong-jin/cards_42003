@@ -1,7 +1,7 @@
 --逐火之蛾的过去 雷电芽衣
 function c9999910.initial_effect(c)
 
-	aux.AddLinkProcedure(c,aux.FilterBoolFunction(Card.IsLinkType,TYPE_EFFECT),2,99,c9999910.lcheck)
+	aux.AddLinkProcedure(c,nil,2,2,c9999910.lcheck)
 	c:EnableReviveLimit()
 
 
