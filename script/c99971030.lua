@@ -135,7 +135,7 @@ function s.turnop(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local g=Duel.GetFieldGroup(tp,LOCATION_HAND,0)
 	if #g>0 and Duel.SendtoDeck(g,nil,SEQ_DECKSHUFFLE,REASON_EFFECT)>0 then
-					Duel.RegisterFlagEffect(tp,99971035,nil,0,98)
+		Duel.RegisterFlagEffect(tp,99971035,RESET_PHASE+PHASE_END,0,1)
 		Duel.ShuffleDeck(tp)
 		Duel.Draw(tp,5,REASON_EFFECT)
 		--增幅*3

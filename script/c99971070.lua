@@ -44,6 +44,7 @@ function s.initial_effect(c)
 		e12:SetRange(LOCATION_HAND+LOCATION_DECK)
 		e12:SetCountLimit(1,99971075)
 		e12:SetCondition(s.pubcon1)
+		e12:SetValue(SUMMON_VALUE_SELF)
 		c:RegisterEffect(e12)
 		
 			-- 特殊召唤时破坏对方怪兽效果（从e2开始）
@@ -58,8 +59,10 @@ function s.initial_effect(c)
 	e22:SetOperation(s.desop)
 	c:RegisterEffect(e22)  -- 注册e2
 end
-function s.pubcon1(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetFlagEffect(tp,99971078)~=0
+function s.pubcon1(e,c)
+	if c==nil then return true end
+		local tp=c:GetControler()
+	return Duel.GetFlagEffect(tp,99971078)~=0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 end
 function s.pubcon2(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetFlagEffect(tp,99971079)~=0 and Duel.GetFlagEffect(tp,99971075)==0

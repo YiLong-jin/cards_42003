@@ -74,7 +74,7 @@ function c65843145.retcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(c65843145.srfilter,tp,LOCATION_REMOVED+LOCATION_GRAVE,0,1,nil)
 end
 function c65843145.retop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.SelectEffectYesNo(tp,e:GetHandler(),aux.Stringid(65843145,2)) then
+	if Duel.SelectYesNo(tp,aux.Stringid(65843145,2)) then
 		Duel.Hint(HINT_CARD,0,65843145)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
 		local tc=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(c65843145.srfilter),tp,LOCATION_REMOVED+LOCATION_GRAVE,0,1,1,nil):GetFirst()

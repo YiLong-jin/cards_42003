@@ -101,6 +101,7 @@ function c99971190.checkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function s.activate1(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
 	local tc=Duel.GetFirstTarget()
 		Duel.RegisterFlagEffect(tp,99971195,RESET_PHASE+PHASE_END,0,1)
 	if tc and tc:IsRelateToEffect(e) and tc:IsFaceup() then
