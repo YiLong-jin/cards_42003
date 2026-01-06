@@ -98,7 +98,7 @@ function c99971170.filter1(c,code)
 end
 function s.filter3(c)
 	return c:IsSetCard(0x67f) and (c:IsLocation(LOCATION_GRAVE) or c:IsLocation(LOCATION_REMOVED))
-		   and c:IsAbleToDeck()
+		   and c:IsAbleToDeck() and c:IsFaceup()
 end
 
 function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
