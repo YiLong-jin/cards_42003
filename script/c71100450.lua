@@ -34,7 +34,7 @@ function s.initial_effect(c)
 end
 function s.regcon(e,tp,eg,ep,ev,re,r,rp)
 	local r=re:GetHandler():GetOriginalRace()
-	return r and bit.band(r,RACE_INSECT)~=0
+	return r and bit.band(r,RACE_INSECT)==RACE_INSECT
 end
 function s.regop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.RaiseEvent(re:GetHandler(),EVENT_CUSTOM+id,re,r,rp,ep,ev)

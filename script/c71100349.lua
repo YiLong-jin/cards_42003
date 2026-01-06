@@ -27,7 +27,7 @@ end
 function cm.op(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	local ct=Duel.GetMatchingGroup(cm.checkgroup,tp,LOCATION_GRAVE,0,nil):GetClassCount(Card.GetCode)
-	if c:IsRelateToEffect(e) then 
+	if c:IsRelateToEffect(e) and c:IsFaceup() then 
 		local e1=Effect.CreateEffect(c)
 		e1:SetType(EFFECT_TYPE_SINGLE)
 		e1:SetCode(EFFECT_UPDATE_ATTACK)

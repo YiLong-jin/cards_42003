@@ -69,14 +69,14 @@ function this.spfilter_dk(c,e,tp)
 	return c:IsSetCard(0x67a4) and c:IsCanBeSpecialSummoned(e,0,tp,false,false)
 end
 function this.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(this.spfilter_ex),tp,LOCATION_EXTRA+LOCATION_GRAVE,0,1,nil,e,tp) and Duel.GetLocationCount(tp,LOCATION_MZONE)>1 and Duel.IsExistingMatchingCard(this.spfilter_dk,tp,LOCATION_DECK,0,1,nil,e,tp) end
+	if chk==0 then return Duel.IsPlayerCanSpecialSummonCount(tp,2) and Duel.GetLocationCount(1-tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(aux.NecroValleyFilter(this.spfilter_ex),tp,LOCATION_EXTRA+LOCATION_GRAVE,0,1,nil,e,tp) and Duel.GetLocationCount(tp,LOCATION_MZONE)>1 and Duel.IsExistingMatchingCard(this.spfilter_dk,tp,LOCATION_DECK,0,1,nil,e,tp) and not Duel.IsPlayerAffectedByEffect(tp,59822133) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,3,tp,LOCATION_EXTRA+LOCATION_GRAVE+LOCATION_DECK)
 end
 function this.spop(e,tp,eg,ep,ev,re,r,rp)
-	if Duel.GetLocationCount(1-tp,LOCATION_MZONE)<=0 then return end
+	if Duel.GetLocationCount(1-tp,LOCATION_MZONE)<=0 or not Duel.IsPlayerCanSpecialSummonCount(tp,2) then return end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(this.spfilter_ex),tp,LOCATION_EXTRA+LOCATION_GRAVE,0,1,1,nil,e,tp)
-	if #g>0 and Duel.SpecialSummon(g,0,tp,1-tp,false,false,POS_FACEUP_ATTACK,0x1f)~=0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>1 then
+	if #g>0 and Duel.SpecialSummon(g,0,tp,1-tp,false,false,POS_FACEUP_ATTACK,0x1f)~=0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>1 and not Duel.IsPlayerAffectedByEffect(tp,59822133)  then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local dg=Duel.SelectMatchingCard(tp,this.spfilter_dk,tp,LOCATION_DECK,0,2,2,nil,e,tp)
 		if #dg>0 and Duel.SpecialSummon(dg,0,tp,tp,false,false,POS_FACEUP)~=0 then 
