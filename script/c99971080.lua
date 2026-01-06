@@ -36,7 +36,7 @@ function s.initial_effect(c)
 	local e4=e3:Clone()  -- 改为e4
 	e4:SetCode(EVENT_SPSUMMON_SUCCESS)
 		e3:SetCondition(s.pubcon1)
-			e3:SetCondition(s.pubcon1)
+			e4:SetCondition(s.pubcon1)
 	e3:SetTarget(s.advtg)
 	e3:SetOperation(s.advop)
 	e4:SetTarget(s.advtg)
