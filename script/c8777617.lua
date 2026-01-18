@@ -46,7 +46,7 @@ function c8777617.grmcon(e,tp,eg,ep,ev,re,r,rp)
 	return e:GetHandler():IsPreviousLocation(LOCATION_GRAVE)
 end
 function c8777617.spfil(c,e,tp)
-	return c:IsSetCard(0x1eaa) and c:IsCanBeSpecialSummoned(e,0,tp,true,false,POS_FACEUP) 
+	return c:IsSetCard(0x1eaa) and c:IsType(TYPE_MONSTER) and c:IsCanBeSpecialSummoned(e,0,tp,true,false,POS_FACEUP) 
 end
 function c8777617.grmtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.IsExistingMatchingCard(c8777617.spfil,tp,LOCATION_GRAVE,0,1,e:GetHandler(),e,tp) end  
