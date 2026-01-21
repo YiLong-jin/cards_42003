@@ -64,7 +64,7 @@ function c65846926.thop(e,tp,eg,ep,ev,re,r,rp)
 	e2:SetProperty(EFFECT_FLAG_PLAYER_TARGET)
 	e2:SetTargetRange(1,0)
 	e2:SetTarget(c65846926.splimit2)
-	e2:SetReset(RESET_PHASE+PHASE_END,2)
+	e2:SetReset(RESET_PHASE+PHASE_END)
 	Duel.RegisterEffect(e2,tp)
 end
 function c65846926.splimit2(e,c)
