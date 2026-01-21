@@ -1,6 +1,6 @@
 --深渊破坏机械 毁灭者
 function c9879244.initial_effect(c)
-	 aux.AddXyzProcedure(c,c9879243.mfilter,13,3)
+	aux.AddXyzProcedure(c,c9879244.mfilter,13,3)
 	c:EnableReviveLimit()
 
 	
@@ -40,7 +40,7 @@ function c9879244.initial_effect(c)
 	c:RegisterEffect(e4)
 
 end
-function c9879243.mfilter(c)
+function c9879244.mfilter(c)
 	return c:IsRace(RACE_MACHINE) and c:IsAttribute(ATTRIBUTE_EARTH)
 end
 
