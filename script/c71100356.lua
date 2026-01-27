@@ -31,7 +31,7 @@ function this.initial_effect(c)
 	e2:SetOperation(this.thop)
 	c:RegisterEffect(e2)
 end
-cm.Automatic_chess_piece=true --「自动棋子」记述
+this.Automatic_chess_piece=true --「自动棋子」记述
 function this.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.GetCurrentPhase()==PHASE_MAIN1 or Duel.GetCurrentPhase()==PHASE_MAIN2
 end
