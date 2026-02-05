@@ -29,7 +29,7 @@ end
 
 function cm.spop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
-	if tc:IsRelateToChain() and Duel.Destroy(tc,REASON_EFFECT) then
+	if tc:IsRelateToChain() and Duel.Destroy(tc,REASON_EFFECT)~=0 then
 		Duel.BreakEffect()
 		if Duel.IsExistingMatchingCard(cm.opsfilter,tp,0x12,0,1,nil,e,tp) and Duel.GetMZoneCount(tp)>0 and Duel.SelectYesNo(tp,aux.Stringid(m,0)) then
 			Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
