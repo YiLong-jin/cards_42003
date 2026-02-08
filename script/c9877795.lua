@@ -30,14 +30,16 @@ function c9877795.cfilter1(c)
 	return  c:IsLevel(2) and c:IsRace(RACE_ZOMBIE) and c:IsAttribute(ATTRIBUTE_FIRE) and c:IsAbleToGraveAsCost()
 end
 function c9877795.negcost(e,tp,eg,ep,ev,re,r,rp,chk)
+	local c=e:GetHandler()
 	if chk==0 then return Duel.IsExistingMatchingCard(c9877795.cfilter,tp,LOCATION_ONFIELD,0,1,nil) or Duel.IsExistingMatchingCard(c9877795.cfilter1,tp,LOCATION_HAND,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local g=Duel.GetMatchingGroup(c9877795.cfilter,tp,LOCATION_ONFIELD,0,nil,e,tp)
 	local g1=Duel.GetMatchingGroup(c9877795.cfilter1,tp,LOCATION_HAND,0,nil,e,tp)
 	local g2=g+g1
-		if g2:GetCount()>0 then
+		if g2:GetCount()>1 then
 			local sg=g2:Select(tp,1,1,nil)
 			Duel.SendtoGrave(sg,REASON_COST)
+			Duel.Remove(c,POS_FACEUP,REASON_EFFECT)
 		end
 end
 function c9877795.tg(e,tp,eg,ep,ev,re,r,rp,chk)
