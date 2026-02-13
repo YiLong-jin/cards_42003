@@ -36,10 +36,6 @@ end
 -- 效果①：控顶 + 无效 + 塞素材
 -- ===========================
 
--- 过滤需要被无效的卡：除自身以外的表侧表示卡
-function s.disfilter(c)
-	return c:IsFaceup() and not c:IsCode(id)
-end
 
 -- 过滤卡组中的「巡猎蜂」怪兽
 function s.tdfilter(c)
@@ -52,12 +48,12 @@ function s.xyzfilter(c)
 end
 
 function s.distg(e, tp, eg, ep, ev, re, r, rp, chk, chkc)
-	if chkc then return chkc:IsOnField() and s.disfilter(chkc) end
-	if chk == 0 then return Duel.IsExistingTarget(s.disfilter, tp, LOCATION_ONFIELD, LOCATION_ONFIELD, 1, e:GetHandler())
+	if chkc then return chkc:IsOnField() and aux.NegateAnyFilter(chkc) end
+	if chk == 0 then return Duel.IsExistingTarget(aux.NegateAnyFilter, tp, LOCATION_ONFIELD, LOCATION_ONFIELD, 1, e:GetHandler())
 		and Duel.IsExistingMatchingCard(s.tdfilter, tp, LOCATION_DECK, 0, 1, nil) end
 	
 	Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_FACEUP)
-	local g = Duel.SelectTarget(tp, s.disfilter, tp, LOCATION_ONFIELD, LOCATION_ONFIELD, 1, 1, e:GetHandler())
+	local g = Duel.SelectTarget(tp, aux.NegateAnyFilter, tp, LOCATION_ONFIELD, LOCATION_ONFIELD, 1, 1, e:GetHandler())
 	Duel.SetOperationInfo(0, CATEGORY_DISABLE, g, 1, 0, 0)
 end
 

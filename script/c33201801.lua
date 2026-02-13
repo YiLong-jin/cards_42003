@@ -3,14 +3,15 @@ local SET_PATROL_BEE = 0xc328
 
 function s.initial_effect(c)
 	--xyz summon
-	c:EnableReviveLimit() 
 	local e0=Effect.CreateEffect(c)
+	e0:SetDescription(1165)
 	e0:SetType(EFFECT_TYPE_FIELD)
 	e0:SetCode(EFFECT_SPSUMMON_PROC)
 	e0:SetProperty(EFFECT_FLAG_CANNOT_DISABLE+EFFECT_FLAG_UNCOPYABLE)
 	e0:SetRange(LOCATION_EXTRA)
-	e0:SetCondition(s.spcon)
-	e0:SetOperation(s.spop)
+	e0:SetCondition(s.XyzCondition(aux.FilterBoolFunction(Card.IsRace,RACE_INSECT),3,2,63))
+	e0:SetTarget(s.XyzTarget(aux.FilterBoolFunction(Card.IsRace,RACE_INSECT),3,2,63))
+	e0:SetOperation(s.XyzOperation(aux.FilterBoolFunction(Card.IsRace,RACE_INSECT),3,2,63))
 	e0:SetValue(SUMMON_TYPE_XYZ)
 	c:RegisterEffect(e0)
 
@@ -57,44 +58,90 @@ end
 -- 自定义超量召唤逻辑
 -- ===========================
 
---xyz
-function s.ovfilter1(c)
-	return c:IsFaceup() and c:IsLevel(3) and c:IsRace(RACE_INSECT) and c:IsCanOverlay()
-end
-function s.spcon(e,c,mg1,min,max)
-	if c==nil then return true end
-	local tp=c:GetControler()
-------------------------MustMaterialCheck---------------------------------------
+function s.XyzCondition(f,lv,minct,maxct)
+	return  function(e,c,og,min,max)
+				if c==nil then return true end
+				local tp=c:GetControler()
 				local mg=nil
-				if mg1 then
-					mg=mg1:Filter(Card.IsCanBeXyzMaterial,nil,c)
+				if og then
+					mg=og
 				else
-					mg=Duel.GetMatchingGroup(Card.IsCanBeXyzMaterial,tp,LOCATION_MZONE+LOCATION_SZONE,0,nil,c)
+					mg=Duel.GetFieldGroup(tp,LOCATION_MZONE+LOCATION_SZONE,0)
 				end
------------------------------------------------------------------------------------
-	return mg:Filter(s.ovfilter1,nil):GetCount()>1
-end
-function s.spop(e,tp,eg,ep,ev,re,r,rp,c,mg1,min,max)
-------------------------MustMaterialCheck---------------------------------------
-				local mg=nil
-				if mg1 then
-					mg=mg1:Filter(Card.IsCanBeXyzMaterial,nil,c)
-				else
-					mg=Duel.GetMatchingGroup(Card.IsCanBeXyzMaterial,tp,LOCATION_MZONE+LOCATION_SZONE,0,nil,c)
+				local minc=minct
+				local maxc=maxct
+				if min then
+					if min>minc then minc=min end
+					if max<maxc then maxc=max end
 				end
------------------------------------------------------------------------------------
-	Duel.Hint(HINT_SELECTMSG,tp,aux.Stringid(id,0))
-	local g=mg:Filter(s.ovfilter1,nil):Select(tp,2,63,nil)
-	for mc in aux.Next(g) do
-		local mg=mc:GetOverlayGroup()
-		if mg:GetCount()~=0 then
-			Duel.Overlay(c,mg)
-		end
-	end
-	c:SetMaterial(g)
-	Duel.Overlay(c,g)
+				return Duel.CheckXyzMaterial(c,f,lv,minc,maxc,mg)
+			end
 end
 
+function s.XyzTarget(f,lv,minct,maxct)
+	return  function(e,tp,eg,ep,ev,re,r,rp,chk,c,og,min,max)
+				if og and not min then
+					return true
+				end
+				local minc=minct
+				local maxc=maxct
+				if min then
+					if min>minc then minc=min end
+					if max<maxc then maxc=max end
+				end
+				local mg=nil
+				if og then
+					mg=og
+				else
+					mg=Duel.GetFieldGroup(tp,LOCATION_MZONE+LOCATION_SZONE,0)
+				end
+				local g=nil
+				g=Duel.SelectXyzMaterial(tp,c,f,lv,minc,maxc,mg)
+				if g then
+					g:KeepAlive()
+					e:SetLabelObject(g)
+					return true
+				else return false end
+			end
+end
+function s.XyzOperation(f,lv,minct,maxct)
+	return  function(e,tp,eg,ep,ev,re,r,rp,c,og,min,max)
+				if og and not min then
+					Auxiliary.Xyz2XMaterialOperation(tp,og,c,minct,maxct)
+					local sg=Group.CreateGroup()
+					local tc=og:GetFirst()
+					while tc do
+						local sg1=tc:GetOverlayGroup()
+						sg:Merge(sg1)
+						tc=og:GetNext()
+					end
+					Duel.SendtoGrave(sg,REASON_RULE)
+					c:SetMaterial(og)
+					Duel.Overlay(c,og)
+				else
+					local mg=e:GetLabelObject()
+					if e:GetLabel()==1 then
+						local mg2=mg:GetFirst():GetOverlayGroup()
+						if mg2:GetCount()~=0 then
+							Duel.Overlay(c,mg2)
+						end
+					else
+						Auxiliary.Xyz2XMaterialOperation(tp,mg,c,minct,maxct)
+						local sg=Group.CreateGroup()
+						local tc=mg:GetFirst()
+						while tc do
+							local sg1=tc:GetOverlayGroup()
+							sg:Merge(sg1)
+							tc=mg:GetNext()
+						end
+						Duel.SendtoGrave(sg,REASON_RULE)
+					end
+					c:SetMaterial(mg)
+					Duel.Overlay(c,mg)
+					mg:DeleteGroup()
+				end
+			end
+end
 
 -- ===========================
 -- 效果①：2个以上 - 补充素材
