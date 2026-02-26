@@ -58,7 +58,7 @@ function this.recon(e,tp,eg,ep,ev,re,r,rp)
 	return rp==1-tp
 end
 function this.ref(c)
-	return c:IsSetCard(0x67a4) and c:IsAbleToHand()
+	return c:IsSetCard(0x67a4) and c:IsAbleToHand() and c:IsFaceup()
 end
 function this.retg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return true end

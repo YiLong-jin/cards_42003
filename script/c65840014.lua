@@ -14,19 +14,13 @@ function c65840014.initial_effect(c)
 	e1:SetTarget(c65840014.syntg)
 	e1:SetOperation(c65840014.synop)
 	c:RegisterEffect(e1)
-	Duel.AddCustomActivityCounter(65840014,ACTIVITY_CHAIN,c65840014.chainfilter)
-end
-function c65840014.chainfilter(re,tp)
-	local rc=re:GetHandler()
-	return not aux.IsCodeListed(rc,65842060)
 end
 function c65840014.syncon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.GetCustomActivityCount(65840014,tp,ACTIVITY_CHAIN)>0
-		or Duel.GetCustomActivityCount(65840014,1-tp,ACTIVITY_CHAIN)>0
+	return Duel.GetCurrentPhase()==PHASE_MAIN1 or Duel.GetCurrentPhase()==PHASE_MAIN2
 end
 function c65840014.synfilter(c,tp,mc)
 	local mg=Group.FromCards(c,mc)
-	return c:IsFaceup() and Duel.IsExistingMatchingCard(Card.IsSynchroSummonable,tp,LOCATION_EXTRA,0,1,nil,nil,mg)
+	return c:IsFaceup() and Duel.IsExistingMatchingCard(function(c,mg) return c:IsSynchroSummonable(nil,mg) and (aux.IsCodeListed(c,65842060) or c:IsType(TYPE_TUNER)) end,tp,LOCATION_EXTRA,0,1,nil,mg)
 end
 function c65840014.syntg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	local c=e:GetHandler()
@@ -47,7 +41,7 @@ function c65840014.synop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.AdjustAll()
 	local mg=Group.FromCards(c,tc)
 	if mg:FilterCount(Card.IsLocation,nil,LOCATION_MZONE)<2 then return end
-	local g=Duel.GetMatchingGroup(Card.IsSynchroSummonable,tp,LOCATION_EXTRA,0,nil,nil,mg)
+	local g=Duel.GetMatchingGroup(function(c,mg) return c:IsSynchroSummonable(nil,mg) and (aux.IsCodeListed(c,65842060) or c:IsType(TYPE_TUNER)) end,tp,LOCATION_EXTRA,0,nil,mg)
 	if g:GetCount()>0 then
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 		local sg=g:Select(tp,1,1,nil)

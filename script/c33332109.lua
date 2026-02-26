@@ -5,10 +5,10 @@ function this.initial_effect(c)
 	aux.EnablePendulumAttribute(c)
 	--to hand and des
 	local e3=Effect.CreateEffect(c) 
-	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_GRAVE_ACTION+CATEGORY_DESTROY) 
+	e3:SetCategory(CATEGORY_TOHAND+CATEGORY_SEARCH+CATEGORY_DESTROY) 
 	e3:SetType(EFFECT_TYPE_IGNITION) 
 	e3:SetRange(LOCATION_PZONE)  
-	e3:SetCountLimit(1,id-200000)
+	e3:SetCountLimit(1,23332103)
 	e3:SetTarget(this.thdtg) 
 	e3:SetOperation(this.thdop) 
 	c:RegisterEffect(e3) 
@@ -122,3 +122,25 @@ function this.desop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.Destroy(tc,REASON_EFFECT)
 	end
 end
+
+function this.tsrfil(c) 
+	return c:IsAbleToHand() and c:IsSetCard(0x6567) and not c:IsType(TYPE_TUNER) 
+end 
+function this.thdtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(this.tsrfil,tp,LOCATION_DECK,0,1,nil) end 
+	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)  
+end 
+function this.thdop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler() 
+	local g=Duel.GetMatchingGroup(this.tsrfil,tp,LOCATION_DECK,0,nil) 
+	if g:GetCount()>0 then 
+		local sg=g:Select(tp,1,1,nil) 
+		Duel.SendtoHand(sg,tp,REASON_EFFECT)
+		Duel.ConfirmCards(1-tp,sg)  
+		if c:IsRelateToEffect(e) then 
+			Duel.BreakEffect() 
+			Duel.Destroy(c,REASON_EFFECT)   
+		end   
+	end  
+end 
+

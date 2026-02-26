@@ -151,19 +151,24 @@ function c10701750.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ct=e:GetHandler():GetOverlayCount() 
 	if chk==0 then return ct>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.IsExistingMatchingCard(c10701750.filter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_GRAVE)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE)
 end
 function c10701750.spop(e,tp,eg,ep,ev,re,r,rp)
-	local ct=e:GetHandler():GetOverlayCount()
+	local c=e:GetHandler()
+	if not c:IsRelateToEffect(e) then return end
+	local ct=c:GetOverlayCount()
 	local ft=Duel.GetLocationCount(tp,LOCATION_MZONE)
-	if ft<=0 then return end
+	if ft<=0 or ct<=0 then return end
 	if Duel.IsPlayerAffectedByEffect(tp,59822133) then ft=1 end
-	local g=Duel.GetMatchingGroup(c10701750.filter,tp,LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE,0,nil,e,tp)
+	local max_ct=math.min(ct,ft)
+	local g=Duel.GetMatchingGroup(aux.NecroValleyFilter(c10701750.filter),tp,LOCATION_HAND+LOCATION_DECK+LOCATION_GRAVE,0,nil,e,tp)
 	if g:GetCount()==0 then return end
-	if ct>0 then
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
-	local sg=g:SelectSubGroup(tp,aux.dncheck,false,1,ct)
-	Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP_DEFENSE)
+	if #g>0 then
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
+		local sg=g:SelectSubGroup(tp,aux.dncheck,false,1,max_ct)
+		if sg and #sg>0 then
+			Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP_DEFENSE)
+		end
 	end
 end
 function c10701750.thcost(e,tp,eg,ep,ev,re,r,rp,chk)

@@ -27,6 +27,13 @@ function c65840001.initial_effect(c)
 	local e4=e2:Clone()
 	e4:SetCode(EVENT_FLIP)
 	c:RegisterEffect(e4)
+	local e5=Effect.CreateEffect(c)
+	e5:SetType(EFFECT_TYPE_SINGLE)
+	e5:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e5:SetRange(LOCATION_MZONE)
+	e5:SetCode(EFFECT_NONTUNER)
+	e5:SetValue(c65840001.tnval)
+	c:RegisterEffect(e5)
 end
 function c65840001.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return not e:GetHandler():IsReason(REASON_DRAW)
@@ -55,7 +62,7 @@ function c65840001.tnval(e,c)
 	return e:GetHandler():IsControler(c:GetControler())
 end
 function c65840001.filter(c)
-	return (aux.IsCodeListed(c,65842060) or c:IsCode(65842060)) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()
+	return aux.IsCodeListed(c,65842060) and c:IsAbleToHand()
 end
 function c65840001.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65840001.filter,tp,LOCATION_DECK+LOCATION_REMOVED,0,1,nil) end
@@ -68,4 +75,7 @@ function c65840001.thop(e,tp,eg,ep,ev,re,r,rp)
 		Duel.SendtoHand(g,nil,REASON_EFFECT)
 		Duel.ConfirmCards(1-tp,g)
 	end
+end
+function c65840001.tnval(e,c)
+	return e:GetHandler():IsControler(c:GetControler())
 end

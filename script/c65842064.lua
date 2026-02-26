@@ -1,0 +1,30 @@
+--纯爱之天使
+function c65842064.initial_effect(c)
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_FIELD)
+	e1:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE+EFFECT_FLAG_SET_AVAILABLE)
+	e1:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
+	e1:SetRange(LOCATION_MZONE)
+	e1:SetTargetRange(LOCATION_ONFIELD,0)
+	e1:SetCondition(c65842064.condition)
+	e1:SetValue(aux.tgoval)
+	c:RegisterEffect(e1)
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_SINGLE)
+	e2:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
+	e2:SetValue(1)
+	c:RegisterEffect(e2)
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetCode(EFFECT_REFLECT_BATTLE_DAMAGE)
+	e3:SetValue(1)
+	c:RegisterEffect(e3)	
+end
+c65842064.SetCard_ZJ_CZ=true
+function c65842064.cfilter(c)
+	return c:IsFaceup() and c:IsAttackAbove(1)
+end
+function c65842064.condition(e)
+	local tp=e:GetHandlerPlayer()
+	return not Duel.IsExistingMatchingCard(c65842064.cfilter,tp,LOCATION_MZONE,0,1,nil)
+end
