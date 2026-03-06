@@ -44,11 +44,11 @@ function c9999920.initial_effect(c)
 
 end
 function c9999920.ovfilter1(c)
-	return c:IsFaceup() and c:IsSetCard(0x669)
+	return c:IsFaceup() and c:IsSetCard(0x669) and c:IsCanBeXyzMaterial()
 end
 
 function c9999920.ovfilter(c)
-	return c:IsFaceup() and c:IsSetCard(0x669) and c:IsLinkAbove(4)
+	return c:IsFaceup() and c:IsSetCard(0x669) and c:IsLinkAbove(4) and c:IsCanBeXyzMaterial()
 end
 
 function c9999920.xyzop(e,tp,chk)
