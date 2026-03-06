@@ -9,7 +9,7 @@ function c9879051.initial_effect(c)
 	e2:SetCode(EFFECT_INDESTRUCTABLE_BATTLE)
 	e2:SetCondition(function(e) 
 	return e:GetHandler():GetCounter(0x7e2)>=1 end)
-	e2:SetValue(aux.indoval)
+	e2:SetValue(1)
 	c:RegisterEffect(e2)
 
 	

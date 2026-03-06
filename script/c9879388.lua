@@ -35,7 +35,7 @@ function c9879388.activate1(e,tp,eg,ep,ev,re,r,rp)
 		tc:AddCounter(0x7e2,3)
 		tc=g:GetNext()
 	end
-	 if g1:GetCount()>0 and Duel.SelectYesNo(tp,aux.Stringid(9879388,0)) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 then 
+	 if g1:GetCount()>0 and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 and Duel.SelectYesNo(tp,aux.Stringid(9879388,0))  then 
 		local sg=g1:Select(tp,1,1,nil) 
 		Duel.SpecialSummon(sg,0,tp,tp,false,false,POS_FACEUP)
 	end
