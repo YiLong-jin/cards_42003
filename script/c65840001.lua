@@ -62,7 +62,7 @@ function c65840001.tnval(e,c)
 	return e:GetHandler():IsControler(c:GetControler())
 end
 function c65840001.filter(c)
-	return aux.IsCodeListed(c,65842060) and c:IsAbleToHand()
+	return aux.IsCodeListed(c,65842060) and c:IsAbleToHand() and c:IsFaceupEx()
 end
 function c65840001.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65840001.filter,tp,LOCATION_DECK+LOCATION_REMOVED,0,1,nil) end

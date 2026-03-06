@@ -33,21 +33,21 @@ function c65840060.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then
 		if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return false end
 		if not Duel.IsExistingMatchingCard(c65840060.cfilter,tp,LOCATION_MZONE,0,1,nil) then
-			return Duel.IsExistingMatchingCard(c65840060.filter1,tp,LOCATION_DECK,0,1,nil,e,tp)
+			return Duel.IsExistingMatchingCard(c65840060.filter1,tp,LOCATION_DECK+LOCATION_HAND,0,1,nil,e,tp)
 		else
-			return Duel.IsExistingMatchingCard(c65840060.filter2,tp,LOCATION_DECK,0,1,nil,e,tp)
+			return Duel.IsExistingMatchingCard(c65840060.filter2,tp,LOCATION_DECK+LOCATION_HAND,0,1,nil,e,tp)
 		end
 	end
-	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_DECK+LOCATION_HAND)
 end
 function c65840060.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)<=0 then return end
 	local g=nil
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SPSUMMON)
 	if not Duel.IsExistingMatchingCard(c65840060.cfilter,tp,LOCATION_MZONE,0,1,nil) then
-		g=Duel.SelectMatchingCard(tp,c65840060.filter1,tp,LOCATION_DECK,0,1,1,nil,e,tp)
+		g=Duel.SelectMatchingCard(tp,c65840060.filter1,tp,LOCATION_DECK+LOCATION_HAND,0,1,1,nil,e,tp)
 	else
-		g=Duel.SelectMatchingCard(tp,c65840060.filter2,tp,LOCATION_DECK,0,1,1,nil,e,tp)
+		g=Duel.SelectMatchingCard(tp,c65840060.filter2,tp,LOCATION_DECK+LOCATION_HAND,0,1,1,nil,e,tp)
 	end
 	if g:GetCount()>0 then
 		Duel.SpecialSummon(g,0,tp,tp,false,false,POS_FACEUP)

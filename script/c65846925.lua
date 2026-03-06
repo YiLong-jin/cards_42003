@@ -23,15 +23,15 @@ end
 function c65846925.target(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return not Duel.IsPlayerAffectedByEffect(tp,59822133)
 		and Duel.GetLocationCount(tp,LOCATION_MZONE)>1
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,65846913,0,TYPES_TOKEN_MONSTER,0,0,3,RACE_ZOMBIE,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE,tp) end
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,65846914,0,TYPES_TOKEN_MONSTER,0,0,3,RACE_ZOMBIE,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE,tp) end
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,2,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,0,0)
 end
 function c65846925.activate(e,tp,eg,ep,ev,re,r,rp)
 	if Duel.IsPlayerAffectedByEffect(tp,59822133) then return end
 	if Duel.GetLocationCount(tp,LOCATION_MZONE)>1
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,65846913,0,TYPES_TOKEN_MONSTER,0,0,3,RACE_ZOMBIE,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE,tp) then
-		local code=65846913
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,65846914,0,TYPES_TOKEN_MONSTER,0,0,3,RACE_ZOMBIE,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE,tp) then
+		local code=65846914
 		for i=1,2 do
 			local token=Duel.CreateToken(tp,code)
 			Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP_DEFENSE)
@@ -44,7 +44,7 @@ function c65846925.activate(e,tp,eg,ep,ev,re,r,rp)
 			e1:SetTarget(c65846925.splimit)
 			e1:SetReset(RESET_EVENT+RESETS_STANDARD)
 			token:RegisterEffect(e1,true)
-			code=code+1
+			--code=code+1
 		end
 		Duel.SpecialSummonComplete()
 	end

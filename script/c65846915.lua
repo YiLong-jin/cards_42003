@@ -31,8 +31,8 @@ function c65846915.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local ft1=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local ft2=Duel.GetLocationCount(1-tp,LOCATION_MZONE,tp)
 	if chk==0 then return ft1>0 and ft2>0
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,65846913,0,TYPES_TOKEN_MONSTER,0,0,3,RACE_ZOMBIE,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE,tp)
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,65846913,0,TYPES_TOKEN_MONSTER,0,0,3,RACE_ZOMBIE,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE,1-tp)
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,65846914,0,TYPES_TOKEN_MONSTER,0,0,3,RACE_ZOMBIE,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE,tp)
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,65846914,0,TYPES_TOKEN_MONSTER,0,0,3,RACE_ZOMBIE,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE,1-tp)
 		and not Duel.IsPlayerAffectedByEffect(tp,59822133) end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,2,0,0)
 	Duel.SetOperationInfo(0,CATEGORY_TOKEN,nil,2,0,0)
@@ -41,11 +41,11 @@ function c65846915.spop(e,tp,eg,ep,ev,re,r,rp)
 	local ft1=Duel.GetLocationCount(tp,LOCATION_MZONE)
 	local ft2=Duel.GetLocationCount(1-tp,LOCATION_MZONE,tp)
 	if ft1<=0 or ft2<=0 or Duel.IsPlayerAffectedByEffect(tp,59822133) then return end
-	if Duel.IsPlayerCanSpecialSummonMonster(tp,65846913,0,TYPES_TOKEN_MONSTER,0,0,3,RACE_ZOMBIE,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE,tp)
-		and Duel.IsPlayerCanSpecialSummonMonster(tp,65846913,0,TYPES_TOKEN_MONSTER,0,0,3,RACE_ZOMBIE,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE,1-tp) then
+	if Duel.IsPlayerCanSpecialSummonMonster(tp,65846914,0,TYPES_TOKEN_MONSTER,0,0,3,RACE_ZOMBIE,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE,tp)
+		and Duel.IsPlayerCanSpecialSummonMonster(tp,65846914,0,TYPES_TOKEN_MONSTER,0,0,3,RACE_ZOMBIE,ATTRIBUTE_DARK,POS_FACEUP_DEFENSE,1-tp) then
 		local token=Duel.CreateToken(tp,65846914)
 		Duel.SpecialSummonStep(token,0,tp,tp,false,false,POS_FACEUP_DEFENSE)
-		local token=Duel.CreateToken(tp,65846913)
+		local token=Duel.CreateToken(tp,65846914)
 		Duel.SpecialSummonStep(token,0,tp,1-tp,false,false,POS_FACEUP_DEFENSE)
 		Duel.SpecialSummonComplete()
 	end
