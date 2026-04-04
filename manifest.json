@@ -4,24 +4,12 @@
     "hash": "7dd4b1df152bbcf8263204446c0deb9e284088b35f0ecdebcffb689d7055c359"
   },
   {
-    "path": "lflist.conf",
-    "hash": "e52d73c2f2cf326b3e8d70cf2a0bab9fc49115a542e10776fbcdca6d6231c9dd"
-  },
-  {
     "path": "LICENSE",
     "hash": "b468bd0a4341e35a65ff93da1ec33506f339c0b0e4fcc9dce4eb20832a33b915"
   },
   {
     "path": "README.md",
     "hash": "2f4f7e480f5192f63daeac5af1d1273b223151183b94948ea30dc528f2bf601a"
-  },
-  {
-    "path": "servers.conf",
-    "hash": "5aac138b9a08115be36e83dcfa39425b3a4f0ab11dc3007eabc160e2d01d946d"
-  },
-  {
-    "path": "strings.conf",
-    "hash": "b04a2b2123541ed8a2a1e37d98227b9155d0ce99ac78b634f483f7d860b0c8e3"
   },
   {
     "path": "pics/10000100.jpg",
