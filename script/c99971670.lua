@@ -1,0 +1,26 @@
+--过往核心
+function c99971670.initial_effect(c)
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_ACTIVATE)
+	e1:SetCode(EVENT_FREE_CHAIN)
+	c:RegisterEffect(e1)
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_SINGLE)
+	e2:SetRange(LOCATION_SZONE)
+	e2:SetProperty(EFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
+	e2:SetCode(EFFECT_LINK_SPELL_KOISHI)
+	e2:SetValue(LINK_MARKER_TOP_LEFT)
+	c:RegisterEffect(e2)
+	
+		local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetRange(LOCATION_SZONE)
+	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE+EFFECT_FLAG_UNCOPYABLE+EFFECT_FLAG_CANNOT_DISABLE)
+	e3:SetCondition(c99971670.con)
+	e3:SetCode(EFFECT_LINK_SPELL_KOISHI)
+	e3:SetValue(LINK_MARKER_TOP+LINK_MARKER_TOP_RIGHT+LINK_MARKER_TOP_LEFT)
+	c:RegisterEffect(e3)
+end
+function c99971670.con(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.IsPlayerAffectedByEffect(tp,99971670)
+end
