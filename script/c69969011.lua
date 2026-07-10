@@ -44,6 +44,7 @@ local e5=aux.AddRitualProcGreater2(c,c69969011.ritfilter,LOCATION_HAND)
 	e5:SetDescription(aux.Stringid(69969011,4))
 	e5:SetType(EFFECT_TYPE_ACTIVATE)
 	e5:SetCode(EVENT_FREE_CHAIN)
+	e5:SetTarget(c69969011.nktg)
 	e5:SetHintTiming(0,TIMINGS_CHECK_MONSTER+TIMING_END_PHASE)
 end
 --s
@@ -52,6 +53,7 @@ function c69969011.syncfilter(c)
 end
 function c69969011.sctarg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c69969011.syncfilter,tp,LOCATION_EXTRA,0,1,nil) end
+	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function c69969011.scop(e,tp,eg,ep,ev,re,r,rp)
@@ -76,6 +78,7 @@ function c69969011.xsptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		local g=Duel.GetMatchingGroup(c69969011.mfilter,tp,LOCATION_MZONE,0,nil)
 		return Duel.IsExistingMatchingCard(c69969011.xyzfilter,tp,LOCATION_EXTRA,0,1,nil,g)
 	end
+	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function c69969011.xspop(e,tp,eg,ep,ev,re,r,rp)
@@ -112,6 +115,7 @@ function c69969011.ysptg(e,tp,eg,ep,ev,re,r,rp,chk)
 		return res
 	end
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
+	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 end
 function c69969011.yspop(e,tp,eg,ep,ev,re,r,rp)
 	local chkf=tp
@@ -158,6 +162,7 @@ function c69969011.lktg(e,tp,eg,ep,ev,re,r,rp,chk)
 		local mg=Duel.GetMatchingGroup(c69969011.matfilter,tp,LOCATION_MZONE,0,nil)
 		return Duel.IsExistingMatchingCard(c69969011.lkfilter,tp,LOCATION_EXTRA,0,1,nil,mg)
 	end
+	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function c69969011.lkop(e,tp,eg,ep,ev,re,r,rp)
@@ -171,6 +176,15 @@ function c69969011.lkop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 --ys
+function c69969011.gxmatfilter(c)
+	return  c:IsSetCard(0x699) and c:IsType(TYPE_RITUAL) and c:IsType(TYPE_MONSTER)
+end
+function c69969011.nktg(e,tp,eg,ep,ev,re,r,rp,chk)
+local c=e:GetHandler()
+if chk==0 then return Duel.IsExistingMatchingCard(c69969011.gxmatfilter,tp,LOCATION_HAND,0,1,c)
+	end
+	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
+	end
 function c69969011.ritfilter(c)
 	return c:IsSetCard(0x699)
 end

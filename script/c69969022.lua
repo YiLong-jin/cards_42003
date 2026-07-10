@@ -56,6 +56,7 @@ end
 function c69969022.thtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and c69969022.xfilter(chkc.tp) end
 	if chk==0 then return Duel.IsExistingTarget(c69969022.xfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil,e,tp) and Duel.GetLocationCount(tp,LOCATION_MZONE)>0 end
+	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TARGET)
 	Duel.SelectTarget(tp,c69969022.xfilter,tp,LOCATION_MZONE,LOCATION_MZONE,1,1,nil,e,tp)
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_OVERLAY)
@@ -81,6 +82,7 @@ function c69969022.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	if chkc then return chkc:IsLocation(LOCATION_MZONE) and chkc:IsControler(tp) and c69969022.tarfilter(chkc,e,tp) end
 	if chk==0 then return Duel.IsExistingTarget(c69969022.tarfilter,tp,LOCATION_MZONE,0,1,nil)
 		and Duel.IsExistingMatchingCard(c69969022.exfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,e:GetHandler()) end
+	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
 	Duel.SelectTarget(tp,c69969022.tarfilter,tp,LOCATION_MZONE,0,1,1,nil)
 	local g=Duel.GetMatchingGroup(c69969022.exfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,e:GetHandler())
@@ -111,6 +113,7 @@ function c69969022.gtarget(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c69969022.ggfilter,tp,LOCATION_DECK,0,1,nil)
 	and Duel.IsExistingMatchingCard(c69969022.agspfilter,tp,LOCATION_ONFIELD+LOCATION_HAND,0,1,nil,tp,true)
 	end
+	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_DECK)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,nil,1,0,0)
 end

@@ -108,9 +108,9 @@ function c10701885.costfilter(c)
 end
 function c10701885.spcost(e,tp,eg,ep,ev,re,r,rp,chk)
 	local c=e:GetHandler()
-	if chk==0 then return Duel.IsExistingMatchingCard(c10701885.costfilter,tp,LOCATION_GRAVE,0,1,c) end
+	if chk==0 then return Duel.IsExistingMatchingCard(c10701885.costfilter,tp,LOCATION_GRAVE,0,2,c) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectMatchingCard(tp,c10701885.costfilter,tp,LOCATION_GRAVE,0,1,1,c)
+	local g=Duel.SelectMatchingCard(tp,c10701885.costfilter,tp,LOCATION_GRAVE,0,2,2,c)
 	Duel.HintSelection(g)
 	Duel.SendtoDeck(g,nil,2,REASON_COST)
 end

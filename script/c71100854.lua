@@ -74,7 +74,7 @@ function this.tgcon(e)
 	return e:GetHandler():IsDefensePos()
 end
 function this.recon(e,tp,eg,ep,ev,re,r,rp)
-	return e:GetHandler():IsReason(REASON_EFFECT)
+	return e:GetHandler():IsReason(REASON_EFFECT) and Duel.IsTurnPlayer(1-tp)
 end
 function this.ref(c)
 	return c:IsSetCard(0x97a3) and c:IsType(TYPE_MONSTER) and c:IsAbleToHand()

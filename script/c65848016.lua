@@ -25,13 +25,13 @@ function c65848016.initial_effect(c)
 	e2:SetOperation(c65848016.thop)
 	c:RegisterEffect(e2)
 end
-function c65848016.cfilter(c)
+function c65848016.filter(c)
 	return c:IsType(TYPE_SPELL) and c:IsAbleToRemoveAsCost()
 end
 function c65848016.cost(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(c65848016.cfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	if chk==0 then return Duel.IsExistingMatchingCard(c65848016.filter,tp,LOCATION_GRAVE,0,1,nil) end
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_REMOVE)
-	local g=Duel.SelectMatchingCard(tp,c65848016.cfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	local g=Duel.SelectMatchingCard(tp,c65848016.filter,tp,LOCATION_GRAVE,0,1,1,nil)
 	Duel.Remove(g,POS_FACEUP,REASON_COST)
 end
 function c65848016.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)

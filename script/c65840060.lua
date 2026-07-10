@@ -57,11 +57,11 @@ function c65840060.tdfilter(c)
 	return (aux.IsCodeListed(c,65842060) or c:IsCode(65842060) or c:IsType(TYPE_SYNCHRO)) and c:IsType(0x1) and c:IsAbleToDeck() and c:IsFaceup()
 end
 function c65840060.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE+LOCATION_REMOVED) and chkc:IsControler(tp) and c65840060.tdfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(c65840060.tdfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,e:GetHandler()) and Duel.GetFlagEffect(tp,65840060)==0 end
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and c65840060.tdfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(c65840060.tdfilter,tp,LOCATION_GRAVE,0,1,e:GetHandler()) and Duel.GetFlagEffect(tp,65840060)==0 end
 	Duel.RegisterFlagEffect(tp,65840060,RESET_PHASE+PHASE_END,0,1)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,c65840060.tdfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,4,nil)
+	local g=Duel.SelectTarget(tp,c65840060.tdfilter,tp,LOCATION_GRAVE,0,1,4,nil)
 	Duel.SetOperationInfo(0,CATEGORY_TODECK,g,g:GetCount(),0,0)
 end
 function c65840060.tdop(e,tp,eg,ep,ev,re,r,rp)

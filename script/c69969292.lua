@@ -91,6 +91,7 @@ function c69969292.sptg2(e,tp,eg,ep,ev,re,r,rp,chk)
 		local g=Duel.GetMatchingGroup(c69969292.mfilter,tp,LOCATION_MZONE,0,nil)
 		return Duel.IsExistingMatchingCard(c69969292.xyzfilter,tp,LOCATION_EXTRA,0,1,nil,g)
 	end
+	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function c69969292.spop2(e,tp,eg,ep,ev,re,r,rp)
@@ -109,6 +110,7 @@ end
 function c69969292.stg(e,tp,eg,ep,ev,re,r,rp,chk)
 	local g=Duel.GetMatchingGroup(Card.IsSetCard,tp,LOCATION_MZONE,0,nil,0x69b)
 	if chk==0 then return #g>0 and Duel.IsExistingMatchingCard(Card.IsSynchroSummonable,tp,LOCATION_EXTRA,0,1,nil,nil,g) end
+	Duel.Hint(HINT_OPSELECTED,1-tp,e:GetDescription())
 	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 function c69969292.sop(e,tp,eg,ep,ev,re,r,rp)

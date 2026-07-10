@@ -192,7 +192,7 @@ end
 
 
 function cm.nf(c)
-	if c:GetOriginalType()&TYPE_MONSTER==0 and c:IsSetCard(0x1661,0x669,0x671,0x676,0x666c) then return false end
+	if (c:GetOriginalType()&TYPE_MONSTER==0 and c:IsSetCard(0x1661,0x669,0x671,0x676,0x666c)) then return false end
 	return Duel.IsExistingMatchingCard(cm.nf1,tp,LOCATION_MZONE,LOCATION_MZONE,1,nil,c)
 end
 function cm.nf1(c,ec)

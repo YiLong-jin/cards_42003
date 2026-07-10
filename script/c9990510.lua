@@ -15,7 +15,7 @@ function c9990510.initial_effect(c)
 	c:RegisterEffect(e2)
 end
 function c9990510.cfilter(c)
-	return (c:IsSetCard(0x671) and c:GetType()==TYPE_SPELL) and c:IsAbleToHand()
+	return (c:IsSetCard(0x671) and c:IsType(TYPE_SPELL)) and c:IsAbleToHand()
 end
 function c9990510.tftg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c9990510.cfilter,tp,LOCATION_DECK,0,1,nil) end
