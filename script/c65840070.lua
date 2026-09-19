@@ -40,7 +40,7 @@ function c65840070.activate(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c65840070.spfilter(c)
-	return c:IsSynchroSummonable(nil)
+	return c:IsSynchroSummonable(nil) and c:IsType(TYPE_TUNER)
 end
 function c65840070.sctg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65840070.spfilter,tp,LOCATION_EXTRA,0,1,nil,nil)and Duel.GetFlagEffect(tp,65840070)==0 end

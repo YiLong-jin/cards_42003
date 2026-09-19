@@ -156,7 +156,7 @@ end
 -- 赋予效果的 target（三者都必须有1）
 -- ============================================================
 function s.destroy_filter(c)
-    return c:IsFaceup() and c:IsDestructable()
+    return c:IsDestructable()
 end
 
 function s.destroy_check(tp)

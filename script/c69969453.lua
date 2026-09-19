@@ -55,7 +55,7 @@ function c69969453.desop(e,tp,eg,ep,ev,re,r,rp)
 end
 --2
 function c69969453.setfilter(c)
-	return c:IsSetCard(0x69e) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSSetable()
+	return c:IsSetCard(0x69e) and c:IsType(TYPE_SPELL+TYPE_TRAP) and c:IsSSetable() and c:IsFaceup()
 end
 function c69969453.settg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c69969453.setfilter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil) end

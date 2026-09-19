@@ -57,8 +57,6 @@ function s.activate(e, tp, eg, ep, ev, re, r, rp)
     local c = e:GetHandler()
     local dis = e:GetLabel()
     if dis == 0 then return end
-
-    -- 解析选中的区域（主怪兽区0-4，对应位16-20）
     local seq = -1
     for i = 0, 4 do
         if (dis >> (i + 16)) & 1 == 1 then
@@ -67,21 +65,13 @@ function s.activate(e, tp, eg, ep, ev, re, r, rp)
         end
     end
     if seq < 0 then return end
-
-    -- 高位掩码（bit 16-20）封锁对方场地
-    local zone = (1 << seq) << 16
-
-    -- 检查该区域是否有表侧表示怪兽
+    local zone =aux.SequenceToGlobal(1-tp,LOCATION_MZONE,seq)
     local tc = Duel.GetFieldCard(1 - tp, LOCATION_MZONE, seq)
     if tc and tc:IsFaceup() then
         Duel.Destroy(tc, REASON_EFFECT)
     end
-
-    -- 保存区域（低位，供②效果使用）
     c:RegisterFlagEffect(id, RESET_PHASE + PHASE_END, 0, 1, 1 << seq)
-
-    -- 封锁对方区域
-    local e1 = Effect.CreateEffect(c)
+    local e1 = Effect.CreateEffect(c)   
     e1:SetType(EFFECT_TYPE_FIELD)
     e1:SetCode(EFFECT_DISABLE_FIELD)
     e1:SetProperty(EFFECT_FLAG_CANNOT_DISABLE)
