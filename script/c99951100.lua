@@ -1,3 +1,4 @@
+--制裁者 自由职业者金初源
 --自由职业者金初源
 function c99951100.initial_effect(c)
 

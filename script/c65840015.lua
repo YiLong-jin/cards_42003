@@ -1,6 +1,6 @@
---大阿卡那 恶魔使者
+--恶魔使者
 function c65840015.initial_effect(c)
-	aux.AddCodeList(c,65842060)
+	aux.AddCodeList(c,65840021)
 	local e1=Effect.CreateEffect(c)
 	e1:SetDescription(aux.Stringid(65840015,0))
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
@@ -30,7 +30,7 @@ function c65840015.initial_effect(c)
 	c:RegisterEffect(e4)
 end
 function c65840015.spfilter(c)
-	return c:IsFaceup() and (aux.IsCodeListed(c,65842060) or c:IsCode(65842060))
+	return c:IsFaceup() and aux.IsCodeListed(c,65840021)
 end
 function c65840015.spcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsExistingMatchingCard(c65840015.spfilter,tp,LOCATION_MZONE,0,1,nil) and (Duel.GetCurrentPhase()==PHASE_MAIN1 or Duel.GetCurrentPhase()==PHASE_MAIN2)
@@ -47,7 +47,7 @@ function c65840015.spop(e,tp,eg,ep,ev,re,r,rp)
 	end
 end
 function c65840015.filter(c)
-	return aux.IsCodeListed(c,65842060) and c:IsType(0x6) and (c:IsAbleToHand() or c:IsAbleToGrave())
+	return aux.IsCodeListed(c,65840021) and c:IsType(0x6) and (c:IsAbleToHand() or c:IsAbleToGrave())
 end
 function c65840015.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65840015.filter,tp,LOCATION_DECK,0,1,nil) and Duel.GetFlagEffect(tp,65840015)==0 end

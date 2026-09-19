@@ -66,45 +66,60 @@ function s.spops(e,tp,eg,ep,ev,re,r,rp)
    Duel.SpecialSummon(c,0,tp,tp,false,false,POS_FACEUP) 
 end
 -------------------------------------------------------------------------------------------------
-function s.indcon(e,tp,eg,ep,ev,re,r,rp)
-	return r==REASON_SYNCHRO and e:GetHandler():GetReasonCard():IsSetCard(0x671)
+function s.indcon(e, tp, eg, ep, ev, re, r, rp)
+	local rc = e:GetHandler():GetReasonCard()
+	return r == REASON_SYNCHRO and rc and rc:IsSetCard(0x671)
 end
-function s.indop(e,tp,eg,ep,ev,re,r,rp)
-	local c=e:GetHandler()
-	local rc=c:GetReasonCard()
-	local e1=Effect.CreateEffect(rc)
-	e1:SetDescription(aux.Stringid(id,1))
-	e1:SetCategory(CATEGORY_DISABLE)
+
+function s.indop(e, tp, eg, ep, ev, re, r, rp)
+	local c = e:GetHandler()
+	local rc = c:GetReasonCard()
+	if not rc then return end
+
+	-- 赋予效果（每个怪兽各自独立计数）
+	local e1 = Effect.CreateEffect(rc)
+	e1:SetDescription(aux.Stringid(id, 1))
+	e1:SetCategory(CATEGORY_TOHAND)
 	e1:SetType(EFFECT_TYPE_IGNITION)
 	e1:SetRange(LOCATION_MZONE)
-	e1:SetCountLimit(1)
---	e1:SetCost(s.cost)
+	e1:SetCountLimit(1)					-- ★ 每个怪兽各自1回合1次
+	e1:SetHintTiming(0, TIMINGS_CHECK_MONSTER)
 	e1:SetTarget(s.target)
 	e1:SetOperation(s.activate)
-	e1:SetReset(RESET_EVENT+RESETS_STANDARD)
-	rc:RegisterEffect(e1,true)
+	e1:SetReset(RESET_EVENT + RESETS_STANDARD)
+	rc:RegisterEffect(e1, true)
+
+	-- 若同调怪兽不是效果怪兽，添加效果类型
 	if not rc:IsType(TYPE_EFFECT) then
-		local e2=Effect.CreateEffect(c)
+		local e2 = Effect.CreateEffect(c)
 		e2:SetType(EFFECT_TYPE_SINGLE)
 		e2:SetCode(EFFECT_ADD_TYPE)
 		e2:SetValue(TYPE_EFFECT)
-		e2:SetReset(RESET_EVENT+RESETS_STANDARD)
-		rc:RegisterEffect(e2,true)
+		e2:SetReset(RESET_EVENT + RESETS_STANDARD)
+		rc:RegisterEffect(e2, true)
 	end
-	rc:RegisterFlagEffect(0,RESET_EVENT+RESETS_STANDARD,EFFECT_FLAG_CLIENT_HINT,1,0,aux.Stringid(id,1))
+
+	-- 客户端提示（鼠标悬停显示已获得额外效果）
+	rc:RegisterFlagEffect(0, RESET_EVENT + RESETS_STANDARD, EFFECT_FLAG_CLIENT_HINT, 1, 0, aux.Stringid(id, 2))
 end
+
+-- 筛选：未来战魔法陷阱
 function s.filter(c)
-	return c:IsSetCard(0x671) and c:IsAbleToHand() and c:IsType(TYPE_SPELL+TYPE_TRAP)
+	return c:IsSetCard(0x671) and (c:IsType(TYPE_SPELL) or c:IsType(TYPE_TRAP)) and c:IsAbleToHand()
 end
-function s.target(e,tp,eg,ep,ev,re,r,rp,chk)
-	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,nil) end
-	Duel.SetOperationInfo(0,CATEGORY_TOHAND,nil,1,tp,LOCATION_GRAVE+LOCATION_REMOVED)
+
+function s.target(e, tp, eg, ep, ev, re, r, rp, chk)
+	if chk == 0 then
+		return Duel.IsExistingMatchingCard(aux.NecroValleyFilter(s.filter), tp, LOCATION_GRAVE + LOCATION_REMOVED, 0, 1, nil)
+	end
+	Duel.SetOperationInfo(0, CATEGORY_TOHAND, nil, 1, tp, LOCATION_GRAVE + LOCATION_REMOVED)
 end
-function s.activate(e,tp,eg,ep,ev,re,r,rp)
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local g=Duel.SelectMatchingCard(tp,aux.NecroValleyFilter(s.filter),tp,LOCATION_GRAVE+LOCATION_REMOVED,0,1,1,nil)
-	if g:GetCount()>0 then
-		Duel.SendtoHand(g,nil,REASON_EFFECT)
-		Duel.ConfirmCards(1-tp,g)
+
+function s.activate(e, tp, eg, ep, ev, re, r, rp)
+	Duel.Hint(HINT_SELECTMSG, tp, HINTMSG_ATOHAND)
+	local g = Duel.SelectMatchingCard(tp, aux.NecroValleyFilter(s.filter), tp, LOCATION_GRAVE + LOCATION_REMOVED, 0, 1, 1, nil)
+	if g:GetCount() > 0 then
+		Duel.SendtoHand(g, nil, REASON_EFFECT)
+		Duel.ConfirmCards(1 - tp, g)
 	end
 end

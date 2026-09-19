@@ -1,6 +1,6 @@
---大阿卡那 创造世界
+--创造世界
 function c65840021.initial_effect(c)
-	aux.AddCodeList(c,65842060)
+	aux.AddCodeList(c,65840021)
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_FIELD)
 	e0:SetCode(EFFECT_CANNOT_SPECIAL_SUMMON)
@@ -42,7 +42,7 @@ function c65840021.thcon(e,tp,eg,ep,ev,re,r,rp)
 	return ph==PHASE_MAIN1 or ph==PHASE_MAIN2
 end
 function c65840021.filter(c)
-	return aux.IsCodeListed(c,65842060) and c:IsAbleToHand()
+	return aux.IsCodeListed(c,65840021) and  not c:IsCode(65840021) and c:IsAbleToHand() and c:IsFaceupEx()
 end
 function c65840021.thtg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.IsExistingMatchingCard(c65840021.filter,tp,LOCATION_DECK+LOCATION_REMOVED,0,1,nil) end

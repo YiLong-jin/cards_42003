@@ -36,10 +36,10 @@ function c9878034.splimit(e,c)
 	return c:IsLocation(LOCATION_EXTRA) and not c:IsType(TYPE_FUSION)
 end
 function c9878034.filter0(c)
-	return (c:IsLocation(LOCATION_MZONE+LOCATION_GRAVE+LOCATION_REMOVED) or c:IsFaceup()) and c:IsType(TYPE_MONSTER) and c:IsCanBeFusionMaterial() and c:IsAbleToDeck()
+	return (c:IsLocation(LOCATION_MZONE+LOCATION_GRAVE) or c:IsFaceup()) and c:IsType(TYPE_MONSTER) and c:IsCanBeFusionMaterial() and c:IsAbleToDeck()
 end
 function c9878034.filter1(c,e)
-	return (c:IsLocation(LOCATION_MZONE+LOCATION_GRAVE+LOCATION_REMOVED) or c:IsFaceup()) and c:IsType(TYPE_MONSTER) and c:IsCanBeFusionMaterial() and c:IsAbleToDeck() and not c:IsImmuneToEffect(e)
+	return (c:IsLocation(LOCATION_MZONE+LOCATION_GRAVE) or c:IsFaceup()) and c:IsType(TYPE_MONSTER) and c:IsCanBeFusionMaterial() and c:IsAbleToDeck() and not c:IsImmuneToEffect(e)
 end
 function c9878034.filter2(c,e,tp,m,f,chkf)
 	return c:IsType(TYPE_FUSION) and (aux.IsCodeListed(c,9878030) or aux.IsCodeListed(c,9877883)) and (not f or f(c))

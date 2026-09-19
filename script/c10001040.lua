@@ -1,0 +1,73 @@
+--环指人体派装置艺术第3号"简易肋骨"
+local s,id,o=GetID()
+function s.initial_effect(c)
+	local e1=Effect.CreateEffect(c)
+	e1:SetDescription(aux.Stringid(id,0))
+	e1:SetCategory(CATEGORY_DISABLE)
+	e1:SetType(EFFECT_TYPE_ACTIVATE)
+	e1:SetCode(EVENT_FREE_CHAIN)
+	e1:SetProperty(EFFECT_FLAG_CARD_TARGET)
+	e1:SetHintTiming(0,TIMINGS_CHECK_MONSTER+TIMING_END_PHASE)
+	e1:SetCondition(s.condition)
+	e1:SetTarget(s.target)
+	e1:SetOperation(s.activate)
+	c:RegisterEffect(e1)
+end
+function s.hzfilter(c)
+	return c:IsSetCard(0x7fe0) and c:IsType(TYPE_MONSTER)
+end
+function s.condition(e,tp,eg,ep,ev,re,r,rp)
+	local g=Duel.GetMatchingGroup(s.hzfilter,tp,LOCATION_MZONE+LOCATION_GRAVE,0,nil)
+	return g:GetClassCount(Card.GetCode)>=2
+end
+function s.tfilter(c)
+	return c:IsFaceup()
+end
+function s.target(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return chkc:IsControler(1-tp) and chkc:IsLocation(LOCATION_MZONE) and s.tfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.tfilter,tp,0,LOCATION_MZONE,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_FACEUP)
+	local g=Duel.SelectTarget(tp,s.tfilter,tp,0,LOCATION_MZONE,1,1,nil)
+	Duel.SetOperationInfo(0,CATEGORY_DISABLE,g,1,0,0)
+end
+function s.activate(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local tc=Duel.GetFirstTarget()
+	if not tc:IsRelateToEffect(e) or tc:IsImmuneToEffect(e) then return end
+	Duel.NegateRelatedChain(tc,RESET_TURN_SET)
+	local e1=Effect.CreateEffect(c)
+	e1:SetType(EFFECT_TYPE_SINGLE)
+	e1:SetCode(EFFECT_DISABLE)
+	e1:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,2)
+	tc:RegisterEffect(e1,true)
+	local e2=Effect.CreateEffect(c)
+	e2:SetType(EFFECT_TYPE_SINGLE)
+	e2:SetCode(EFFECT_DISABLE_EFFECT)
+	e2:SetValue(RESET_TURN_SET)
+	e2:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,2)
+	tc:RegisterEffect(e2,true)
+	local e3=Effect.CreateEffect(c)
+	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
+	e3:SetRange(LOCATION_MZONE)
+	e3:SetValue(1)
+	e3:SetReset(RESET_EVENT+RESETS_STANDARD+RESET_PHASE+PHASE_END,2)
+	e3:SetCode(EFFECT_CANNOT_BE_FUSION_MATERIAL)
+	e3:SetValue(s.fuslimit)
+	tc:RegisterEffect(e3,true)
+	local e4=e3:Clone()
+	e4:SetCode(EFFECT_CANNOT_BE_SYNCHRO_MATERIAL)
+	e4:SetValue(1)
+	tc:RegisterEffect(e4,true)
+	local e5=e3:Clone()
+	e5:SetCode(EFFECT_CANNOT_BE_XYZ_MATERIAL)
+	e5:SetValue(1)
+	tc:RegisterEffect(e5,true)
+	local e6=e3:Clone()
+	e6:SetCode(EFFECT_CANNOT_BE_LINK_MATERIAL)
+	e6:SetValue(1)
+	tc:RegisterEffect(e6,true)
+end
+function s.fuslimit(e,c,sumtype,sumplayer)
+	return sumtype==SUMMON_TYPE_FUSION
+end

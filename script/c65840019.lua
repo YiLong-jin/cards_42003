@@ -1,7 +1,6 @@
---大阿卡那 向日葵！
+--向日葵！
 function c65840019.initial_effect(c)
-	--aux.AddCodeList(c,65842060)
-	aux.AddSynchroProcedure(c,nil,aux.NonTuner(Card.IsSynchroType,TYPE_SYNCHRO),1)
+	aux.AddSynchroMixProcedure(c,aux.Tuner(nil),nil,nil,aux.FilterBoolFunction(Card.IsSynchroType,TYPE_SYNCHRO),1,99)
 	c:EnableReviveLimit()
 	local e0=Effect.CreateEffect(c)
 	e0:SetType(EFFECT_TYPE_SINGLE)
@@ -10,7 +9,7 @@ function c65840019.initial_effect(c)
 	e0:SetRange(LOCATION_MZONE)
 	e0:SetCondition(c65840019.imcon)
 	e0:SetValue(c65840019.efilter)
-	--c:RegisterEffect(e0)
+	c:RegisterEffect(e0)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_FIELD+EFFECT_TYPE_CONTINUOUS)
 	e1:SetCode(EVENT_CHAINING)
@@ -26,21 +25,13 @@ function c65840019.initial_effect(c)
 	e2:SetOperation(c65840019.recop)
 	c:RegisterEffect(e2)	
 	local e3=Effect.CreateEffect(c)
-	e3:SetType(EFFECT_TYPE_FIELD)
+	e3:SetType(EFFECT_TYPE_SINGLE)
+	e3:SetProperty(EFFECT_FLAG_SINGLE_RANGE)
 	e3:SetRange(LOCATION_MZONE)
-	e3:SetTargetRange(0,LOCATION_MZONE)
-	e3:SetCode(EFFECT_CANNOT_SELECT_BATTLE_TARGET)
-	e3:SetValue(c65840019.atlimit)
+	e3:SetCode(EFFECT_UPDATE_ATTACK)
+	e3:SetCondition(c65840019.imcon)
+	e3:SetValue(800)
 	c:RegisterEffect(e3)
-	local e4=Effect.CreateEffect(c)
-	e4:SetType(EFFECT_TYPE_FIELD)
-	e4:SetCode(EFFECT_CANNOT_BE_EFFECT_TARGET)
-	e4:SetRange(LOCATION_MZONE)
-	e4:SetProperty(EFFECT_FLAG_IGNORE_IMMUNE+EFFECT_FLAG_SET_AVAILABLE)
-	e4:SetTargetRange(LOCATION_ONFIELD,LOCATION_ONFIELD)
-	e4:SetTarget(c65840019.tgtg)
-	e4:SetValue(aux.tgoval)
-	c:RegisterEffect(e4)
 end
 function c65840019.regop(e,tp,eg,ep,ev,re,r,rp)
 	e:GetHandler():RegisterFlagEffect(65840019,RESET_EVENT+RESETS_STANDARD-RESET_TURN_SET+RESET_CHAIN,0,1)
@@ -54,15 +45,29 @@ function c65840019.recop(e,tp,eg,ep,ev,re,r,rp)
 	Duel.Recover(tp,200,REASON_EFFECT)
 end
 function c65840019.imcon(e)
-	local tp=e:GetHandlerPlayer()
-	return Duel.GetLP(tp)>=Duel.GetLP(1-tp) and e:GetHandler():IsSummonType(SUMMON_TYPE_SYNCHRO)
+	return e:GetHandler():GetSequence()>4
 end
 function c65840019.efilter(e,re)
-	return e:GetHandlerPlayer()~=re:GetOwnerPlayer() and re:IsActivated()
+	return re:GetOwnerPlayer()~=e:GetHandlerPlayer() and re:IsActivated()
+		and re:IsActiveType(TYPE_MONSTER)
 end
-function c65840019.atlimit(e,c)
-	return c~=e:GetHandler()
+function c65840019.rmcon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.GetLP(tp)>=Duel.GetLP(1-tp)+4000
 end
-function c65840019.tgtg(e,c)
-	return c~=e:GetHandler()
+function c65840019.rmcost(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return true end
+	Duel.PayLPCost(tp,math.floor(Duel.GetLP(tp)/2))
+end
+function c65840019.rmtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	local c=e:GetHandler()
+	if chk==0 then return c:IsAbleToRemove()
+		and Duel.IsExistingMatchingCard(Card.IsAbleToRemove,tp,0,LOCATION_ONFIELD,1,nil) end
+	local g=Duel.GetFieldGroup(tp,0,LOCATION_ONFIELD)+c
+	Duel.SetOperationInfo(0,CATEGORY_REMOVE,g,#g,0,0)
+end
+function c65840019.rmop(e,tp,eg,ep,ev,re,r,rp)
+	local c=e:GetHandler()
+	local g=Duel.GetFieldGroup(tp,0,LOCATION_ONFIELD)
+	if c:IsRelateToEffect(e) then g:AddCard(c) end
+	Duel.Remove(g,POS_FACEUP,REASON_EFFECT)
 end

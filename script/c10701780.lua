@@ -74,7 +74,7 @@ function c10701780.tg2(e,tp,eg,ep,ev,re,r,rp,chk)
 		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 		gg = gg:SelectSubGroup(tp,c10701780.tg2f4,false,1,#tg)
 		local ct = Duel.SendtoGrave(gg,REASON_COST)
-		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_DESTROY)
+		Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_SET)
 		tg = Duel.SelectTarget(tp,c10701780.tg2f2,tp,0,LOCATION_ONFIELD,ct,ct,nil)
 		Duel.SetOperationInfo(0,CATEGORY_POSITION,tg,#tg,1-tp,LOCATION_ONFIELD)
 	end

@@ -1,4 +1,4 @@
---连接魔法
+-- 富裕
 function c99940240.initial_effect(c)
 	local e1=Effect.CreateEffect(c)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
