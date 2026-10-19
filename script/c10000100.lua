@@ -1,6 +1,6 @@
 --大刀直刺
 function c10000100.initial_effect(c)
-	--Activate
+	--Activate--
 	local e1=Effect.CreateEffect(c) 
 	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
 	e1:SetType(EFFECT_TYPE_ACTIVATE)
