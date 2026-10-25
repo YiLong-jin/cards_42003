@@ -23,7 +23,7 @@ function c21400199.initial_effect(c)
 	c:RegisterEffect(e1)
 end
 function c21400199.matfil(c,tp)
-	return (c:IsFaceup() or c:IsLocation(LOCATION_HAND)) and c:IsSetCard(0x3211) and c:IsAbleToGraveAsCost()
+	return (c:IsFaceup() or c:IsLocation(LOCATION_HAND)) and c:IsType(TYPE_MONSTER) and c:IsSetCard(0x3211) and c:IsAbleToGraveAsCost()
 end
 function c21400199.xmatfil(c) 
 	return c:IsSetCard(0x3211) and c:IsLevelAbove(5)  
@@ -41,7 +41,7 @@ function c21400199.hsptg(e,tp,eg,ep,ev,re,r,rp,chk,c)
 	local g=Duel.GetMatchingGroup(c21400199.matfil,tp,LOCATION_HAND+LOCATION_MZONE,0,nil,tp)
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TOGRAVE)
 	local sg=g:SelectSubGroup(tp,c21400199.matgck,true,2,2,e,tp)
-	if sg:GetCount()>0 then 
+	if sg~=nil and sg:GetCount()>0 then 
 		sg:KeepAlive()
 		e:SetLabelObject(sg)
 		return true

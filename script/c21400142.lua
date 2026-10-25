@@ -48,7 +48,7 @@ end
 function c21400142.thop(e,tp,eg,ep,ev,re,r,rp) 
 	local c=e:GetHandler()
 	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_ATOHAND)
-	local tc1=Duel.SelectMatchingCard(tp,c21400142.thfilter1,tp,LOCATION_DECK,0,1,1,nil):GetFirst() 
+	local tc1=Duel.SelectMatchingCard(tp,c21400142.thfilter1,tp,LOCATION_DECK,0,1,1,nil,tp):GetFirst() 
 	local tc2=Duel.SelectMatchingCard(tp,c21400142.thfilter2,tp,LOCATION_DECK,0,1,1,tc1):GetFirst() 
 	local g=Group.FromCards(tc1,tc2)
 	if g:GetCount()>0 then
